@@ -10,3 +10,9 @@ export * from "./Inputs/InputsLoginCadastro/InputsCadastro"
 
 //Exporta CheckBox
 export * from "./checkBoxs/CheckBoxLogin/KeepLogin";
+
+//Exporta Map
+export * from "./Maps/"
+
+//Exporta Barras de Pesquisas
+export * from "./Bars/SearchBar/SearchBar"
