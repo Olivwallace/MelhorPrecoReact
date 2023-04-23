@@ -1,0 +1,185 @@
+body {
+  font-family:Arial, Helvetica, sans-serif;
+  background-image: url(/public/imgs/bg-login.svg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
+.main-containerL{
+  height: 95vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.imgL{
+  width: 400px;
+}
+.form-containerL{
+  padding: 20px;
+  width: 350px;
+  height: 420px;
+  display: grid;
+  position: relative;
+  backdrop-filter: blur(2px) saturate(99%);
+  -webkit-backdrop-filter: blur(2px) saturate(99%);
+  background-color: rgba(17, 25, 40, 0.18);
+
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.divB div{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.divB p{
+  color: #fff;
+  padding:10px 0 0 0;
+  margin: 0;
+}
+.divB div h3{
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+.img{
+  width: 60px;
+}
+.login{
+  text-align: center;
+}
+.divInputE, .divInputS{
+  display: flex;
+  align-items: center;
+}
+.divIcon{
+  height: 39px;
+  display: flex;
+  padding: 0 5px;
+  align-items: center;
+  background:#282828;
+  border-radius: 5px 0px 0px 5px;
+}
+.inputEmailL{
+  border: solid 1px #00000000;
+  border-radius: 0px 5px 5px 0px;
+  color: #fff;
+  width: 280px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputSenhaL{
+  border: solid 1px #00000000;
+  color: #fff;
+  width: 255px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputEmailL:hover,.inputSenhaL:hover{
+  border-color: #0d4c00;
+}
+.divOlho{
+  display: inline;
+  height: 39px;
+  display: flex;
+  padding: 0 5px;
+  align-items: center;
+  background:#282828;
+  border-radius: 0px 5px 5px 0px;
+}
+.label{
+  color: #fff;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  height: 10px;
+}
+.divES{
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.link{
+  text-decoration: none;
+  color: #29d5f4;
+}
+.salvarLogin label{
+  color: #fff;
+}
+.botaoSubmit {
+  margin: 10px auto;
+  margin-top: 5px;
+  width: 73px;
+  border: none;
+  outline: none;
+  background-color: #007712;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #018e53;
+}
+
+.botaoSubmit:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
+}
+.botaoSubmit:disabled{
+  background-color: #575657;
+  box-shadow: 0px 5px 0px 0px #282828;
+
+}
+.linkCadastro label{
+  margin-right: 5px;
+}
+.error{
+  text-align: center;
+  color: #ec0000;
+  font-weight:600;
+}
+.linkCadastro{
+  padding-top: 20px;
+}
+@media screen and (max-width:600px) {
+  .main-containerL {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    align-content: center;
+    justify-content: center;
+    }
+    body{
+      background-image: url(/public/imgs/bg-login-mobile.svg);
+      height: 100vh;
+      overflow: hidden;
+      background-size:contain;
+    }
+    .imgL{
+      width: 200px;
+    }
+}
+@media screen and (min-width:600px) and (max-width:820px) {
+  .main-containerL {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    align-content: center;
+    justify-content: center;
+    }
+    body{
+      background-image: url(/public/imgs/bg-login-mobile.svg);
+      height: 100vh;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .imgL{
+      width: 300px;
+    }
+}

@@ -10,10 +10,15 @@ import { validaDadosUsuario, validaDadosLogin } from "../../assets/scripts/usefu
 import { useAPI } from "../../service/api/useApi";
 import { AuthContext } from "../../contexts/auth/authContext";
 import { useNavigate } from "react-router-dom";
-
+//---------------------- Inporta CSS
+import './signup.css'; 
+import imgC from './img/cadastro.svg';
+import progressBar1 from './img/progressBar1.svg';
+import progressBar2 from './img/progressBar2.svg';
 //---------------------------- Redefined Types
 type InputEvent = ChangeEvent<HTMLInputElement>
 type EventSubmit = React.FormEvent<HTMLFormElement>
+
 
 //----------------------- Login Page
 export const SingUp: React.FC = (props) => {
@@ -86,68 +91,82 @@ export const SingUp: React.FC = (props) => {
 
     //Construtor Pagina
     return (
-        <main>
+        <main className="main-containerC">
             
             <div>
-                <h1>Olá, bem-vindo de volta!</h1>
-                <h3>Vamos economizar ainda mais?</h3>
-                <LinkLogin href="/login" sizeIcon={25}/>
+             <img className="imgL" src={imgC} alt="" />
             </div>
 
-            <form onSubmit={handleRegister}>
+            <form className="form-containerC" onSubmit={handleRegister}>
+
+                    
                 {(formState.continuar)?
                     <div>
-                        <h1></h1>
+                        <img src={progressBar2} alt="" />
+                        <div className="botaoVoltar">  
+                        <LinkContinue right={true} 
+                          class="linkV"
+                        content="" 
+                        icon={<HiOutlineArrowLeft size={30}/>} 
+                        onClick={handleContinuar}/></div>
+                        <label className="labelC">Email</label>
                         <InputEmailValid
+                        className="divInputEmail"
                         onChange={[(event:InputEvent) => { setFormState({...formState, Email: event.target.value}) },
                                    (event:InputEvent) => { setFormState({...formState, ValidarEmail: event.target.value}) } ] }
                         value={[formState.Email, formState.ValidarEmail]}
                         placeholder ={["Email", "Confirmar Email"]}/>
-
+                        <label className="labelC">Senha</label>
                         <InputPassConfirm
+                        className="divInputSenha"
                         onChange={[(event:InputEvent) => { setFormState({...formState, Pass: event.target.value}) },
                                    (event:InputEvent) => { setFormState({...formState, ValidarPass: event.target.value}) } ] } 
                         value={[formState.Pass, formState.ValidarPass]}
                         placeholder={["Senha", "Confirma Senha"]}/>
 
-                        <LinkContinue right={true} 
-                        content=" Voltar" 
-                        icon={<HiOutlineArrowLeft/>} 
-                        onClick={handleContinuar}/>
                         
-                        <BtnCadastro disebled={!validarCamposFinais()} onClick={console.log}/>
+                        <BtnCadastro class="botaoConcluir" disebled={!validarCamposFinais()} onClick={console.log}/>
                     </div>
                     :
                     <div>
-                        <h1>Novo Usuario</h1>
-                        
+                        <img src={progressBar1} alt="" />
+                        <h2 className="cadastro">Novo Usuario</h2>
+                        <label className="labelC">CPF</label>
                         <InputCPF 
+                        className="divInputCPF"
                         onChange={(event:InputEvent) => { setFormState({...formState, CPF: event.target.value}) } }
                         value={formState.CPF}
                         placeholder="CPF"/>
-
+                        <label className="labelC">Nome</label>
                         <InputNome 
+                        className="divInputNome"
                         onChange={[(event:InputEvent) => { setFormState({...formState, Nome: event.target.value}) },
                                    (event:InputEvent) => { setFormState({...formState, Sobrenome: event.target.value}) } ] }
                         value={[formState.Nome, formState.Sobrenome]}
                         placeholder ={["Nome", "Sobrenome"]}/>
-
+                        <label className="labelC">Data de Nascimento</label>
                         <InputData
+                        className="divInputData"
                         onChange={(event:InputEvent) => { setFormState({...formState, Nascimento: event.target.value}) }}
                         value={formState.Nascimento}
                         />
-
+                        <label className="labelC">Gênero</label>
                         <InputGender
+                        className="divInputGender"
                         onChange={(event:InputEvent) => { setFormState({...formState, Genero: event.target.value}) }}
                         value={formState.Genero}/>
 
                         {(validarCamposIniciais())?
-                            <LinkContinue left={true}
+                            <div className="botaoContinuar"><LinkContinue
+                            class="linkC"
+                            left={true}
                             content="Continuar "
-                            onClick={handleContinuar}/>
+                            onClick={handleContinuar}/></div>
                             :null}
                     </div>
-                }          
+                }       
+                 <div className="linkLogin"><label style={{color:"#fff"}} >É novo por aqui? </label> <LinkLogin  href="/login"/></div>
+
             </form>
         </main>
     );

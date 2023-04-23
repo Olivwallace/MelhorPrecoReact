@@ -12,6 +12,11 @@ import { AuthContext } from "../../contexts/auth/authContext";
 //----------------------- Importa Uteis
 import { validEmail, validPassword } from "../../assets/scripts/usefulValidation";
 
+//---------------------- Importa CSS
+import './login.css';
+//----------------------- Importa imagens
+import logo from './img/logo.png';
+import imgL from './img/login.svg';
 
 //---------------------------- Redefined Types
 type InputEvent = ChangeEvent<HTMLInputElement>
@@ -80,41 +85,42 @@ export const Login : React.FC = (props) => {
 
     //Construtor Pagina
     return (
-        <main>
-
-            <form onSubmit={handleLogin}>
-                <h1>Login</h1>
-                
-                <InputEmail 
-                    onChange={handleEmail} 
-                    placeholder="Email"
-                    id="email" 
-                    value={email} />
-
-                <InputPass 
-                    onChange={handlePassword}
-                    placeholder="Senha"
-                    id="password" 
-                    value={password} />
-
-                <BtnLogin disebled={(!(validEmail(email) && validPassword(password)))}
-                sizeIcon={25}/>
-
-
-                <KeepLogin label="Salvar Login" checked={keep} onChange={handleKeep}/>
-
-
-                <div className="error">{errMessage}</div>
-
-                <Link to="/forgotPass">Esqueci a senha.</Link>
-            </form>
+        <main className="main-containerL" >
 
             <div>
-                <h1>Olá, é novo por aqui?</h1>
-                <h3>Não perca a oportunidade de economizar!</h3>
-                <LinkCadastro href="/singup" sizeIcon={30}/>
+            <img className="imgL" src={imgL}/>
             </div>
-
+            <div> 
+                <form className="form-containerL" onSubmit={handleLogin}> 
+                <div className="divB">
+                    <div> 
+                    <h3>Bem vindo(a) de volta!!</h3><img className="img" src={logo}/>
+                    </div>
+                <p>Faça seu login, e comece a economizar</p>
+                </div>        
+                    <label className="label">Email</label>  
+                    <InputEmail 
+                        className="inputEmailL"
+                        onChange={handleEmail} 
+                        placeholder="Email"
+                        id="email" 
+                        value={email} />
+                        <label className="label">Senha</label>  
+                    <InputPass 
+                        className="inputSenhaL"
+                        onChange={handlePassword}
+                        placeholder="Senha"
+                        id="password" 
+                        value={password} />
+                    <div className="divES">
+                        <KeepLogin label="Salvar Login" checked={keep} onChange={handleKeep}/>
+                        <Link className="link" to="/forgotPass">Esqueceu a senha?</Link>
+                    </div>
+                    <div className="error">{errMessage}</div>
+                    <BtnLogin class="botaoSubmit" disebled={(!(validEmail(email) && validPassword(password)))}sizeIcon={25}/>
+                    <div className="linkCadastro"><label style={{color:"#fff"}} >É novo por aqui? </label><LinkCadastro class="link" href="/singup"/></div>
+                </form>         
+            </div>
         </main>
     );
 }; 
