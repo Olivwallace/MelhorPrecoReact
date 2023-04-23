@@ -42,7 +42,6 @@ export const SingUp: React.FC = (props) => {
     //Altera Parte do Formulario Visivel
     const handleContinuar = () => {
         setFormState({...formState, continuar: !formState.continuar})
-        console.log(formState.Nascimento)
     }
 
     //Valida Campos Iniciais
