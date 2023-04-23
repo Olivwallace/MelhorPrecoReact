@@ -9,7 +9,7 @@ interface CheckBoxProps {
 
 export const KeepLogin: React.FC<CheckBoxProps> = (props) => {
     return (
-        <div style={{paddingTop: '10px'}} >
+        <div className="salvarLogin" >
             <input type="checkbox" checked={props.checked} onChange={props.onChange} />
             <label>{props.label}</label>
         </div>

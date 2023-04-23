@@ -14,9 +14,11 @@ type InputEvent = ChangeEvent<HTMLInputElement>
 //----------------------- Input Email
 export const InputEmail:React.FC<InputProps> = (props) => {
     return (
-        <div className={props.className}>
-            <HiOutlineMail size={20}/>
-            <input autoComplete="off" 
+        <div className="divInputE">
+            <div className="divIcon"><HiOutlineMail color="white" size={20}/></div>
+            <input 
+            className={props.className}
+            autoComplete="off" 
                 type="text"
                 name="email"
                 id={props.id} 
@@ -36,19 +38,19 @@ export const InputPass:React.FC<InputProps> = (props) => {
     },[verSenha])
 
     return (
-        <div className={props.className}>
-            <HiOutlineKey size={20}/>
-            <input autoComplete="off" 
+        <div className="divInputS">
+           <div className="divIcon"> <HiOutlineKey color="white" size={20}/></div>
+            <input  className={props.className} 
+            autoComplete="off" 
                 type={(verSenha)?"text":"password"}
                 name="password"
                 id={props.id}  
                 value={props.value} 
                 onChange={props.onChange} 
                 placeholder={props.placeholder}/>
-            
             {(verSenha)?
-                <AiOutlineEyeInvisible onClick={handleSeeKey}/>:
-                <AiOutlineEye onClick={handleSeeKey}/>}
+                <div className="divOlho"><AiOutlineEyeInvisible color="white" onClick={handleSeeKey}/></div>:
+                <div className="divOlho"><AiOutlineEye color="white" onClick={handleSeeKey}/></div>}
                 
         </div>
     );

@@ -12,18 +12,18 @@ import { Link } from "react-router-dom";
 //----------------------- Button Login
 export const BtnLogin: React.FC <ButtonProps> = (props) => {
     return (
-        <button disabled={props.disebled} type="submit" onClick={props.onClick}> 
+        <button className={props.class} disabled={props.disebled} type="submit" onClick={props.onClick}> 
         Login
-        {(props.icon != null)?props.icon:<CgLogIn size={props.sizeIcon}/>}
+      
         </button>
     );
 };
 
 export const LinkLogin : React.FC <ButtonProps> = (props) => {
     return (
-        <Link to={(props.href != null)?props.href:'#'}>
-            Efetuar Login
-            {(props.icon != null)?props.icon:<CgLogIn size={props.sizeIcon}/>}
+        <Link className="link" to={(props.href != null)?props.href:'#'}>
+            Login
+           
         </Link>
     )
 }

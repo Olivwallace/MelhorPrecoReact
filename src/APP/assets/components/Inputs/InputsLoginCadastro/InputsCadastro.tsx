@@ -14,15 +14,16 @@ import { PassComp } from "../../../../model";
 export const InputEmailValid:React.FC<InputPropsArray> = (props) => {
     return (
         <div className={props.className}>
-            <HiOutlineMail size={25}/>
-            <input autoComplete="off" 
+            <input className="inputEmailC1"
+                autoComplete="off" 
                 type="text"
                 name="email"
                 id={props.id?.[0]} 
                 value={props.value?.[0]}
                 onChange={props.onChange?.[0]} 
                 placeholder={props.placeholder?.[0]} />
-            <input autoComplete="off" 
+            <input className="inputEmailC2" 
+                autoComplete="off" 
                 type="text"
                 name="confirm_email"
                 id={props.id?.[1]} 
@@ -54,9 +55,11 @@ export const InputPassConfirm:React.FC<InputPropsArray> = (props) => {
     }
 
     return (
-        <div className={props.className}>
-            <HiOutlineKey size={25}/>
-            <input autoComplete="off" 
+        <div >
+        
+        <div className={props.className}>            
+            <input className="inputSenhaC1" 
+                autoComplete="off" 
                 type={(verSenha)?"text":"password"}
                 name="password"
                 id={props.id?.[0]} 
@@ -66,7 +69,8 @@ export const InputPassConfirm:React.FC<InputPropsArray> = (props) => {
                 onBlurCapture={e => {compararSenhas({password: e.target.value, password_comp: props.value[1]})}}
                 placeholder={props.placeholder?.[0]}/>
 
-            <input autoComplete="off" 
+            <input className="inputSenhaC2" 
+                autoComplete="off" 
                 type={(verSenha)?"text":"password"}
                 name="confirm_password"
                 id={props.id?.[1]} 
@@ -75,12 +79,13 @@ export const InputPassConfirm:React.FC<InputPropsArray> = (props) => {
                 placeholder={props.placeholder?.[1]}/>
 
             {(verSenha)?
-                <AiOutlineEyeInvisible onClick={handleSeeKey}/>:
-                <AiOutlineEye onClick={handleSeeKey}/>}
+                <div className="divOlho"><AiOutlineEyeInvisible color="white" onClick={handleSeeKey}/></div>:
+                <div className="divOlho"><AiOutlineEye color="white" onClick={handleSeeKey}/></div>}
+                </div>
             
-            <div className="error">{errMessage}</div> 
+            <div className="errorC">{errMessage}</div> 
 
-            <div>
+            <div className="Csenha">
                 <p>Números</p>
                 <p>6 a 15 caracteres</p>
                 <p>Letras Maiusculas e Minusculas</p>
@@ -113,8 +118,9 @@ export const InputCPF:React.FC<InputProps> = (props) => {
 
     return ( 
         <div className={props.className}>
-            <HiOutlineIdentification size={20}/>
-            <input autoComplete="off" 
+            <div className="divIcon"><HiOutlineIdentification color="white" size={20}/></div>
+            <input className="inputCPF"
+                 autoComplete="off" 
                 type="text"
                 name="CPF"
                 id={props.id} 
@@ -136,15 +142,18 @@ export const InputNome:React.FC<InputPropsArray> = (props) => {
 
     return ( 
         <div className={props.className}>
-            <HiOutlineUserCircle size={25}/>
-            <input autoComplete="off" 
+            <div className="divIcon"><HiOutlineUserCircle color="white" size={20}/></div>
+            <input
+                className="inputNome"
+                 autoComplete="off" 
                 type="text"
                 name="nome"
                 id={props.id?.[0]} 
                 value={capitalize(props.value?.[0])}
                 onChange={props.onChange?.[0]} 
                 placeholder={props.placeholder?.[0]} />
-            <input autoComplete="off" 
+            <input className="inputSobrenome"
+             autoComplete="off" 
                 type="text"
                 name="sobrenome"
                 id={props.id?.[1]} 
@@ -159,8 +168,9 @@ export const InputNome:React.FC<InputPropsArray> = (props) => {
 export const InputData:React.FC<InputProps> = (props) => {
     return (
         <div className={props.className}>
-            <HiOutlineCake size={25}/>
-            <input autoComplete="off" 
+            <div className="divIcon"><HiOutlineCake color="white" size={20}/></div>
+            <input className="inputData"
+                autoComplete="off" 
                 type="date"
                 name="data"
                 id={props.id} 
@@ -190,7 +200,7 @@ export const InputGender: React.FC<InputPropsGender> = (props) => {
   
     return (
       <div className={props.className}>
-        <AiOutlineMan size={25} />
+        <div className="divIconG"><AiOutlineMan color="white" size={25} /></div>
         <input
           type="radio"
           name="opcao"
@@ -201,7 +211,7 @@ export const InputGender: React.FC<InputPropsGender> = (props) => {
         />
         <label htmlFor="M">Masculino</label>
   
-        <AiOutlineWoman size={25} />
+        <div className="divIconG"><AiOutlineWoman color="white" size={25} /></div>
         <input
           type="radio"
           name="opcao"
@@ -212,7 +222,7 @@ export const InputGender: React.FC<InputPropsGender> = (props) => {
         />
         <label htmlFor="W">Feminino</label>
   
-        <TbGenderNeutrois size={25} />
+        <div className="divIconG"><TbGenderNeutrois color="white" size={25} /></div>
         <input
           type="radio"
           name="opcao"

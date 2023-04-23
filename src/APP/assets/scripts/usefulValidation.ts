@@ -27,7 +27,7 @@ export const validSpecialChar = (password : string): boolean => {
 
 //Valida comprimento minimo e maximo.
 export const validLengthPassword = (password : string): boolean => {
-    return password.length > 4 && password.length < 8;
+    return password.length >= 6 && password.length <= 15;
 }
 
 //Valida se é uma senha forte.

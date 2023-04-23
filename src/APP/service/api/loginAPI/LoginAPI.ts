@@ -11,14 +11,15 @@ export const LoginAPI = (api: AxiosInstance) => ({
     },
 
     login : async ({email, pass}: LoginData) => {
-        const response = await api.post('/login', {email: email, pass: pass});
-        return response.data;
 
-        return (email === "wllace@gmail.com" && pass === "Pas123")?{
+        return (email === "jerson@gmail.com" && pass === "Pas123")?{
             user: {id: 123, name: "Wallace", email:"Wallace@gmail.com"},
             token: "wa1214scas"
         }:{stutus: 400, user: null};
-        response.data;
+        const response = await api.post('/login', {email, pass});
+        return response.data;
+
+
     },
 
     logout: async () => {
