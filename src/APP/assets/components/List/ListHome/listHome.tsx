@@ -8,7 +8,3 @@ export const ListHome:React.FC <PropsList> = (props) =>{
         </div>
     )
 }
-
-const ListarMercado: React.FC  = (props) => {
-    
-}

@@ -7,7 +7,8 @@ import { useGetLocation } from "../../../../hooks/useGetLocation"
 
 interface PropsMarker {
   popUp?: string
-  locate: LatLng | null
+  locate: LatLng | null,
+
 }
 
 
@@ -20,8 +21,8 @@ export const MarkerUser = (props:PropsMarker) => {
     )
 }
 
-export const  MarkerSupermaket = (props: PropsMarker) => {
-
+export const MarkerSupermaket = (props: PropsMarker) => {
+    
     return props.locate === null ? null : (
       <Marker position={props.locate} icon={MarketIcon}>
         <Popup>{(props.popUp)?props.popUp:"Mercado"}</Popup>

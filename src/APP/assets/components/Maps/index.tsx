@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react'
 interface MapProps {
     positionCSS?: any,
     locateUser: L.LatLng,
-    markers?: MarketModel[]
+    markers?: MarketModel[] 
 }
 
 export const Map = (props : MapProps) => {
