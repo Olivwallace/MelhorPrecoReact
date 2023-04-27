@@ -6,17 +6,28 @@ export const LoginAPI = (api: AxiosInstance) => ({
         return {
             user: {id: 123, name: "Wallace", email:"Wallace@gmail.com"}
         };
-        const response = await api.post('/validateToken', {token});
+        const response = await api.post('/validateToken', {token:token});
         return response.data;
+
     },
 
-    login : async ({email, pass}: LoginData) => {
+    login : async ({email, pass,token}: LoginData) => {
 
         return (email === "jerson@gmail.com" && pass === "Pas123")?{
-            user: {id: 123, name: "Wallace", email:"Wallace@gmail.com"},
-            token: "wa1214scas"
+            
+                "status": 200,
+                "mensagem": "SUCESS",
+                "data": {
+                    "user": {
+                        "id": 4,
+                        "nome": "Wallace Freitas",
+                        "email": "jerson@gmail.com"
+                    },
+                    "token": "glt4HLRRJXJnpykbwpbe"
+                }
+            
         }:{stutus: 400, user: null};
-        const response = await api.post('/login', {email, pass});
+        const response = await api.post('/login', {email, pass,token});
         return response.data;
 
 

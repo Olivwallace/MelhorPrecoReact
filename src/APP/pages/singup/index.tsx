@@ -75,7 +75,7 @@ export const SingUp: React.FC = (props) => {
                                  'Sobrenome': formState.Sobrenome, 
                                  'Genero': formState.Genero, 
                                  'Nascimento': formState.Nascimento},
-                        'loginData': { email: formState.Email, pass: formState.Pass }}
+                        'loginData': { email: formState.Email, pass: formState.Pass,token:"" }}
 
         let registrado;
         event.preventDefault()

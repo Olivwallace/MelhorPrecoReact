@@ -62,9 +62,9 @@ export const Login : React.FC = (props) => {
         if (validEmail(email) && validPassword(password)) {
             
             if (keep) {
-                logado = await context.loginKeep({ email: email, pass: password });
+                logado = await context.loginKeep({ email: email, pass: password,token:"" });
             } else {
-                logado = await context.login({ email: email, pass: password });
+                logado = await context.login({ email: email, pass: password,token:"" });
             }
 
 
