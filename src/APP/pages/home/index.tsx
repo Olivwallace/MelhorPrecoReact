@@ -8,7 +8,8 @@ import { SearchBarHome } from "../../assets/components/";
 import { useAPI } from "../../service/api/useApi";
 import { ListHome } from "../../assets/components/List/ListHome/listHome";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
-
+import ResponsiveDrawer from "../../assets/components/NavBar/NavBar";
+import './index.css'; 
 
 //---------------------------- Redefined Types
 type InputEvent = ChangeEvent<HTMLInputElement>
@@ -22,7 +23,6 @@ export const Home: React.FC = (props) => {
     const api = useAPI.Home
 
     const [markers, setMarkets] = useState<ReponseSearch>()
-    const [list, setList] = useState<ProductModel | PromotionsModel>()
 
     const [searchState, setSearch] = useState({
         text: "",
@@ -56,8 +56,12 @@ export const Home: React.FC = (props) => {
     },[searchState.radio, searchState.select])
 
     useEffect(() => {
+        handleShearch()
+    }, [])
 
-    }, [markers?.response])
+   // useEffect(() => {
+    //    handleShearch()
+    //}, [markers?.data])
 
 
     if(!useLocation) { return <h1>Carregando Dados</h1>;} // Mostra Icone de Carregamento Temporario
@@ -77,9 +81,8 @@ export const Home: React.FC = (props) => {
                     onKeyDonw={listenerKeyboard} 
                     search={searchState}/>
 
-                <Map locateUser={useLocation} markers={markers?.response.markets} positionCSS={'relative'}/>
+                <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/>
                 
-                {(markers?.response)?listar():null}
             </main>
         </>
     );

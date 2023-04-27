@@ -2,9 +2,8 @@ import { MarketModel, ProductModel, PromotionsModel } from "../../../model";
 
 export type ReponseSearch = {
     status: number,
-    response: {
+    messenger: string,
+    data: {
         markets: MarketModel[]
-        product: ProductModel[] | null
-        promotion: PromotionsModel[] | null
     }
 }
