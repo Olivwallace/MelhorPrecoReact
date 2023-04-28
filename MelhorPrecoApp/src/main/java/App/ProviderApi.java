@@ -46,9 +46,9 @@ public class ProviderApi {
 
         //------------- Lista App -----------------------------------------------------------------------
         post("/createList", (request, response) -> listService.createList(request, response));
-        // post("/updateList", (request, response) -> listService.updateList(request, response));
-        //post("/getLists", (request, response) -> listService.getLists(request, response));
-        //post("/deleteList", (request, response) -> listService.deleteList(request, response));
+        post("/updateList", (request, response) -> listService.updateList(request, response));
+        post("/getLists", (request, response) -> listService.getLists(request, response));
+        post("/deleteList", (request, response) -> listService.deleteList(request, response));
 
         //post("/createList", (request, response) ->)
 
