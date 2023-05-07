@@ -10,9 +10,3 @@ npm install react-leaflet-routing-machine
 npm install --save @types/leaflet-routing-machine
 npm add react-leaflet leaflet
 npm add --dev @types/leaflet
-
-# Todo 10/04
-TODO: CSS de Componentes
-TODO: CSS Paginas de Cadastro e Login
-TODO: Verificação de semelhante ao de senha em componente InputEmailValid (InputsLoginCadastro/InputsCadastro.tsx)
-TODO: ... Em Processo
