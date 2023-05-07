@@ -15,7 +15,7 @@ import spark.Response;
 
 public class RegisterService {
 
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
     private ResponseService response;
 
     public String existEmail(Request req, Response resp) {
@@ -41,6 +41,7 @@ public class RegisterService {
         resp.type("application/json");
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+        System.out.println(json);
 
         boolean exist = userDAO.existCPF(json.get("CPF").toString().replace("\"",""));
 

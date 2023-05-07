@@ -48,7 +48,6 @@ export const InputPassConfirm:React.FC<InputPropsArray> = (props) => {
 
     const compararSenhas = ({password, password_comp}:PassComp) => {
         let result = validFullPassword({password, password_comp})
-        console.log(result + " " + props.value[0] + " " + props.value[1])
         
         if(result) setMessage('')
         else setMessage('Senhas Não Conferem')

@@ -48,10 +48,10 @@ export const SingUp: React.FC = (props) => {
     const validarCamposIniciais = () => {
         let usuario = {
             CPF: formState.CPF, 
-            Nome: formState.Nome, 
-            Sobrenome: formState.Sobrenome,
-            Genero: formState.Genero,
-            Nascimento: formState.Nascimento}
+            nome: formState.Nome, 
+            sobrenome: formState.Sobrenome,
+            genero: formState.Genero,
+            nascimento: formState.Nascimento}
         
         return validaDadosUsuario(usuario);
     }
@@ -69,23 +69,26 @@ export const SingUp: React.FC = (props) => {
     }
 
     const context = useContext(AuthContext);
-    const handleRegister = useCallback(async (event: EventSubmit) =>{
+    const handleRegister = async (event: EventSubmit) =>{
         let novoUser = {'user': {'CPF': formState.CPF, 
-                                 'Nome': formState.Nome, 
-                                 'Sobrenome': formState.Sobrenome, 
-                                 'Genero': formState.Genero, 
-                                 'Nascimento': formState.Nascimento},
+                                 'nome': formState.Nome, 
+                                 'sobrenome': formState.Sobrenome, 
+                                 'genero': formState.Genero, 
+                                 'nascimento': formState.Nascimento},
                         'loginData': { email: formState.Email, password: formState.Pass,token:"" }}
 
         let registrado;
         event.preventDefault()
+        
+        let valor1 = validarCamposIniciais();
+        let valor2 = validarCamposFinais(); 
 
-        if(validarCamposIniciais() && validarCamposFinais()){
+        if(valor1 && valor2){
             registrado = await context.singup(novoUser)
             navigate('/login');
         }
 
-    },[formState.CPF, formState.Email])
+    }
 
 
     //Construtor Pagina
@@ -124,7 +127,7 @@ export const SingUp: React.FC = (props) => {
                         placeholder={["Senha", "Confirma Senha"]}/>
 
                         
-                        <BtnCadastro class="botaoConcluir" disebled={!validarCamposFinais()} onClick={console.log}/>
+                        <BtnCadastro class="botaoConcluir" disebled={!validarCamposFinais()} onClick={handleRegister}/>
                     </div>
                     :
                     <div>

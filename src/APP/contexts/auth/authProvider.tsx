@@ -68,18 +68,19 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     const singup = async ({user, loginData}: RegisterData) => {
+
         let registrado:boolean = false;
-        const responseEmail = await apiSingUp.existEmail(loginData.email)
         const responseCpf = await apiSingUp.existUser(user.CPF);
-        
-        if(!responseEmail.data.exist &&!responseCpf.data.exist){
+        const responseEmail = await apiSingUp.existEmail(loginData.email)
+
+        if(!responseEmail.data.exist && !responseCpf.data.exist){
             const response = await apiSingUp.register({user, loginData})
-            if( response.data.register&&response.data.user){
+            if( response.data.register && response.data.user){
                 setUser(response.data.user);
                 registrado = true;   
             }
         }else{
-            setUser({name:user.Nome , email: loginData.email});
+            setUser({name:user.nome , email: loginData.email});
             if(responseEmail.data.exist) alert('Email Já Cadastrado')
             else alert('CPF Já Cadastrado')
         }
@@ -88,7 +89,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     return(
-        <AuthContext.Provider value={{user, login, loginKeep, logout, singup}}>
+        <AuthContext.Provider value={{user, login, loginKeep, singup, logout}}>
             {children}
         </AuthContext.Provider>
     )
