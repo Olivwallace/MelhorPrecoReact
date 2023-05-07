@@ -1,0 +1,267 @@
+
+  
+  .main-containerC {
+    height: 100vh;
+    display: grid;
+    background-image: url(/public/imgs/bg-login.svg);
+    background-size: cover;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+      
+  }
+  
+  .form-containerC{
+    padding: 20px;
+    width: 350px;
+    height: 470px;
+    display: grid;
+    position: relative;
+    backdrop-filter: blur(2px) saturate(99%);
+    -webkit-backdrop-filter: blur(2px) saturate(99%);
+    background-color: rgba(17, 25, 40, 0.18);
+  
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 10px;
+    justify-content: center; 
+  }
+  .cadastro{
+    margin: 0;
+    color: #fff;
+    padding: 5px 0px 10px 0px;
+    
+  }
+.labelC{
+  color: #fff;
+  
+}
+  .divInputCPF, .divInputNome,.divInputData,.divInputGende,.divInputGender{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .inputCPF{
+    border: solid 1px #00000000;
+    border-radius: 0px 5px 5px 0px;
+    color: #fff;
+    width: 140px;
+    height: 35px;
+    background-color: #282828;
+  }
+  .inputNome{
+    border: solid 1px #00000000;
+    border-radius: 0px 5px 5px 0px;
+    color: #fff;
+    width: 140px;
+    margin-right: 5px;
+    height: 35px;
+    background-color: #282828;
+  }
+.inputSobrenome{
+  border: solid 1px #00000000;
+  border-radius: 5px;
+  color: #fff;
+  width: 150px;
+  padding-left: 5px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputData{
+  border: solid 1px #00000000;
+  border-radius: 0px 5px 5px 0px;
+  color: #fff;
+  width: 150px;
+
+  height: 37px;
+  background-color: #282828;
+}
+.divInputGender{
+  border: solid 1px #00000000;
+  border-radius: 5px;
+  padding: 2px;
+  color: #fff;
+  width: 100%;
+  height: 37px;
+  background-color: #282828;
+}
+.linkLogin label{
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+.botaoContinuar {
+    margin: 20px auto;
+    width: 73px;
+    border: none;
+    outline: none;
+    background-color: #015733;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 5px;
+    transition: all ease 0.1s;
+    box-shadow: 0px 5px 0px 0px #018e53;
+  }
+  .linkC{
+    text-decoration: none;
+    color:#fff;
+  }
+  .botaoContinuar:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #a29bfe;
+  }
+  .botaoContinuar:disabled{
+    background-color: #575657;
+    box-shadow: 0px 5px 0px 0px #282828;
+}
+/*---------------Tela 2 -----------------------------*/
+
+
+.divInputEmail, .divInputSenha{
+  display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.inputEmailC1{
+  border: solid 1px #00000000;
+  border-radius: 5px;
+  padding-left: 5px;
+  color: #fff;
+  width: 160px;
+  margin-right: 5px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputEmailC2{
+  border: solid 1px #00000000;
+  border-radius: 5px;
+  color: #fff;
+  width: 160px;
+  padding-left: 5px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputSenhaC1{
+  border: solid 1px #00000000;
+  border-radius: 5px;
+  color: #fff;
+  padding-left: 5px;
+  width: 150px;
+  margin-right: 5px;
+  height: 35px;
+  background-color: #282828;
+}
+.inputSenhaC2{
+  border: solid 1px #00000000;
+  border-radius: 5px 0px 0px 5px;
+  color: #fff;
+  width: 145px;
+  padding-left: 5px;
+  height: 35px;
+  background-color: #282828;
+}
+.botaoVoltar{
+  margin: 20px 0px;
+  width: 30px;
+  background: #0ea582;
+  padding: 4px 6px;
+  border-radius: 100px;
+}
+.linkV{
+  color: #fff;
+}
+.errorC{
+  text-align: center;
+  color: #ec0000;
+  font-weight:600;
+  margin: 10px 0;
+}
+.botaoConcluir {
+  margin: 0 135px;
+  margin-top: 25px;
+  width: 73px;
+  border: none;
+  outline: none;
+  background-color: #007712;
+  padding: 10px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #018e53;
+}
+
+.botaoConcluir:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
+}
+.botaoConcluir:disabled{
+  background-color: #575657;
+  box-shadow: 0px 5px 0px 0px #282828;
+
+}
+.Csenha p {
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------Media queries------------------*/
+ @media screen and (max-width:600px) {
+  .main-containerC {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    align-content: center;
+    justify-content: center;
+    }
+    body{
+      background-image: url(/public/imgs/bg-login-mobile.svg);
+      height: 100vh;
+      overflow: hidden;
+      background-size:cover;
+    }
+    .imgL{
+      width: 200px;
+    }
+}
+
+@media screen and (min-width:600px) and (max-width:820px) {
+  .main-containerC {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, auto);
+    align-content: center;
+    justify-content: center;
+    }
+    body{
+      background-image: url(/public/imgs/bg-login-mobile.svg);
+      height: 100vh;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .imgL{
+      width: 300px;
+    }
+}

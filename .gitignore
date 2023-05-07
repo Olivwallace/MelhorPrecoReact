@@ -1,0 +1,17 @@
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.idea/
+*.target/
+*out/
+*.iml
+*.in
+*.out
+*.class
+*x64/
+*.exe
+*.vs
+*.log
+node_modules
+
