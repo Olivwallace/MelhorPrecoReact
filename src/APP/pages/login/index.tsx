@@ -62,9 +62,9 @@ export const Login : React.FC = (props) => {
         if (validEmail(email) && validPassword(password)) {
             
             if (keep) {
-                logado = await context.loginKeep({ email: email, pass: password,token:"" });
+                logado = await context.loginKeep({ email: email, password: password,token:"" });
             } else {
-                logado = await context.login({ email: email, pass: password,token:"" });
+                logado = await context.login({ email: email, password: password,token:"" });
             }
 
 
@@ -94,7 +94,7 @@ export const Login : React.FC = (props) => {
                 <form className="form-containerL" onSubmit={handleLogin}> 
                 <div className="divB">
                     <div> 
-                    <h3>Bem vindo(a) de volta!!</h3><img className="imgLogo" src={logo}/>
+                    <h3>Bem vindo(a) de volta!!</h3><img className="img" src={logo}/>
                     </div>
                 <p>Faça seu login, e comece a economizar</p>
                 </div>        

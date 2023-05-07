@@ -1,5 +1,5 @@
 export type LoginData = {
     'email': string;
-    'pass': string;
+    'password': string;
     'token': string;
 }

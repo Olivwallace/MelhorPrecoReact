@@ -330,6 +330,33 @@ public class UserDAO {
         return status;
     }
 
+    public static  boolean validarSenha(int id, String senha_informada){
+        Connection connect = Connect.getConnection();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+
+        boolean status = false;
+
+        try {
+            statement = connect.prepareStatement("SELECT senha, salt, CPF FROM usuario WHERE id = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+
+            if (result.next()) {
+                String salt = result.getString("salt");
+                String senha = result.getString("senha");
+
+                status = User.comparePass(senha_informada, senha, salt);
+            }
+
+        } catch (SQLException e) {
+            status = false;
+            throw new RuntimeException(e);
+        }
+
+        return status;
+    }
+
     public boolean deleteUser(JsonObject json){
         Connection connect = Connect.getConnection();
         PreparedStatement statement = null;

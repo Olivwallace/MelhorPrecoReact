@@ -1,6 +1,7 @@
 package Model;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -18,8 +19,22 @@ public class Lista {
         setUserId((json.get("user") != null)?json.get("user").getAsInt():0);
         setListId((json.get("id") != null)?json.get("id").getAsInt():0);
         setNomeLista(json.get("nomeLista").toString().replaceAll("\"",""));
+
         JsonArray itens = json.getAsJsonArray("produtos");
-        System.out.println(itens);
+        ArrayList<Produto> produtos = new ArrayList<>();
+
+        for(int i = 0; i < itens.size(); i++){
+            produtos.add(new Produto(itens.get(i)));
+        }
+
+        setItens(produtos);
+    }
+
+    public Lista(int codLista, int userId, String nomeLista, ArrayList<Produto> produtos) {
+        setListId(codLista);
+        setUserId(userId);
+        setNomeLista(nomeLista);
+        setItens(produtos);
     }
 
     //--------------------------------- Setter's --------------------------------------
@@ -57,4 +72,5 @@ public class Lista {
     public ArrayList<Produto> getItens() {
         return itens;
     }
+
 }

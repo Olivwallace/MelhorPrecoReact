@@ -1,16 +1,20 @@
 /**
  * @file ProviderApi.java
  * @author Wallace Freitas Oliveira (https://github.com/Olivwallace)
+ * @author Jerson Vitor de Paula Gomes
  * @brief Api Provider For Melhor Preco App
  * @date 22-04-2023
  */
 
 package App;
 
+
+import Connection.CorsFilter;
 import Service.ListService;
 import Service.PerfilService;
 import Service.RegisterService;
 import Service.SingInService;
+
 import static spark.Spark.*;
 
 public class ProviderApi {
@@ -21,9 +25,24 @@ public class ProviderApi {
     public static ListService listService = new ListService();
 
     public static void main(String[] args){
-        port(4567);
+        // Habilita o CORS para todas as origens e métodos
+        options("/*", (request, response) -> {
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+            return "OK";
+        });
 
-        //staticFileLocation("/com.melhorpreco_app");
+        // Habilita o CORS para todas as origens e métodos
+        before((request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+        });
+
 
         //-------------- Routes Login ----------------------------------------------------------
         post("/login", (request, response) -> singInService.singInUser(request, response) );
@@ -46,14 +65,16 @@ public class ProviderApi {
 
         //------------- Lista App -----------------------------------------------------------------------
         post("/createList", (request, response) -> listService.createList(request, response));
-        // post("/updateList", (request, response) -> listService.updateList(request, response));
-        //post("/getLists", (request, response) -> listService.getLists(request, response));
-        //post("/deleteList", (request, response) -> listService.deleteList(request, response));
+        post("/updateList", (request, response) -> listService.updateList(request, response));
+        post("/getLists", (request, response) -> listService.getLists(request, response));
+        post("/deleteList", (request, response) -> listService.deleteList(request, response));
 
-        //post("/createList", (request, response) ->)
 
         //post("/searchMercados", (request, reponse) -> appService.searchMercados(request, response));
         //post("/searchProdutos", (request, response) -> appService.searchProdutos(request, response));
+
+        port(4567);
+        init();
     }
 
 }

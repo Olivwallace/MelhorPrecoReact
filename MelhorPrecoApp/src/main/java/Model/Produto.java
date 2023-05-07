@@ -8,6 +8,7 @@
 package Model;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class Produto {
@@ -31,10 +32,20 @@ public class Produto {
         setDescricao(descricao);
     }
 
-    public Produto(Object[] itens){
-        for(Object i : itens){
+    public Produto(JsonElement json){
+        String codigo = json.getAsJsonObject().get("codigo").toString().replaceAll("\"", "");
+        int quantidade = json.getAsJsonObject().get("quantidade").getAsInt();
+        setCodigo(codigo);
+        setQuantidade(quantidade);
+    }
 
-        }
+    public Produto(String cod, String nome, String marca, String un_medida, String descricao, int qtd) {
+        setCodigo(cod);
+        setNome(nome);
+        setMarca(marca);
+        setUnidadeMedida(un_medida);
+        setDescricao(descricao);
+        setQuantidade(qtd);
     }
 
     // ------------------- Setters -------------------
