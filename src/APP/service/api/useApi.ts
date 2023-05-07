@@ -4,7 +4,7 @@ import { RegisterAPI } from './registerAPI/RegisterAPI';
 import { HomeAPI } from './HomeAPI/HomeApi';
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API,
+    baseURL: "http://localhost:4567",
 });
 
 export const useAPI = ({

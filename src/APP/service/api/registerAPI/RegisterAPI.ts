@@ -4,39 +4,20 @@ import { RegisterData } from "../../../model";
 export const RegisterAPI = (api: AxiosInstance) => ({
 
     existEmail: async (email : string) => {
-        return {
-            status:200,
-            message:"DISPONIVEL",
-            data:{
-                exist:false
-            }
-        }
-        const response = await api.post('/existEmail', {email});
+        const response = await api.post('/existEmail', {'email': email});
+        console.log(response);
+        return response.data;
     },
 
     existUser: async (cpf : string) => {
-        return {
-            status:200,
-            message:"DISPONIVEL",
-            data:{
-                exist:false
-            }
-        }
-        const response = await api.post('/existeUser', {cpf});
+        const response = await api.post('/existeUser', {'CPF': cpf});
+        console.log(response);
+        return response.data;
     },
 
     register: async ({user, loginData}:RegisterData) => {
-        return {
-            status:200,
-            message:"DISPONIVEL",
-            data:{
-                register: true,
-                user:{
-                    name: "Wallace",
-                    email: "wallace@gmail.com"}   
-            }
-           
-        };
         const response = await api.post('/registerUser', {user, loginData})
+        console.log(response);
+        return response.data;
     }
 });

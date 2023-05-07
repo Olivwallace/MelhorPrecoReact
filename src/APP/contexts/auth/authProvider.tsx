@@ -31,10 +31,10 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     },[api])
 
 
-    const login = async ({email, pass,token} : LoginData) => {
+    const login = async ({email, password,token} : LoginData) => {
         let autenticado:boolean = false;
 
-        const data = await api.login({email, pass,token}); 
+        const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
             autenticado = true;
@@ -43,10 +43,10 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         return autenticado;
     }
 
-    const loginKeep = async ({email, pass,token} : LoginData) => {
+    const loginKeep = async ({email, password,token} : LoginData) => {
         let autenticado:boolean = false;
 
-        const data = await api.login({email, pass,token}); 
+        const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
             setToken(data.token);
