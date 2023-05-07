@@ -5,7 +5,7 @@ import  { HiOutlineMail, HiOutlineKey } from "react-icons/hi"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
 //----------------------- Props Input
-import { InputProps } from "../PropsInpult"
+import { InputProps } from "../PropsInput"
 import { useEventCallback } from "@mui/material";
 
 //---------------------------- Redefined Types

@@ -1,0 +1,27 @@
+.main {
+    height: 100vh;
+    display: grid;
+
+    background-size: cover;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 4;
+}
+
+.div3 {
+    grid-area: 1 / 4 / 2 / 6;
+}
+
+.img {
+    width: 60%;
+}

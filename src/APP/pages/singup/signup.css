@@ -1,8 +1,10 @@
 
   
   .main-containerC {
-    height: 95vh;
+    height: 100vh;
     display: grid;
+    background-image: url(/public/imgs/bg-login.svg);
+    background-size: cover;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     align-items: center;

@@ -4,8 +4,8 @@ import { LoginData } from "../../../model";
 export const LoginAPI = (api: AxiosInstance) => ({
     validateToken: async (token: string) => {
         const response = await api.post('/validateToken', {token:token});
-        console.log(response.data.data);
-        return response.data.data;
+        return response.data;
+
     },
 
     login : async ({email, password,token}: LoginData) => {

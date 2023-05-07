@@ -4,7 +4,7 @@ import React, { ChangeEvent, FocusEventHandler, useCallback, useEffect, useState
 import  { HiOutlineMail, HiOutlineKey, HiOutlineIdentification, HiOutlineCake, HiOutlineUserCircle } from "react-icons/hi"
 
 //----------------------- Props Input
-import { InputProps, InputPropsArray } from "../PropsInpult"
+import { InputProps, InputPropsArray } from "../PropsInput"
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineWoman, AiOutlineMan } from "react-icons/ai";
 import { TbGenderNeutrois } from "react-icons/tb"
 import { validFullPassword } from "../../../scripts/usefulValidation";

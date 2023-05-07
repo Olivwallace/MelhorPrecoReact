@@ -13,34 +13,33 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-
+import { BtnAlterar,BtnDelete } from "../..";
 import { visuallyHidden } from '@mui/utils';
+import SelectFiltro from '../../Select/list/SelectFiltro';
 
 interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
+  produto:string,
+  qtd: number,
+  mercado1: number,
+  mercado2: number,
+  mercado3: number
+  
 }
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
+  produto:string,
+  qtd: number,
+  mercado1: number,
+  mercado2: number,
+  mercado3: number,
 ): Data {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    produto,
+    qtd,
+    mercado1,
+    mercado2,
+    mercado3
   };
 }
 
@@ -109,31 +108,31 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'name',
+    id: 'produto',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'Produtos',
   },
   {
-    id: 'calories',
+    id: 'qtd',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'QTD',
   },
   {
-    id: 'fat',
+    id: 'mercado1',
     numeric: true,
     disablePadding: false,
     label: 'Fat (g)',
   },
   {
-    id: 'carbs',
+    id: 'mercado2',
     numeric: true,
     disablePadding: false,
     label: 'Carbs (g)',
   },
   {
-    id: 'protein',
+    id: 'mercado3',
     numeric: true,
     disablePadding: false,
     label: 'Protein (g)',
@@ -199,6 +198,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 interface EnhancedTableToolbarProps {
   numSelected: number;
+  nameList: string;
+
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
@@ -222,7 +223,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected} Selecionados
         </Typography>
       ) : (
         <Typography
@@ -231,28 +232,28 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+         {props.nameList}
         </Typography>
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-            <div>Delete</div>
+            <BtnDelete/>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <div>filtro</div>
+         <SelectFiltro/>
         </Tooltip>
       )}
     </Toolbar>
   );
 }
 
-export default function EnhancedTable() {
+export default function EnhancedTable(PropsList: { nameList: string; }) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('produto');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const [dense, setDense] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (
@@ -266,7 +267,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.produto);
       setSelected(newSelected);
       return;
     }
@@ -323,8 +324,8 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <Paper sx={{ width: 'auto', mb: 2 }}>
+        <EnhancedTableToolbar nameList={PropsList.nameList} numSelected={selected.length} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -341,21 +342,23 @@ export default function EnhancedTable() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
+                const isItemSelected = isSelected(row.produto);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    role="checkbox"
+                    onClick={(event) => handleClick(event, row.produto)}
+                    role=""
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.produto}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
+                   
                     <TableCell padding="checkbox">
+                      
                       <Checkbox
                         color="primary"
                         checked={isItemSelected}
@@ -370,12 +373,12 @@ export default function EnhancedTable() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.produto}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="right">{row.qtd}</TableCell>
+                    <TableCell align="right">{row.mercado1}</TableCell>
+                    <TableCell align="right">{row.mercado2}</TableCell>
+                    <TableCell align="right">{row.mercado3}</TableCell>
                   </TableRow>
                 );
               })}
@@ -401,10 +404,7 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+
     </Box>
   );
 }
