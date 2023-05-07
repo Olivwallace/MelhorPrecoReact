@@ -39,7 +39,7 @@ export const validPassword = (password: string): boolean => {
 
 //Valida se senhas conferem e se é forte
 export const validFullPassword = ({password, password_comp}:PassComp) =>{
-    return validPassword(password) && password == password_comp;
+    return validPassword(password) && password === password_comp;
 }
 
 //Valida email e confere se é igual a verificaçao
@@ -55,11 +55,11 @@ export const validIdade = (dateNasc: string) => {
     return birthDate.isBetween(maxAge, minAge, undefined, '[]');
 }
 
-export const validaDadosUsuario = ({CPF, Nome, Sobrenome, Nascimento, Genero}:UserData) => {
-    return  Nome && Sobrenome && validIdade(Nascimento) && Genero && CPF;
+export const validaDadosUsuario = ({CPF, nome, sobrenome, nascimento, genero}:UserData) => {
+    return  nome != null && sobrenome != null && validIdade(nascimento) && genero != null && CPF != null;
 }
 
-export const validaDadosLogin = ({Email, ValidarEmail, Pass, ValidarPass}:LoginComp) => {
-    return validFullEmail({email: Email, email_comp: ValidarEmail}) 
-            && validFullPassword({password: Pass, password_comp: ValidarPass})
+export const validaDadosLogin = ({Email, ValidarEmail, Pass, ValidarPass}:LoginComp) => { 
+    return  validFullEmail({email: Email, email_comp: ValidarEmail})
+            && validFullPassword({password: Pass, password_comp: ValidarPass}) 
 }

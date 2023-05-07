@@ -4,7 +4,7 @@ import React, { ChangeEvent, FocusEventHandler, useCallback, useEffect, useState
 import  { HiOutlineMail, HiOutlineKey, HiOutlineIdentification, HiOutlineCake, HiOutlineUserCircle } from "react-icons/hi"
 
 //----------------------- Props Input
-import { InputProps, InputPropsArray } from "../PropsInput"
+import { InputProps, InputPropsArray } from "../PropsInpult"
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineWoman, AiOutlineMan } from "react-icons/ai";
 import { TbGenderNeutrois } from "react-icons/tb"
 import { validFullPassword } from "../../../scripts/usefulValidation";
@@ -48,7 +48,6 @@ export const InputPassConfirm:React.FC<InputPropsArray> = (props) => {
 
     const compararSenhas = ({password, password_comp}:PassComp) => {
         let result = validFullPassword({password, password_comp})
-        console.log(result + " " + props.value[0] + " " + props.value[1])
         
         if(result) setMessage('')
         else setMessage('Senhas Não Conferem')

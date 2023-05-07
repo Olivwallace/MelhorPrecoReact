@@ -7,8 +7,8 @@ export type user = {
 
 export type UserData = {
     'CPF': string,
-    'Nome': string,
-    'Sobrenome': string,
-    'Genero': string,
-    'Nascimento': string
+    'nome': string,
+    'sobrenome': string,
+    'genero': string,
+    'nascimento': string
 }

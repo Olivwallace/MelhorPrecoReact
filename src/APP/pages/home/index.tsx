@@ -8,7 +8,7 @@ import { SearchBarHome } from "../../assets/components/";
 import { useAPI } from "../../service/api/useApi";
 import { ListHome } from "../../assets/components/List/ListHome/listHome";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
-import NavBar from "../../assets/components/NavBar/NavBar";
+import ResponsiveDrawer from "../../assets/components/NavBar/NavBar";
 import './index.css'; 
 
 //---------------------------- Redefined Types
@@ -69,16 +69,11 @@ export const Home: React.FC = (props) => {
     //Construtor Pagina
     return (
         <>
-  
-            <main className="parent">
-                   
-            <div className="div1">    {
-                    (context && context.user)? 
-                    <NavBar />
-                    :
-                    "Menu Sem User"
-                    }</div>
-                <div className="mapaSearch"><SearchBarHome onChange={[
+            <header>
+                {(context && context.user)? null: "Menu Sem User"}
+            </header>
+            <main>
+                <SearchBarHome onChange={[
                         (event:SelectEvent) => {setSearch({... searchState, select: event.target.value})},
                         (event:InputEvent)  => {setSearch({... searchState, radio: event.target.value })},
                         (event:InputEvent)  => {setSearch({...searchState, text: event.target.value})}
@@ -86,7 +81,7 @@ export const Home: React.FC = (props) => {
                     onKeyDonw={listenerKeyboard} 
                     search={searchState}/>
 
-                <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/></div>
+                <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/>
                 
             </main>
         </>

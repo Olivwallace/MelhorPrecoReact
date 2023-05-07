@@ -31,10 +31,10 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     },[api])
 
 
-    const login = async ({email, pass,token} : LoginData) => {
+    const login = async ({email, password,token} : LoginData) => {
         let autenticado:boolean = false;
 
-        const data = await api.login({email, pass,token}); 
+        const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
             autenticado = true;
@@ -43,10 +43,10 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         return autenticado;
     }
 
-    const loginKeep = async ({email, pass,token} : LoginData) => {
+    const loginKeep = async ({email, password,token} : LoginData) => {
         let autenticado:boolean = false;
 
-        const data = await api.login({email, pass,token}); 
+        const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
             setToken(data.token);
@@ -68,18 +68,19 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     const singup = async ({user, loginData}: RegisterData) => {
+
         let registrado:boolean = false;
-        const responseEmail = await apiSingUp.existEmail(loginData.email)
         const responseCpf = await apiSingUp.existUser(user.CPF);
-        
-        if(!responseEmail.data.exist &&!responseCpf.data.exist){
+        const responseEmail = await apiSingUp.existEmail(loginData.email)
+
+        if(!responseEmail.data.exist && !responseCpf.data.exist){
             const response = await apiSingUp.register({user, loginData})
-            if( response.data.register&&response.data.user){
+            if( response.data.register && response.data.user){
                 setUser(response.data.user);
                 registrado = true;   
             }
         }else{
-            setUser({name:user.Nome , email: loginData.email});
+            setUser({name:user.nome , email: loginData.email});
             if(responseEmail.data.exist) alert('Email Já Cadastrado')
             else alert('CPF Já Cadastrado')
         }
@@ -88,7 +89,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     return(
-        <AuthContext.Provider value={{user, login, loginKeep, logout, singup}}>
+        <AuthContext.Provider value={{user, login, loginKeep, singup, logout}}>
             {children}
         </AuthContext.Provider>
     )

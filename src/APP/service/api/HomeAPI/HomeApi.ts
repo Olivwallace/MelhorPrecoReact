@@ -36,8 +36,5 @@ export const HomeAPI = (api: AxiosInstance) => ({
         const response = await api.post('/getMercados', search)
     },
 
-    getPromotions: async () => {
-
-    }
 
 })
