@@ -1,7 +1,7 @@
 //Exporta Botoes
 export * from "./Buttons/LoginCadastro/ButtonsLogin";
 export * from "./Buttons/LoginCadastro/ButtonsCadastro";
-export * from "./Buttons/CreateList/ButtonsCreateList";
+
 
 //Exporta Campos de Inpult
 export * from "./Inputs/InputsLoginCadastro/InputsLogin";
@@ -24,6 +24,3 @@ export * from "./Select/list/SelectFiltro";
 //Exporta Barra de navegação lateral
 export * from "./NavBar/NavBar";
 
-//exporta fomLista
-
-export * from "./List/ListCreate/inputsCreateLista"

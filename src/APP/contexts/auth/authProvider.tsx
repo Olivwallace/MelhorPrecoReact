@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { user , LoginData, RegisterData } from "../../model/";
 import { AuthContext } from "../auth/authContext"
 import { useAPI } from "../../service/api/useApi";
+import { stringify } from "querystring";
+import { responsiveFontSizes } from "@mui/material";
 
 
 export const AuthProvider = ({children}:{children: JSX.Element}) => {
@@ -27,9 +29,21 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
             }
         }
 
-        validToken();
+        //validToken();
     },[api])
 
+    const session = () =>{
+        let resp = false;
+
+        let strData = localStorage.getItem('session') 
+        if(strData) resp = new Date().toDateString() === strData
+        
+        return resp; 
+    }
+
+    const setSession = (data: string) => {
+        localStorage.setItem('session', data);
+    }
 
     const login = async ({email, password,token} : LoginData) => {
         let autenticado:boolean = false;
@@ -37,6 +51,8 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
+            setSession(new Date().toDateString())
+            setToken("")
             autenticado = true;
         }
 
@@ -49,6 +65,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
+            setSession(new Date().toDateString())
             setToken(data.token);
             autenticado = true;
         }
@@ -60,6 +77,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         await api.logout();
         setUser(null);
         setToken('');
+        setSession('')
         navigate("/login");
     }
 
@@ -89,7 +107,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     return(
-        <AuthContext.Provider value={{user, login, loginKeep, singup, logout}}>
+        <AuthContext.Provider value={{user, login, loginKeep, singup, session, logout}}>
             {children}
         </AuthContext.Provider>
     )

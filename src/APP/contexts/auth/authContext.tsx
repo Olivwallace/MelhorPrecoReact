@@ -6,6 +6,7 @@ export type AuthContextType = {
     login: ({}: LoginData) => Promise<boolean>;
     loginKeep: ({}:LoginData) => Promise<boolean>;
     singup: ({}:RegisterData) => Promise<boolean>;
+    session: () => boolean;
     logout: () => void;
 }
 

@@ -6,7 +6,6 @@ import { useGetLocation } from "../../hooks/useGetLocation";
 import { MarketModel, ProductModel, PromotionsModel, SearchType  } from "../../model";
 import { SearchBarHome } from "../../assets/components/";
 import { useAPI } from "../../service/api/useApi";
-import { ListHome } from "../../assets/components/List/ListHome/listHome";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
 import NavBar from "../../assets/components/NavBar/NavBar";
 import './index.css'; 
@@ -72,8 +71,8 @@ export const Home: React.FC = (props) => {
   
             <main className="parent">
                    
-            <div className="div1">    {
-                    (context && context.user)? 
+            <div className="div1"> {
+                    (context.user || context.session())? 
                     <NavBar />
                     :
                     "Menu Sem User"

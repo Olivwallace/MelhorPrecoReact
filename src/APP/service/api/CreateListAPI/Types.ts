@@ -5,8 +5,7 @@ export type create = {
         {
             codigo: string,
             quantidade: number, 
-        }
-]
+        }]
 }
 
 export type alter = {
@@ -16,19 +15,15 @@ export type alter = {
 		{
             codigo: string,
             quantidade: number, 
-        }
-]
+        }]
 }
 
 export type search = {
-
 	user: number
 }
 
 export type excluir = {
-
 	user: string,
 	lista: number,
 	password: string
-
 }
