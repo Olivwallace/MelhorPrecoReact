@@ -32,8 +32,8 @@ export const Map = (props : MapProps) => {
     },[props.markers, props.locateUser])
 
     return(
-        <div style={{height: '100vh', position: props.positionCSS, zIndex:1}}>
-            <MapContainer style={{height: '100vh'}} maxZoom={18} minZoom={2} center={props.locateUser} zoom={15} zoomControl={false} scrollWheelZoom={true}>
+        <div className='mapa'>
+            <MapContainer style={{height: '100%'}} maxZoom={18} minZoom={2} center={props.locateUser} zoom={15} zoomControl={false} scrollWheelZoom={true}>
                 
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

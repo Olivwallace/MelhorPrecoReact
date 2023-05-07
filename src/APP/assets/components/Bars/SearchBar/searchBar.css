@@ -2,10 +2,8 @@
   z-index: 2;
   position: absolute;
   display: inline-block;
-  margin-top: 3rem;
-  max-width: 100%;
-  height: 20%;
-  width: 85%;
+  position: absolute;
+  margin-top: 100px;
 }
 
 .searchbar {
