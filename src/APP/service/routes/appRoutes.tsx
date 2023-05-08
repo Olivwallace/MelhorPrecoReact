@@ -7,6 +7,7 @@ import { Login, SingUp, Home, Lista} from "../../pages/";
 //---------------------------- Import Context
 import { AuthProvider } from '../../contexts/auth/authProvider';
 import { RequireAuth } from '../../contexts/auth/requireAuth';
+import { CreateList } from '../../pages/createList';
 
 
 //---------------------------- Define Rotas das Paginas
@@ -19,7 +20,7 @@ export const Routers = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path='/singup' element={<SingUp/>} />
                     <Route path='/lists' element={<RequireAuth><Lista/></RequireAuth>}/>
-                    <Route path='/createList' element={<RequireAuth><SingUp/></RequireAuth>}/>
+                    <Route path='/createList' element={<CreateList/>}/>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
