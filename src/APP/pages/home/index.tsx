@@ -71,7 +71,7 @@ export const Home: React.FC = (props) => {
   
             <main className="main">
                    
-            <div className="div1"> {
+             {
                     (context.user || context.session())? 
                     <NavBar auth = {true}
                      namePerfil={context.user?.name} 
@@ -86,7 +86,7 @@ export const Home: React.FC = (props) => {
                      hrefListas={"/login"} 
                      hrefNota={"/Singup"} 
                      hrefSobreNos={"/sobreNos"}/>
-                    }</div>
+                    }
                 <div className="mapaSearch"><SearchBarHome onChange={[
                         (event:SelectEvent) => {setSearch({... searchState, select: event.target.value})},
                         (event:InputEvent)  => {setSearch({... searchState, radio: event.target.value })},
