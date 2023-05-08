@@ -22,6 +22,10 @@ export type search = {
 	user: number
 }
 
+export type searchStr = {
+	busca: string
+}
+
 export type excluir = {
 	user: string,
 	lista: number,
