@@ -7,7 +7,7 @@ import { MarketModel, ProductModel, PromotionsModel, SearchType  } from "../../m
 import { SearchBarHome } from "../../assets/components/";
 import { useAPI } from "../../service/api/useApi";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
-import NavBar from "../../assets/components/NavBar/NavBar";
+import {NavBar} from "../../assets/components/NavBar/NavBar";
 import './index.css'; 
 
 //---------------------------- Redefined Types
@@ -69,13 +69,23 @@ export const Home: React.FC = (props) => {
     return (
         <>
   
-            <main className="parent">
+            <main className="main">
                    
             <div className="div1"> {
                     (context.user || context.session())? 
-                    <NavBar />
+                    <NavBar auth = {true}
+                     namePerfil={context.user?.name} 
+                     hrefPerfil={""} 
+                     hrefListas={""} 
+                     hrefNota={""} 
+                     hrefSobreNos={""}/>
                     :
-                    "Menu Sem User"
+                    <NavBar auth = {false}
+                     namePerfil={""} 
+                     hrefPerfil={""} 
+                     hrefListas={"/login"} 
+                     hrefNota={"/Singup"} 
+                     hrefSobreNos={"/sobreNos"}/>
                     }</div>
                 <div className="mapaSearch"><SearchBarHome onChange={[
                         (event:SelectEvent) => {setSearch({... searchState, select: event.target.value})},
