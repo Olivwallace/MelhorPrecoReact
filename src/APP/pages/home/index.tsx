@@ -68,9 +68,6 @@ export const Home: React.FC = (props) => {
     //Construtor Pagina
     return (
         <>
-  
-            <main className="main">
-                   
              {
                     (context.user || context.session())? 
                     <NavBar auth = {true}
@@ -87,6 +84,7 @@ export const Home: React.FC = (props) => {
                      hrefNota={"/Singup"} 
                      hrefSobreNos={"/sobreNos"}/>
                     }
+            <main className="main">
                 <div className="mapaSearch"><SearchBarHome onChange={[
                         (event:SelectEvent) => {setSearch({... searchState, select: event.target.value})},
                         (event:InputEvent)  => {setSearch({... searchState, radio: event.target.value })},
@@ -94,7 +92,6 @@ export const Home: React.FC = (props) => {
                     ]}
                     onKeyDonw={listenerKeyboard} 
                     search={searchState}/>
-
                 <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/></div>
                 
             </main>

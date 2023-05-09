@@ -29,9 +29,11 @@ export const NavBar: React.FC<NavBarProps> = (props) => {
 
     
       {props.auth?(   <>
-       <Link className='linkHeader' to={props.hrefListas}>Lista</Link>
+       <div>
+      <Link className='linkHeader' to={props.hrefListas}>Lista</Link>
        <Link className='linkHeader' to={props.hrefNota}>Nota</Link>
        <Link className='linkHeader' to={props.hrefSobreNos}>Sobre nós</Link>
+       </div>
       <div className='div'>
               <label className='logado' onClick={handleMenu}>Olá, {props.namePerfil}</label>
               <Menu

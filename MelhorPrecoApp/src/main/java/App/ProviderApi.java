@@ -73,7 +73,7 @@ public class ProviderApi {
         //post("/searchMercados", (request, reponse) -> appService.searchMercados(request, response));
         //post("/searchProdutos", (request, response) -> appService.searchProdutos(request, response));
 
-      
+
         init();
     }
 
