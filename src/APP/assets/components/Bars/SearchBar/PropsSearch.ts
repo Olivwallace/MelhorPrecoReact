@@ -2,6 +2,7 @@ export interface PropsSearch {
     search: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyDonw: (event: React.KeyboardEvent) => void;
+    placeHolder?: string,
     className?: string;
 }
 
