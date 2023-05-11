@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react"
-import { ListaPropsA } from "../PropsList"
+import { ListaPropsA, ListaPropsB } from "../PropsList"
 import { ListaLateralItem } from "../itemLista/itemLista";
-import { MarketModel, ProductModel } from "../../../../model";
+import { ListaHomeItem } from "../itemLista/itemLista";
 
 export const ListaLateral: React.FC<ListaPropsA> = (props) => {
     
@@ -20,6 +20,43 @@ export const ListaLateral: React.FC<ListaPropsA> = (props) => {
                 unidadeMedida={element.unMedida}
               />
             );
+        });
+
+        setItens(listaDeItens)
+    },[props.itens])
+
+
+    return(
+        <div className={props.className}>
+            {itens}
+        </div>
+    )
+}
+
+export const ListaLateralHome: React.FC<ListaPropsB> = (props) => {
+    
+    const [itens, setItens] = useState<React.ReactNode[]>([])
+
+    useEffect(()=>{
+        const listaDeItens = props.itens.map((element, index) => {
+            return(
+                element.produtos.map((item, index) =>{
+                    return(
+                        <ListaHomeItem
+                            key={item.codigo}
+                            className="homeLista"
+                            mercado={element.nome}
+                            nomeItem={item.nome}
+                            marca={item.marca}
+                            descricao={item.descricao}
+                            unidadeMedida={item.unMedida}
+                            valor={item.valor}
+                            promocionado={item.promocionado}
+                            condicaoPromocao={item.validadeOferta}
+                            avaliacao={item.avaliacao}/>
+                    )       
+                })
+            )
         });
 
         setItens(listaDeItens)

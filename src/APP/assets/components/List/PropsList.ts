@@ -22,21 +22,20 @@ export interface ItemListaVisualizacaoProps{
     valor2?: number | string,
     valor3?: number | string,
     quantidade?:number | string
-    onClickButtonAdd?: () => void
-    onClickButtonSub?: () => void
-    onClickButtonRem?: () => void
+    onClickButtonAdd: () => void
+    onClickButtonSub: () => void
+    onClickButtonRem: () => void
 }
 
 export interface ListaPropsA {
     className: string,
     itens: ProductModel[]
-    onSelect?: (item: ProductModel) => void
+    onSelect: (item: ProductModel) => void
 }
 
 export interface ListaPropsB {
     className: string,
     itens: MarketModel[]
-    onSelect?: (market: MarketModel) => void
 }
 
 

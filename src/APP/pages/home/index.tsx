@@ -9,6 +9,7 @@ import { useAPI } from "../../service/api/useApi";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
 import {NavBar} from "../../assets/components/NavBar/NavBar";
 import './index.css'; 
+import { ListaLateral, ListaLateralHome } from "../../assets/components/List/lista";
 
 //---------------------------- Redefined Types
 type InputEvent = ChangeEvent<HTMLInputElement>
@@ -22,17 +23,18 @@ export const Home: React.FC = (props) => {
     const api = useAPI.Home
 
     const [markers, setMarkets] = useState<ReponseSearch>()
-
     const [searchState, setSearch] = useState({
         text: "",
         select: 'Promotion',
         radio: 'Distance'
     });
 
+
     const listenerKeyboard = useCallback((event: React.KeyboardEvent) => {
         if(event.key === 'Enter') handleShearch();
     },[props])
 
+    
     const handleShearch = useCallback(async () => {
         const search = {
             search: searchState.text, 
@@ -92,6 +94,12 @@ export const Home: React.FC = (props) => {
                     ]}
                     onKeyDonw={listenerKeyboard} 
                     search={searchState}/>
+
+                <ListaLateralHome
+                    className="listaHome"
+                    itens={(markers)?markers.data.markets:[]}
+                />
+
                 <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/></div>
                 
             </main>
