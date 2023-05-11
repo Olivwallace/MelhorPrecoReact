@@ -1,7 +1,7 @@
 //----------------------- Importa Dependencias
 import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
-import { ListaLateralItem, ListaHomeItem } from "../../assets/components/List/itemLista/itemLista";
+import { ListaLateralItem, ListaHomeItem, ListaVisualizacaoItem } from "../../assets/components/List/itemLista/itemLista";
 import './index.css'; 
 import { ListaLateral } from "../../assets/components/List/lista";
 import { ProductModel } from "../../model";
@@ -57,8 +57,10 @@ export const CreateList: React.FC = (props) => {
 
             <ListaLateral 
                 className="listaBuscas"
-                itens={listaBusca}/>
+                itens={listaBusca}
+                />
 
+            
         </main>
     );
 }; 

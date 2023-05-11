@@ -11,12 +11,35 @@ export interface ItemListaProps {
     promocionado?: boolean,
     condicaoPromocao?: string,
     avaliacao: number,
+    onClickButton?: () => void
+}
+
+export interface ItemListaVisualizacaoProps{
+    className: string,
+    alteravel: boolean,
+    nomeItem?: string,
+    valor1?: number | string,
+    valor2?: number | string,
+    valor3?: number | string,
+    quantidade?:number | string
+    onClickButtonAdd?: () => void
+    onClickButtonSub?: () => void
+    onClickButtonRem?: () => void
 }
 
 export interface ListaPropsA {
     className: string,
     itens: ProductModel[]
+    onSelect?: (item: ProductModel) => void
 }
+
+export interface ListaPropsB {
+    className: string,
+    itens: MarketModel[]
+    onSelect?: (market: MarketModel) => void
+}
+
+
 
 
 
