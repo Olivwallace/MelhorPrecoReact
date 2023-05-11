@@ -1,12 +1,14 @@
 .listaHome{
+    height: 87vh;
     position: absolute;
     z-index: 2;
     margin: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-x: scroll;
+    overflow-y: scroll;
     white-space: nowrap;
+    scrollbar-width: none;
 }
 
 
