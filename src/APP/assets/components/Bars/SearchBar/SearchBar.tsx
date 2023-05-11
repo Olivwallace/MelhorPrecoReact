@@ -40,7 +40,7 @@ export const SearchBar: React.FC<PropsSearch> = (props) => {
                             type="text" className="searchbar-input" 
                             maxLength={2048} name="q" autoCapitalize={'off'}
                             autoComplete={"off"} title="Search" role="combobox" 
-                            placeholder="Busque por produto ou mercado" />
+                            placeholder={(props.placeHolder)?props.placeHolder:"Busque por produto ou mercado"} />
                 </div>
 
                 <div className="searchbar-right">
