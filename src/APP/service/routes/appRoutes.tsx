@@ -2,7 +2,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 //---------------------------- Import pages 
-import { Login, SingUp, Home, Lista} from "../../pages/";
+import { Login, SingUp, Home, Lista,EnvioNota} from "../../pages/";
 
 //---------------------------- Import Context
 import { AuthProvider } from '../../contexts/auth/authProvider';
@@ -21,6 +21,7 @@ export const Routers = () => {
                     <Route path='/singup' element={<SingUp/>} />
                     <Route path='/lists' element={<RequireAuth><Lista/></RequireAuth>}/>
                     <Route path='/createList' element={<CreateList/>}/>
+                    <Route path='/nota' element={<EnvioNota/>}/>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

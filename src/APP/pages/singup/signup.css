@@ -234,9 +234,10 @@
     grid-template-rows: repeat(2, auto);
     align-content: center;
     justify-content: center;
+    background-image: url(/public/imgs/bg-login-mobile.svg);
     }
     body{
-      background-image: url(/public/imgs/bg-login-mobile.svg);
+      
       height: 100vh;
       overflow: hidden;
       background-size:cover;
