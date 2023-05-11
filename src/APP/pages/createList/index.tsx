@@ -58,7 +58,9 @@ export const CreateList: React.FC = (props) => {
             <ListaLateral 
                 className="listaBuscas"
                 itens={listaBusca}
+                onSelect={() => {}}
                 />
+
 
             
         </main>

@@ -45,9 +45,6 @@ export const ListaHomeItem: React.FC<ItemListaProps> = (props) => {
                 </div>
                 
                 <div className="avaliacao">{<HalfRating rating={props.avaliacao}/>}</div>
-                <div className="acoes" onClick={props.onClickButton} style={{'display': ''}}>
-                    <AddSVG/>
-                </div>
         </div>
     )    
 }
