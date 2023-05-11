@@ -8,4 +8,5 @@ export type ProductModel = {
     avaliacao: number,
     promocionado?: boolean
     validadeOferta?: string
+    quantidade?: number
 }
