@@ -26,7 +26,7 @@ public class Connect {
 	private static final String DATABASE = "SMP";
     private static final String URL = "jdbc:postgresql://" + SERVER_NAME + ":" + SERVER_PORT + "/" + DATABASE;
     private static final String USER = "postgres";
-    private static final String PASS = "Oliv05";
+    private static final String PASS = "ti@cc";
 
     public static Connection getConnection(){
         Connection newConnection = null;

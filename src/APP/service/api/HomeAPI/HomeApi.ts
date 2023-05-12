@@ -11,25 +11,94 @@ export const HomeAPI = (api: AxiosInstance) => ({
             data: {
                 markets: [{
                     nome: "Epa",
-                    endereco: "Rua Coração Eucarístico de Jesus, 86 - Coração Eucarístico, Belo Horizonte - MG, 30535-460",
+                    cnpj: "111.111.111.111-11",
+                    endereco: "Rua Coração Eucarístico de Jesus",
+                    numero: 86,
+                    cep:  "30535-460",
+                    estado: "MG",
+                    cidade: "Belo Horizonte",
                     coords: ["-19.92648878", "-43.98874015"],
                     avaliacao:3,
-                    produtos:[],
-                    promocoes:[]
+                    produtos:[{
+                        codigo: '6023130621686',
+                        nome: 'Feijão',
+                        marca: 'Camil',
+                        unMedida: '1 kg',
+                        avaliacao: 3,
+                        descricao: 'feijão carioca',
+                        valor: 10.2},
+                        {
+                            codigo: '6023130621686',
+                            nome: 'Feijão',
+                            marca: 'Camil',
+                            unMedida: '1 kg',
+                            avaliacao: 3,
+                            descricao: 'feijão carioca',
+                            valor: 10.2,
+                            validadeOferta: "10/05/2023",
+                            promocionado: true
+                        },
+                        {
+                            codigo: '6023130621686',
+                            nome: 'Feijão',
+                            marca: 'Camil',
+                            unMedida: '1 kg',
+                            avaliacao: 3,
+                            descricao: 'feijão carioca',
+                            valor: 10.2},
+                            {
+                                codigo: '6023130621686',
+                                nome: 'Feijão',
+                                marca: 'Camil',
+                                unMedida: '1 kg',
+                                avaliacao: 3,
+                                descricao: 'feijão carioca',
+                                valor: 10.2,
+                                validadeOferta: "10/05/2023",
+                                promocionado: true
+                            },
+                            {
+                                codigo: '6023130621686',
+                                nome: 'Feijão',
+                                marca: 'Camil',
+                                unMedida: '1 kg',
+                                avaliacao: 3,
+                                descricao: 'feijão carioca',
+                                valor: 10.2},
+                                {
+                                    codigo: '6023130621686',
+                                    nome: 'Feijão',
+                                    marca: 'Camil',
+                                    unMedida: '1 kg',
+                                    avaliacao: 3,
+                                    descricao: 'feijão carioca',
+                                    valor: 10.2,
+                                    validadeOferta: "10/05/2023",
+                                    promocionado: true
+                                }
+                    ]
                 },{
-                    nome: "Super Nosso",
-                    endereco: "R. Dom José Pereira Lara, 33 - Coração Eucarístico, Belo Horizonte - MG, 30535-520",
-                    coords: ["-19.92426973", "-43.9865461"],
+                    nome: "Epa",
+                    cnpj: "111.111.111.111-11",
+                    endereco: "Rua Coração Eucarístico de Jesus",
+                    numero: 86,
+                    cep:  "30535-460",
+                    estado: "MG",
+                    cidade: "Belo Horizonte",
+                    coords: ["-19.92648878", "-43.98874015"],
                     avaliacao:3,
-                    produtos:[],
-                    promocoes:[]
+                    produtos:[]
                 },{
-                    nome: "Dia",
-                    endereco: "Av. Ver. Cícero Ildefonso, 855 - João Pinheiro, Belo Horizonte - MG, 30530-000",
-                    coords: ["-19.92563647", "-44.00087446"],
+                    nome: "Epa",
+                    cnpj: "111.111.111.111-11",
+                    endereco: "Rua Coração Eucarístico de Jesus",
+                    numero: 86,
+                    cep:  "30535-460",
+                    estado: "MG",
+                    cidade: "Belo Horizonte",
+                    coords: ["-19.92648878", "-43.98874015"],
                     avaliacao:3,
-                    produtos:[],
-                    promocoes:[]
+                    produtos:[]
                 }]
             }
         }

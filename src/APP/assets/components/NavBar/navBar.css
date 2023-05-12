@@ -1,0 +1,45 @@
+
+.navegacao{
+    display: flex;
+    height: 60px;
+    background: rgb(5,79,63);
+    background: linear-gradient(90deg, rgba(5,79,63,1) 0%, rgba(43,171,139,1) 85%);
+    align-items: center;
+    justify-content: space-evenly;
+}
+.linkHeader{
+    margin-left: 30px;
+    text-decoration: none;
+    color: #fff;
+}
+.logado{
+    color: #fff;
+}
+.naoLogado {
+
+    background-color: #cc8b11;
+    box-shadow: #032532 4px 4px 0px;
+    border-radius: 8px;
+    padding: 7px 8px;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    min-width: 50px;
+    transition: transform 200ms, box-shadow 200ms;
+  }
+  
+  .naoLogado:active {
+    transform: translateY(4px) translateX(4px);
+    box-shadow: #032532 0px 0px 0px;
+  }
+
+  .div{
+    margin-left: auto;
+    margin-right: 20px;
+  }
+.menuLink{
+    text-decoration: none;
+    color: #000;
+}
