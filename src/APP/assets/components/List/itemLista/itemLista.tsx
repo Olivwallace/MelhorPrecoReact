@@ -86,7 +86,7 @@ export const ListaVisualizacaoItem: React.FC<ItemListaVisualizacaoProps> = (prop
         if(props.valor1 && props.valor2 && props.valor3){
             let valores =  [props.valor1, props.valor2, props.valor3];
             valores.sort()
-            setOrdemValores(valores)
+            setOrdemValores(valores) 
         }
     },[])
     
