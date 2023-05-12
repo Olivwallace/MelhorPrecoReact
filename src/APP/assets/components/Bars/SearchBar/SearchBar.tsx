@@ -44,7 +44,7 @@ export const SearchBar: React.FC<PropsSearch> = (props) => {
                 </div>
 
                 <div className="searchbar-right">
-                    <VoiceSVG />
+                    
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
 import { ListaLateralItem, ListaHomeItem, ListaVisualizacaoItem } from "../../assets/components/List/itemLista/itemLista";
-import './index.css'; 
+import './index.css';
 import { ListaLateral } from "../../assets/components/List/lista";
 import { ProductModel } from "../../model";
 import { useAPI } from "../../service/api/useApi";
@@ -22,47 +22,57 @@ export const CreateList: React.FC = (props) => {
     const [listaBusca, setListaBusca] = useState<ProductModel[]>([]); // Lista Renderizada
     const [listaCliente, setListaCliente] = useState<ProductModel[]>([]); // Mantem Lista Cadastrada
 
-    const [busca, setBusca] = useState<string>("A"); 
+    const [busca, setBusca] = useState<string>("A");
     const buscarItens = useCallback(async () => {
-        let lista = await api.pesquisarItens({busca: busca})
+        let lista = await api.pesquisarItens({ busca: busca })
         setListaBusca(lista.produtos)
-    },[busca])
+    }, [busca])
 
     //Realiza carga inicial de itens para facilitar a busca
-    useEffect(()=>{ 
+    useEffect(() => {
         buscarItens();
-    },[])
+    }, [])
 
+    const handleSubmit = useCallback(async (event: EventSubmit) => {
+        event.preventDefault();
+        console.log("to aqui");
+    }, [listaCliente]);
 
     //Construtor Pagina
     return (
-        <main className="main">
-            <NavBar auth = {true}
-                namePerfil={context.user?.name} 
-                hrefPerfil={""} 
-                hrefListas={""} 
-                hrefNota={""} 
-                hrefSobreNos={""}/>
+        <><NavBar auth={true}
+            namePerfil={""}
+            hrefPerfil={""}
+            hrefListas={""}
+            hrefNota={""}
+            hrefSobreNos={""} /><main className="main-lista">
 
-            <SearchBar 
-                search=""
-                placeHolder="Busque o produto" 
-                onChange={()=> console.log("Hello")} 
-                onKeyDonw={()=> console.log("clicou")}/>
+                <div>
+                    <form className="form-Lista" onSubmit={handleSubmit}>
+                        <div className="divPesquisa">
+                            <SearchBar
+                                search=""
+                                placeHolder="Busque o produto"
+                                onChange={() => console.log("Hello")}
+                                onKeyDonw={() => console.log("clicou")} />
 
-            <input 
-                type="text" 
-                id="nomeLista" 
-                placeholder="Nova Lista"/>
+                            <ListaLateral
+                                className="listaBuscas"
+                                itens={listaBusca}
+                                onSelect={() => { } } />
+                        </div>
+                        <div className="div2">
+                            <input
+                            className="inputLista"
+                                type="text"
+                                id="nomeLista"
+                                placeholder="Nova Lista" />
+                            <div className="divLista"></div>
+                            <button className="btn-envio" type="submit">Salvar lista</button>
+                        </div>
+                    </form>
+                </div>
 
-            <ListaLateral 
-                className="listaBuscas"
-                itens={listaBusca}
-                onSelect={() => {}}
-                />
-
-
-            
-        </main>
+            </main></>
     );
 }; 
