@@ -31,6 +31,8 @@ export interface ListaPropsA {
     className: string,
     itens: ProductModel[]
     onSelect: (item: ProductModel) => void
+    onUpdate: (item: ProductModel, valor: number) => void
+    onDelete: (item: ProductModel) => void
 }
 
 export interface ListaPropsB {
