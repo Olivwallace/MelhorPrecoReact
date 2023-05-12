@@ -25,25 +25,7 @@ export const ListaAPI = (api: AxiosInstance) => ({
     },
 
     pesquisarItens: async(busca: searchStr) =>{
-        return {
-                produtos: [{
-                    codigo: "1121312312",
-                    nome: "Refrigerante Coca Cola",
-                    marca: "Coca-Cola",
-                    descricao: "Refrigerante de Cola",
-                    unMedida: "2L",
-                    avaliacao: 4
-                },{
-                    codigo: "112122312",
-                    nome: "Refrigerante Pespsi Cola",
-                    marca: "Pespsi",
-                    descricao: "Refrigerante de Cola",
-                    unMedida: "2L",
-                    avaliacao: 4
-                }
-            ]
-        }
-        const response = await api.post('/buscaProduto', {busca})
-        return response.data.data
+        const response = await api.post('/getProdutos', {busca: busca});
+        return response.data.data;
     }
 });

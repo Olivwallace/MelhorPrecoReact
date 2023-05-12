@@ -10,10 +10,7 @@ package App;
 
 
 import Connection.CorsFilter;
-import Service.ListService;
-import Service.PerfilService;
-import Service.RegisterService;
-import Service.SingInService;
+import Service.*;
 
 import static spark.Spark.*;
 
@@ -23,6 +20,7 @@ public class ProviderApi {
     public static RegisterService registerService = new RegisterService();
     public static PerfilService perfilService = new PerfilService();
     public static ListService listService = new ListService();
+    public static SearchService searchService = new SearchService();
 
     public static void main(String[] args){
         // Habilita o CORS para todas as origens e métodos
@@ -68,6 +66,14 @@ public class ProviderApi {
         post("/updateList", (request, response) -> listService.updateList(request, response));
         post("/getLists", (request, response) -> listService.getLists(request, response));
         post("/deleteList", (request, response) -> listService.deleteList(request, response));
+
+        //--------- Buscas -------------------------------------------------------------------------------
+        post("/getMercados", (request, response) -> searchService.getMercados(request, response));
+        post("/getProdutos" ,(request, response) -> searchService.getProdutos(request, response));
+
+        post("/getProductPrice", (request, response) -> searchService.getMercados(request, response));
+        post("/getProductDistance", (request, response) -> searchService.getMercados(request, response));
+        post("/getProductRating", (request, response) -> searchService.getMercados(request, response));
 
 
         //post("/searchMercados", (request, reponse) -> appService.searchMercados(request, response));

@@ -21,11 +21,12 @@ export const CreateList: React.FC = (props) => {
 
     const [listaBusca, setListaBusca] = useState<ProductModel[]>([]); // Lista Renderizada
 
-    const [busca, setBusca] = useState<string>("A");
+    const [busca, setBusca] = useState<string>("a");
     const buscarItens = useCallback(async () => {
-        let lista = await api.pesquisarItens({ busca: busca })
-        setListaBusca(lista.produtos)
-    }, [busca])
+        let lista = await api.pesquisarItens({busca: busca})
+        console.log(lista)
+        setListaBusca((lista.produtos != "[]")?lista.produtos:listaBusca)
+    }, [props, busca])
 
     //Adiciona itens a lista
     const [listaCliente, setListaCliente] = useState<ProductModel[]>([]); // Mantem Lista Cadastrada
@@ -59,8 +60,14 @@ export const CreateList: React.FC = (props) => {
 
     const handleSubmit = useCallback(async (event: EventSubmit) => {
         event.preventDefault();
-        console.log("to aqui");
     }, [listaCliente]);
+
+    
+    //Efetua busca em tempo real
+    useEffect(() => {
+        buscarItens()
+    },[busca])
+
 
     //Construtor Pagina
     return (
@@ -73,9 +80,9 @@ export const CreateList: React.FC = (props) => {
                 hrefSobreNos={""} />
 
             <SearchBar
-                search=""
+                search={busca}
                 placeHolder="Busque o produto"
-                onChange={() => console.log("Hello")}
+                onChange={(event:InputEvent) => {setBusca(event.target.value)}}
                 onKeyDonw={() => console.log("clicou")} />
 
 

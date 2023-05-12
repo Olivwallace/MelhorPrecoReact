@@ -21,7 +21,7 @@ export const ListaHomeItem: React.FC<ItemListaProps> = (props) => {
             {(props.promocionado) ? <PriceSVG /> : null}
 
             <div className="validadeOferta" style={(props.promocionado) ? {} : { 'display': 'none' }}>
-                {(props.promocionado) ? "Oferta valida até: " + props.condicaoPromocao : null}
+                {(props.promocionado) ?  props.condicaoPromocao : null}
             </div>
 
             <div className="item" >

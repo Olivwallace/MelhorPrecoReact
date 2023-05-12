@@ -78,7 +78,6 @@ export const SearchBarHome: React.FC<PropsSearchHome> = (props) => {
                 <select onChange={handleSelect} defaultValue={props.search.select} className="select_search" id="selecao" name="selecao">
                     <option value="Market">Mercado</option>
                     <option value="Product">Produto</option>
-                    <option value="Promotion">Oferta</option>
                 </select>
 
                 <div className="rating">
