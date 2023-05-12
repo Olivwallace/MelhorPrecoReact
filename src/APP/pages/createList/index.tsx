@@ -21,7 +21,7 @@ export const CreateList: React.FC = (props) => {
 
     const [listaBusca, setListaBusca] = useState<ProductModel[]>([]); // Lista Renderizada
 
-    const [busca, setBusca] = useState<string>("a");
+    const [busca, setBusca] = useState<string>("");
     const buscarItens = useCallback(async () => {
         let lista = await api.pesquisarItens({busca: busca})
         console.log(lista)
@@ -62,7 +62,7 @@ export const CreateList: React.FC = (props) => {
         event.preventDefault();
     }, [listaCliente]);
 
-    
+
     //Efetua busca em tempo real
     useEffect(() => {
         buscarItens()
