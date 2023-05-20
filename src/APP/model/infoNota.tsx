@@ -5,3 +5,6 @@ export type infoNota = {
     
 
 }
+export type uploadNota = {
+    image: FormData
+}

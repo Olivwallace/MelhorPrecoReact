@@ -22,6 +22,7 @@ public class ProviderApi {
     public static ListService listService = new ListService();
     public static SearchService searchService = new SearchService();
 
+    public static NotaService notaService = new NotaService();
     public static void main(String[] args){
         // Habilita o CORS para todas as origens e métodos
         options("/*", (request, response) -> {
@@ -76,10 +77,10 @@ public class ProviderApi {
         post("/getProductRating", (request, response) -> searchService.getMercados(request, response));
 
 
-        //post("/searchMercados", (request, reponse) -> appService.searchMercados(request, response));
+        //post("/searchMercados", (request, response) -> appService.searchMercados(request, response));
         //post("/searchProdutos", (request, response) -> appService.searchProdutos(request, response));
-
-
+        //-------- Notas -----------------------------------
+        post( "/uploadNota",(request, response) -> notaService.uploadNota(request, response));
         init();
     }
 
