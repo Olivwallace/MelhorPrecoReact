@@ -62,7 +62,7 @@ public class ProviderApi {
         post("/deleteUser", (request, response) -> perfilService.deleteUser(request, response));
 
         //------------- Lista App -----------------------------------------------------------------------
-        post("/createList", (request, response) -> listService.createList(request, response));
+        post("/createLista", (request, response) -> listService.createList(request, response));
         post("/updateList", (request, response) -> listService.updateList(request, response));
         post("/getLists", (request, response) -> listService.getLists(request, response));
         post("/deleteList", (request, response) -> listService.deleteList(request, response));

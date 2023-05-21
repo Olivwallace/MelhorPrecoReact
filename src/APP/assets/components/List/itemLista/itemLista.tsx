@@ -107,6 +107,14 @@ export const ListaVisualizacaoItem: React.FC<ItemListaVisualizacaoProps> = (prop
                 {props.nomeItem}
             </div>
 
+            <div className="desc" >
+                {props.desc}
+            </div>
+
+            <div className="unMedida">
+                {props.unMedida}
+            </div>
+
             <div className="quantidade">
                 <div className="add" onClick={props.onClickButtonAdd}>
                     {(props.alteravel) ? <AddSVG /> : null}

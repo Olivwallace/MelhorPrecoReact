@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
-import { user , LoginData, RegisterData } from "../../model/";
+import { user , LoginData, RegisterData, userLocal } from "../../model/";
 import { AuthContext } from "../auth/authContext"
 import { useAPI } from "../../service/api/useApi";
 import { stringify } from "querystring";
@@ -41,7 +41,13 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         return resp; 
     }
 
-    const setSession = (data: string) => {
+    const usuario = () =>{
+        let resp = localStorage.getItem('usuario')
+        return (resp)?JSON.parse(resp):null;
+    }
+
+    const setSession = (data: string, user: userLocal) => {
+        localStorage.setItem('usuario', JSON.stringify(user))
         localStorage.setItem('session', data);
     }
 
@@ -51,7 +57,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
-            setSession(new Date().toDateString())
+            setSession(new Date().toDateString(), data.user)
             setToken("")
             autenticado = true;
         }
@@ -65,7 +71,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         const data = await api.login({email, password,token}); 
         if(data.user && data.token) {
             setUser(data.user);
-            setSession(new Date().toDateString())
+            setSession(new Date().toDateString(), data.user)
             setToken(data.token);
             autenticado = true;
         }
@@ -77,7 +83,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
         await api.logout();
         setUser(null);
         setToken('');
-        setSession('')
+        setSession('', {id: -1, name: "", email: ""})
         navigate("/login");
     }
 
@@ -107,7 +113,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     return(
-        <AuthContext.Provider value={{user, login, loginKeep, singup, session, logout}}>
+        <AuthContext.Provider value={{user, login, loginKeep, singup, session, usuario, logout}}>
             {children}
         </AuthContext.Provider>
     )

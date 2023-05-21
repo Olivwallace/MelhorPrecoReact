@@ -5,6 +5,12 @@ export type user = {
     password?: string;
 }
 
+export type userLocal = {
+    id: number;
+    name: string,
+    email: string
+}
+
 export type UserData = {
     'CPF': string,
     'nome': string,

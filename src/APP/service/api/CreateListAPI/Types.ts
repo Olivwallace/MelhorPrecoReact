@@ -1,21 +1,15 @@
+import { ProductModel } from "../../../model"
+
 export type create = {
     user:number,
     nomeLista: string,
-    produtos:[
-        {
-            codigo: string,
-            quantidade: number, 
-        }]
+    produtos: ProductModel[]
 }
 
 export type alter = {
 	id: number,
 	nomeLista: string,
-	produtos: [
-		{
-            codigo: string,
-            quantidade: number, 
-        }]
+	produtos: ProductModel[]
 }
 
 export type search = {

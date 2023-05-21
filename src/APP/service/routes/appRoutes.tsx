@@ -20,7 +20,7 @@ export const Routers = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path='/singup' element={<SingUp/>} />
                     <Route path='/lists' element={<RequireAuth><Lista/></RequireAuth>}/>
-                    <Route path='/createList' element={<CreateList/>}/>
+                    <Route path='/createList' element={<RequireAuth><CreateList/></RequireAuth>}/>
                     <Route path='/nota' element={<EnvioNota/>}/>
                 </Routes>
             </AuthProvider>
