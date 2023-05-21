@@ -10,3 +10,8 @@ npm install react-leaflet-routing-machine
 npm install --save @types/leaflet-routing-machine
 npm add react-leaflet leaflet
 npm add --dev @types/leaflet
+
+https://github.com/UB-Mannheim/tesseract/wiki
+
+
+https://sourceforge.net/projects/opencvlibrary/files/

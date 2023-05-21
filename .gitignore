@@ -14,4 +14,17 @@
 *.vs
 *.log
 node_modules
+/tmp
+*.png
+*.webp
+*.jpeg
+*.gif
+*.tiff
+*.jpg
+*.jar
+*.lst
+*.properties
+
+
+
 

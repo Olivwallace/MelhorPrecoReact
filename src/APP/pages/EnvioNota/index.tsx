@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useAPI } from "../../service/api/useApi";
 import { ReactComponent as DelSVG } from "./img/delete.svg";
 import upload from "./img/upload.png"
 import imgUp from "./img/imgUp.svg"
 import { NavBar } from "../../assets/components";
 import "./envioNota.css"
+
 type EventSubmit = React.FormEvent<HTMLFormElement>
 
 export const EnvioNota: React.FC = () => {
@@ -13,7 +15,7 @@ export const EnvioNota: React.FC = () => {
     const [image, setImage] = useState<File[]>([]); // inicializa o vetor de estados como um vetor vazio
     const [itens, setItens] = useState<React.ReactNode[]>([])
     const [isConfirmOne, setIsConfirmOne] = useState(false);
-    
+    const api = useAPI.Nota
 
     const handleDeleteImagem = (index: number) => {
         console.log(image.length);
@@ -37,6 +39,13 @@ export const EnvioNota: React.FC = () => {
             setIsVazio(true);
             return;
         }
+        const formData = new FormData();
+        
+           for (let i = 0; i < image.length; i++) {
+            formData.append('image', image[i]);
+           }
+
+          await api.uploadImage({image: formData});
         setIsConfirmOne(true);
     }, [image]);
 
@@ -75,9 +84,9 @@ export const EnvioNota: React.FC = () => {
                     <img className="uploadSVG" src={imgUp} alt="" />
                 </div>
                     <div className="form">
-                        <form onSubmit={handlesubmit}>
+                        <form onSubmit={handlesubmit} name="upfile">
                             <h1 className="titulo">Envie sua nota</h1>
-                            <input disabled={isCheio} id="uploadPhoto" className="input-img" type="file" accept="image/*" name="image" onChange={e => {
+                            <input disabled={isCheio} id="uploadPhoto" className="input-img" type="file" accept="image/*" name="upfile" onChange={e => {
                                 const file = e.target.files?.[0];
                                 if (file) {
                                     if (image.length < 3) {
