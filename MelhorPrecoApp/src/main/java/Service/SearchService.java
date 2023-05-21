@@ -5,7 +5,6 @@ import Model.Mercado;
 import Model.Produto;
 import Model.User;
 import com.google.gson.*;
-import org.eclipse.jetty.util.ajax.JSONObjectConvertor;
 import spark.Request;
 import spark.Response;
 

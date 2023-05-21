@@ -18,6 +18,8 @@ export interface ItemListaVisualizacaoProps{
     className: string,
     alteravel: boolean,
     nomeItem?: string,
+    desc?: string,
+    unMedida?: string,
     valor1?: number | string,
     valor2?: number | string,
     valor3?: number | string,

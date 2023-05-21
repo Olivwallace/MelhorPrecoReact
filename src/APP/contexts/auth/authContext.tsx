@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { LoginData, RegisterData, user } from "../../model/";
+import { LoginData, RegisterData, user, userLocal } from "../../model/";
 
 export type AuthContextType = {
     user: user | null;
@@ -7,6 +7,7 @@ export type AuthContextType = {
     loginKeep: ({}:LoginData) => Promise<boolean>;
     singup: ({}:RegisterData) => Promise<boolean>;
     session: () => boolean;
+    usuario: () => userLocal | null;
     logout: () => void;
 }
 

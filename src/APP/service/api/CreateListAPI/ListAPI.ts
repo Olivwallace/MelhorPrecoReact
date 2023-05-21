@@ -5,7 +5,16 @@ import { alter, create, excluir, search, searchStr } from "./Types";
 export const ListaAPI = (api: AxiosInstance) => ({
 
     criar: async (lista: create) => {
-        const response = await api.post('/createLista', {lista});
+        let itens: { codigo: string; quantidade: number | undefined; }[] = []
+
+        lista.produtos.forEach(element => {
+            itens.push({
+                codigo: element.codigo,
+                quantidade: element.quantidade
+            })
+        });
+
+        const response = await api.post('/createLista', {user: lista.user, nomeLista: lista.nomeLista, produtos: itens});
         return response.data.data;
     },
 

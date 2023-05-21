@@ -53,6 +53,15 @@ public class Produto {
         setQuantidade(qtd);
     }
 
+    public Produto(String cod, String nome, String marca, String un_medida, String descricao, float avaliacaoMedia) {
+        setCodigo(cod);
+        setNome(nome);
+        setMarca(marca);
+        setUnidadeMedida(un_medida);
+        setDescricao(descricao);
+        setAvaliacaoMedia(avaliacaoMedia);
+    }
+
     public Produto(String codigo, String nomeItem, String marca, String unidadeMedida,
     String desc, int avaliacaoMedia, double valor, boolean promocionado, Date data){
         setCodigo(codigo);

@@ -90,7 +90,7 @@ public class SearchDAO {
                     int avaliacao = resultSet.getInt("avaliacao");
                     String desc = resultSet.getString("descricao");
 
-                    produtos.add(new Produto(codigo, nomeItem, marca, unMedida, desc, avaliacao));
+                    produtos.add(new Produto(codigo, nomeItem, marca, unMedida, desc, (float)avaliacao));
             }
 
         } catch (SQLException ex) {
