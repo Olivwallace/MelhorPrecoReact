@@ -20,5 +20,11 @@ node_modules
 *.jpeg
 *.gif
 *.tiff
+*.jpg
+*.jar
+*.lst
+*.properties
+
+
 
 
