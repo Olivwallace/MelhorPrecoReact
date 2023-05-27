@@ -25,8 +25,6 @@ export interface ItemListaVisualizacaoProps{
     valor2?: number | string,
     valor3?: number | string,
     quantidade?:number | string
-    desc?: string
-    unMedida?: string
     onClickButtonAdd?: () => void
     onClickButtonSub?: () => void
     onClickButtonRem?: () => void
@@ -50,11 +48,6 @@ export interface ListaPropsC {
     itens: ItensMercados[]
 }
 
-
-
-
-
-
 export interface PropsList {
     className: string,
     nameList: string
@@ -63,6 +56,7 @@ export type produto = {
     id: number;
     nome: string;
     }
+    
  export interface produtoBD{
     produto: Array<produto>;
  }

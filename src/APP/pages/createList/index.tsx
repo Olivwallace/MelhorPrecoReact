@@ -21,8 +21,6 @@ export const CreateList: React.FC = (props) => {
 
     const [listName, setListName] = useState<string>('novaLista');
 
-    const [listName, setListName] = useState<string>('novaLista');
-
     const [listaBusca, setListaBusca] = useState<ProductModel[]>([]); // Lista Renderizada
 
     const [busca, setBusca] = useState<string>("");
