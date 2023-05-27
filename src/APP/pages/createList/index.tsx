@@ -19,6 +19,8 @@ export const CreateList: React.FC = (props) => {
     const context = useContext(AuthContext)
     const api = useAPI.Create
 
+    const [listName, setListName] = useState<string>('novaLista');
+
     const [listaBusca, setListaBusca] = useState<ProductModel[]>([]); // Lista Renderizada
 
     const [busca, setBusca] = useState<string>("A");
@@ -94,6 +96,8 @@ export const CreateList: React.FC = (props) => {
                 itens={listaCliente}
                 onUpdate={updateList}
                 onDelete={()=>{}} />
+
+            </div>
 
         </main>
     );

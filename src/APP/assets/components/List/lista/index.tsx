@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react"
-import { ListaPropsA, ListaPropsB } from "../PropsList"
+import { ListaPropsA, ListaPropsB, ListaPropsC } from "../PropsList"
 import { ListaLateralItem, ListaVisualizacaoItem } from "../itemLista/itemLista";
 import { ListaHomeItem } from "../itemLista/itemLista";
 
@@ -94,6 +94,37 @@ export const ListaCriancao: React.FC<ListaPropsA> = (props) => {
         setItens(listaDeItens)
     },[props])
 
+
+    return(
+        <div className={props.className}>
+            {itens}
+        </div>
+    )
+}
+
+export const ListaExibe: React.FC<ListaPropsC> = (props) => {
+    const [itens, setItens] = useState<React.ReactNode[]>([])
+
+    useEffect(() =>{
+        const listaDeItens = props.itens.map((element, index) => {
+            return (
+                <ListaVisualizacaoItem
+                className="exibeItens"
+                key={index}
+                quantidade={(element.quantidade)?element.quantidade:element.quantidade = 1}
+                alteravel={false}
+                nomeItem={element.nomeItem}
+                desc={element.marca}
+                unMedida={element.unMedida}
+                valor1={element.mercado1}
+                valor2={element.mercado2}
+                valor3={element.mercado3}
+                />
+            );
+        });
+
+        setItens(listaDeItens)
+    },[props])
 
     return(
         <div className={props.className}>

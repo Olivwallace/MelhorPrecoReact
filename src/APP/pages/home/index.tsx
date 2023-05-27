@@ -58,6 +58,8 @@ export const Home: React.FC = (props) => {
 
     useEffect(() => {
         handleShearch()
+        context.validToken()
+        if(context.user == null) context.session()
     }, [])
 
    // useEffect(() => {
@@ -100,7 +102,7 @@ export const Home: React.FC = (props) => {
                     itens={(markers)?markers.data.markets:[]}
                 />
 
-                <Map locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/></div>
+                <Map className="mapa" locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'}/></div>
                 
             </main>
         </>

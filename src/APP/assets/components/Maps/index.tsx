@@ -6,6 +6,7 @@ import { MarkerSupermaket, MarkerUser } from './Marcadores/markers'
 import { useCallback, useEffect, useState } from 'react'
 
 interface MapProps {
+    className: string
     positionCSS?: any,
     locateUser: L.LatLng,
     markers?: MarketModel[] 
@@ -32,7 +33,7 @@ export const Map = (props : MapProps) => {
     },[props.markers, props.locateUser])
 
     return(
-        <div className='mapa'>
+        <div className={props.className}>
             <MapContainer style={{height: '100%'}} maxZoom={18} minZoom={2} center={props.locateUser} zoom={15} zoomControl={false} scrollWheelZoom={true}>
                 
                 <TileLayer

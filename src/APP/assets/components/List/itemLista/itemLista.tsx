@@ -82,23 +82,28 @@ export const ListaLateralItem: React.FC<ItemListaProps> = (props) => {
 export const ListaVisualizacaoItem: React.FC<ItemListaVisualizacaoProps> = (props) => {
 
     const [ordemValores, setOrdemValores] = useState<(string | number)[]>([]);
-    const handleOrdem = useEffect(() => {
+    useEffect(() => {
         if (props.valor1 && props.valor2 && props.valor3) {
             let valores = [props.valor1, props.valor2, props.valor3];
-            valores.sort()
+            
+            if(valores[0] > valores[1]) valores = [valores[1], valores[0], valores[2]]
+            if(valores[1] > valores[2]) valores = [valores[0], valores[2], valores[1]]
+            if(valores[0] > valores[1]) valores = [valores[1], valores[0], valores[2]]
+
             setOrdemValores(valores)
         }
-    }, [])
+    }, [props])
 
 
-    const obterIcone = useCallback((valor: number) => {
-        let retorno = <HighPrice />
+    const obterIcone = (valor: number) => {
+        let retorno
 
         if (valor === ordemValores[0]) retorno = <LowPrice />
         else if (valor === ordemValores[1]) retorno = <StablePrice />
+        else if (valor === ordemValores[2]) retorno = <HighPrice />
 
         return retorno;
-    }, [props])
+    }
 
 
     return (

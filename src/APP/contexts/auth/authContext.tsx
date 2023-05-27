@@ -7,6 +7,8 @@ export type AuthContextType = {
     loginKeep: ({}:LoginData) => Promise<boolean>;
     singup: ({}:RegisterData) => Promise<boolean>;
     session: () => boolean;
+    usuario: () => userLocal | null;
+    validToken: () => Promise<void>;
     logout: () => void;
 }
 
