@@ -7,7 +7,7 @@ import { ListaAPI } from "../../service/api/ListsAPI/ListAPI";
 import { useAPI } from "../../service/api/useApi";
 import { ListaDate } from "../../model/dadosLista";
 import './index.css';
-import { ListaCriacao, ListaExibe } from "../../assets/components/List/lista";
+import { ListaExibe } from "../../assets/components/List/lista";
 import { ProductModel } from "../../model";
 import { ListaVisualizacaoItem } from "../../assets/components/List/itemLista/itemLista";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";

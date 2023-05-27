@@ -1,0 +1,171 @@
+.main {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mapaList {
+    height: 100%;
+    width: 50%;
+    left: 50%;
+    z-index: 2;
+    position: absolute;
+}
+
+.listaAtual > input::placeholder{
+    color: white;
+}
+
+
+.listaAtual {
+    width: 600px;
+    height: 500px;
+    margin-top: 2%;
+    margin-left: 15px;
+    overflow-y: auto;
+}
+
+
+.cabecalho {
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    display: grid;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    max-width: 600px;
+}
+
+
+.exibeItens {
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    display: grid;
+    max-width: 600px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    border: 1px solid #b9b99d;
+    background-color: white;
+}
+
+
+
+
+.exibeItens > .item {
+    grid-area: 1 / 1 / 2 / 3;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.exibeItens > .desc {
+    grid-area: 1 / 3 / 2 / 3;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.exibeItens > .unMedida {
+    grid-area: 1 / 4 / 2 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.exibeItens > .quantidade {
+    grid-area: 1 / 5 / 2 / 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.exibeItens > .quantidade > svg {
+    align-items: center;
+}
+
+.exibeItens > .valores {
+    grid-area: 1 / 6 / 2 / 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.exibeItens > .valores > .valor1, .valor2, .valor3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    min-width: 100px;
+    min-height: 34px;
+}
+
+
+
+.filter-container2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: center;
+    margin-top: 0.1rem;
+    /*width: 100%;*/
+}
+
+
+.filter-container2 > .filter-text {
+    border-radius: 0rem 0rem 0rem 1.5rem;
+    background-color: rgba(0, 0, 16, 0.8);
+    height: 2.15rem;
+}
+
+.filter-container2 > .filter-text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: arial, sans-serif;
+    font-weight: 400;
+    text-align: center;
+    align-self: center;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    width: 3rem;
+    margin-top: 0.5rem;
+    padding-left: 1.0rem;
+    text-align: center;
+}
+
+.filter-container2 > .select_filter,
+.filter-container2 > .select_filter:active {
+    font-size: 16px;
+    font-family: arial, sans-serif;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 16, 0.8);
+    text-align: center;
+    width: 100px;
+}
+
+.filter-container2 > .rating-filter {
+    background-color: rgba(0, 0, 16, 0.8);
+    border-radius: 0rem 0rem 1.5rem;
+    padding: 0.2rem;
+    align-items: center;
+    align-self: center;
+}
+
+.filter-container2 > .rating-filter svg {
+    fill: rgb(242, 242, 242);
+    height: 1.5rem;
+    width: 3rem;
+    margin: 0rem;
+}
