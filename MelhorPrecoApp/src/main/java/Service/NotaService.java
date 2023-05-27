@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 
+
 public class NotaService extends QRcode {
 
 
@@ -29,6 +30,7 @@ public class NotaService extends QRcode {
         String path ="tmpImages/";
         File existente;
         int numero = 0;
+
         //Carregando cada imagem do formData e salvando na pasta
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
@@ -37,11 +39,13 @@ public class NotaService extends QRcode {
             String nomeArquivo = numero+fName.substring(posicaoPonto);
             existente = new File(path + nomeArquivo);
             //verifica se essa imagem já existe
+
             if (!existente.exists()) {
                 Path out = Paths.get(path + nomeArquivo);
                 try (final InputStream in = part.getInputStream()) {
                     Files.copy(in, out);
                     part.delete();
+
                     //Conversão da imagem para tons de cinza
                     //convertGray(nomeArquivo);
 
@@ -58,7 +62,7 @@ public class NotaService extends QRcode {
 
         }
 
-        // limpeza
+
         existente = null;
         multipartConfigElement = null;
         parts = null;

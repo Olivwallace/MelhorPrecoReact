@@ -1,4 +1,5 @@
 import { MarketModel, ProductModel } from "../../../model";
+import { ItensMercados } from "../../../model/itemMercado";
 
 export interface ItemListaProps {
     className: string,
@@ -24,9 +25,11 @@ export interface ItemListaVisualizacaoProps{
     valor2?: number | string,
     valor3?: number | string,
     quantidade?:number | string
-    onClickButtonAdd: () => void
-    onClickButtonSub: () => void
-    onClickButtonRem: () => void
+    desc?: string
+    unMedida?: string
+    onClickButtonAdd?: () => void
+    onClickButtonSub?: () => void
+    onClickButtonRem?: () => void
 }
 
 export interface ListaPropsA {
@@ -40,6 +43,11 @@ export interface ListaPropsA {
 export interface ListaPropsB {
     className: string,
     itens: MarketModel[]
+}
+
+export interface ListaPropsC {
+    className: string,
+    itens: ItensMercados[]
 }
 
 

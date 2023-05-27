@@ -9,6 +9,12 @@ export const RequireAuth = ({children}:{children:Element}) =>{
     
     const context = useContext(AuthContext);
     
+    context.validToken();
+
+    if(context.user == null && context.session()){
+        context.user = context.usuario();
+    }
+
     if(!context.user){
         page = <Login/>;
     }

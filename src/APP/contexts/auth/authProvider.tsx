@@ -17,20 +17,16 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
 
     const [user, setUser] = useState <user | null> (null);
 
-    useEffect(() =>{
 
-        const validToken = async()=> {
-            const storage = localStorage.getItem('authToken');
-            if(storage){
-                const data = await api.validateToken(storage);
-                if(data.user){
-                    setUser(data.user);
-                }
+    const validToken = async()=> {
+        const storage = localStorage.getItem('authToken');
+        if(storage){
+            const data = await api.validateToken(storage);
+            if(data.user){
+                setUser(data.user);
             }
         }
-
-        //validToken();
-    },[api])
+    }
 
     const session = () =>{
         let resp = false;
@@ -113,7 +109,7 @@ export const AuthProvider = ({children}:{children: JSX.Element}) => {
     }
 
     return(
-        <AuthContext.Provider value={{user, login, loginKeep, singup, session, usuario, logout}}>
+        <AuthContext.Provider value={{user, login, loginKeep, singup, session, usuario, validToken, logout}}>
             {children}
         </AuthContext.Provider>
     )
