@@ -1,5 +1,9 @@
 package Service;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import spark.Request;
 import spark.Response;
 
@@ -57,8 +61,9 @@ public class NotaService extends QRcodeService {
                      */
                     binaryImg(nomeArquivo);
                     //quadriculaImg(nomeArquivo);
-                    System.out.println(url.getHtml(qrReader(nomeArquivo)));
-
+                   String html =  url.getHtml(qrReader(nomeArquivo));
+                    mercado(html);
+                    produtos(html);
 
                 }
                 numero++;
@@ -72,7 +77,37 @@ public class NotaService extends QRcodeService {
         parts = null;
         return "OK";
     }
+    public static void produtos(String result) {
+        Document html = Jsoup.parse(result);
+        Elements trElements = html.select("#myTable tr");
+        Elements tdElements;
+        for (Element trElement : trElements) {
+            tdElements = trElement.select("td");
+            Element td = tdElements.get(0);
+            String tmp = td.toString().replaceAll("\n","");
+            String nome = tmp.substring((tmp.indexOf("<h7>")+4),(tmp.indexOf("</h7>")));
+            String codigo = tmp.substring((tmp.indexOf(": ")+2),(tmp.indexOf(")")));
+            td = tdElements.get(3);
+            tmp = td.toString().replaceAll("\n","");
+            String valor = tmp.substring(tmp.lastIndexOf("R$")+3,(tmp.indexOf("</td>")));
+            System.out.println(nome+"\t"+codigo+"\t"+valor);
+        }
+    }
 
+    public static void mercado(String result){
+        int inicio = result.indexOf("<table");
+        int fim = result.indexOf("</table>");
+        String tabela = result.substring(inicio,fim);
+        String nomeMercado = tabela.substring((tabela.indexOf("<b>")+3),(tabela.indexOf("</b>")));
+        String CNPJ = tabela.substring((tabela.indexOf("CNPJ")+5),(tabela.indexOf(" -, ")));
+        String endereco = tabela.substring((tabela.indexOf("italic")+9),(tabela.lastIndexOf("</td>")));
+        String []dadosEnd = endereco.split(", ");
+        String rua = dadosEnd[0];
+        int numero = Integer.parseInt(dadosEnd[1]);
+        String cidade = dadosEnd[3].substring(dadosEnd[3].indexOf("-")+1);
+        System.out.println(nomeMercado+"\t"+CNPJ+"\t"+rua+"\t"+numero+"\t"+cidade);
+
+    }
 
 }
 
