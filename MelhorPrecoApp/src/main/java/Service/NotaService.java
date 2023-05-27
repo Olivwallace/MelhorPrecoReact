@@ -14,8 +14,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 
+import Connection.NotaURL;
 
-public class NotaService extends QRcode {
+public class NotaService extends QRcodeService {
+
 
 
     public String uploadNota(Request request, Response response) throws ServletException, IOException {
@@ -27,6 +29,7 @@ public class NotaService extends QRcode {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(location, maxFileSize, maxRequestSize, fileSizeThreshold);
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
         Collection<Part> parts = request.raw().getParts();
+        NotaURL url = new NotaURL();
         String path ="tmpImages/";
         File existente;
         int numero = 0;
@@ -35,7 +38,7 @@ public class NotaService extends QRcode {
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
             int posicaoPonto = fName.lastIndexOf(".");
-            //modificaçõa do nome do arquivo por causa dos caracteres especiais
+            //modificação do nome do arquivo devido aos caracteres especiais
             String nomeArquivo = numero+fName.substring(posicaoPonto);
             existente = new File(path + nomeArquivo);
             //verifica se essa imagem já existe
@@ -45,15 +48,16 @@ public class NotaService extends QRcode {
                 try (final InputStream in = part.getInputStream()) {
                     Files.copy(in, out);
                     part.delete();
-
+                    /*Conversão da imagem para tons de cinza
                     //Conversão da imagem para tons de cinza
                     //convertGray(nomeArquivo);
-
                     //contrasteImg(nomeArquivo);
                     //equalizeImage(nomeArquivo);
+                    //
+                     */
                     binaryImg(nomeArquivo);
-                    System.out.println(qrReader(nomeArquivo));
-
+                    //quadriculaImg(nomeArquivo);
+                    System.out.println(url.getHtml(qrReader(nomeArquivo)));
 
 
                 }
