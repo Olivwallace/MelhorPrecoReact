@@ -13,8 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+
 import Connection.NotaURL;
+
 public class NotaService extends QRcodeService {
+
 
 
     public String uploadNota(Request request, Response response) throws ServletException, IOException {
@@ -30,6 +33,7 @@ public class NotaService extends QRcodeService {
         String path ="tmpImages/";
         File existente;
         int numero = 0;
+
         //Carregando cada imagem do formData e salvando na pasta
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
@@ -38,12 +42,14 @@ public class NotaService extends QRcodeService {
             String nomeArquivo = numero+fName.substring(posicaoPonto);
             existente = new File(path + nomeArquivo);
             //verifica se essa imagem já existe
+
             if (!existente.exists()) {
                 Path out = Paths.get(path + nomeArquivo);
                 try (final InputStream in = part.getInputStream()) {
                     Files.copy(in, out);
                     part.delete();
                     /*Conversão da imagem para tons de cinza
+                    //Conversão da imagem para tons de cinza
                     //convertGray(nomeArquivo);
                     //contrasteImg(nomeArquivo);
                     //equalizeImage(nomeArquivo);
@@ -60,7 +66,7 @@ public class NotaService extends QRcodeService {
 
         }
 
-        // limpeza
+
         existente = null;
         multipartConfigElement = null;
         parts = null;
