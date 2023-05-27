@@ -23,6 +23,8 @@ export interface ItemListaVisualizacaoProps{
     valor2?: number | string,
     valor3?: number | string,
     quantidade?:number | string
+    desc?: string
+    unMedida?: string
     onClickButtonAdd?: () => void
     onClickButtonSub?: () => void
     onClickButtonRem?: () => void
