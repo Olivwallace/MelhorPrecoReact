@@ -33,10 +33,5 @@ class NotaURL {
 
       return resp;
    }
-   public static void main(String[] args) {
-      String endereco, html;
-      endereco = "http://maratona.crc.pucminas.br/series/Friends.html";
-      html = getHtml(endereco);
-      System.out.print(html);
-   }
+  
 }
