@@ -17,7 +17,7 @@ type EventSubmit = React.FormEvent<HTMLFormElement>
 export const CreateList: React.FC = (props) => {
 
     const context = useContext(AuthContext)
-    const api = useAPI.Create
+    const api = useAPI.Lista
 
     const [listName, setListName] = useState<string>('novaLista');
 
@@ -96,8 +96,6 @@ export const CreateList: React.FC = (props) => {
                 itens={listaCliente}
                 onUpdate={updateList}
                 onDelete={()=>{}} />
-
-            </div>
 
         </main>
     );
