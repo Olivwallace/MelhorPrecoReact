@@ -167,7 +167,7 @@ export const SingUp: React.FC = (props) => {
                             :null}
                     </div>
                 }       
-                 <div className="linkLogin"><label style={{color:"#fff"}} >É novo por aqui? </label> <LinkLogin  href="/login"/></div>
+                 <div className="linkLogin"><label style={{color:"#fff"}} >Já é cadastrado? </label> <LinkLogin  href="/login"/></div>
 
             </form>
         </main>

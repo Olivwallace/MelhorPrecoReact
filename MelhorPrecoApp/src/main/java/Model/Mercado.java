@@ -7,6 +7,10 @@
 
 package Model;
 
+import netscape.javascript.JSObject;
+
+import java.util.ArrayList;
+
 public class Mercado {
 
     private int id; // primary key
@@ -20,6 +24,7 @@ public class Mercado {
     private String coordenada;
     private float avaliacaoMedia;
     private int numAvaliacoes;
+    private ArrayList<Produto> itens;
 
     // ------------------- Construtores -------------------
 
@@ -36,6 +41,14 @@ public class Mercado {
         setCoordenada(coordenada);
         setAvaliacaoMedia(3);
         setNumAvaliacoes(0);
+    }
+
+    public Mercado(String CNPJ, String nome, String endereco, String coordenada, ArrayList<Produto> itens){
+        setCNPJ(CNPJ);
+        setNome(nome);
+        setRua(endereco);
+        setCoordenada(coordenada);
+        setItens(itens);
     }
 
     // ------------------- Setters -------------------
@@ -84,6 +97,10 @@ public class Mercado {
         this.numAvaliacoes = numAvaliacoes;
     }
 
+    public void setItens(ArrayList<Produto> itens){
+        this.itens = itens;
+    }
+
     // ------------------- Getters -------------------
 
     public int getId() {
@@ -118,8 +135,8 @@ public class Mercado {
         return estado;
     }
 
-    public String getCoordenada() {
-        return coordenada;
+    public String[] getCoordenada() {
+        return  coordenada.split(",");
     }
 
     public float getAvaliacaoMedia() {
@@ -130,4 +147,7 @@ public class Mercado {
         return numAvaliacoes;
     }
 
+    public ArrayList<Produto> getItens(){
+        return this.itens;
+    }
 }

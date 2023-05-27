@@ -1,119 +1,55 @@
-.listaHome {
-    position: absolute;
-    z-index: 2;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-x: scroll;
-    white-space: nowrap;
+.main {
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(5,79,63,1) 0%, rgba(43,171,139,1) 85%);
 }
 
+.navegacao{
+    border-bottom: 2px solid rgba(26, 25, 25, 0.5);
+}
+
+.listaBuscas {
+    top: 4.5rem;
+    left: 0.5rem;
+    max-height: 34rem;
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 10px;
+    align-items: center;
+}
+
+.listaBuscas {
+    width: 25%;
+    height: 85%;
+    overflow: auto;
+    margin: 10px;
+    padding-right: 17px;
+    /* Adicione um espaço para acomodar a barra de rolagem vertical */
+    box-sizing: content-box;
+}
+
+.listaBuscas::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+}
+
+.listaBuscas::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
 
 /* ------------------- Renderização Lista */
 
-.homeLista {
-    background-color: rgba(0, 0, 16, 0.8);
-    color: white;
-    max-width: 270px;
-    min-height: 90px;
-    max-height: 150px;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 15px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
-
-.homeLista>.mercado {
-    font-weight: bold;
-    text-align: justify;
-    font-size: 14px;
-    grid-area: 1 / 1 / 2 / 3;
-}
-
-.homeLista svg {
-    justify-self: flex-end;
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: rgb(54, 177, 101);
-    grid-area: 1 / 3 / 2 / 5;
-}
-
-.homeLista>.validadeOferta {
-    text-align: center;
-    font-size: 12px;
-    grid-area: 2 / 1 / 3 / 5;
-    border-bottom: 1px solid black;
-}
-
-.homeLista>.item {
-    margin-top: 10px;
-    text-align: start;
-    font-size: 16px;
-    font-weight: bold;
-    grid-area: 3 / 1 / 4 / 3;
-}
-
-.homeLista>.marca {
-    margin-top: 10px;
-    text-align: end;
-    font-size: 12px;
-    font-weight: bold;
-    grid-area: 3 / 3 / 4 / 5;
-}
-
-.homeLista>.desc {
-    font-size: 14px;
-    grid-area: 4 / 1 / 5 / 4;
-}
-
-.homeLista>.unMedida {
-    font-size: 12px;
-    text-align: end;
-    grid-area: 4 / 4 / 5 / 5;
-}
-
-.homeLista>.avaliacao {
-    font-size: 12px;
-    text-align: end;
-    grid-area: 5 / 4 / 6 / 5;
-}
-
-.homeLista>.avaliacao svg {
-    width: 1rem;
-    height: 1rem;
-    border: black;
-    fill: yellow;
-}
-
-
-.homeLista>.valor {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: justify;
-    grid-area: 5 / 1 / 6 / 4;
-}
-
-.homeLista>.acoes {
-    margin-left: 10px;
-    display: flex;
-    justify-content: center;
-    padding-left: 8px;
-    border-left: 1px solid black;
-    flex-wrap: wrap;
-    flex-direction: column;
-    grid-area: 1 / 5 / 6 / 6;
-}
-
-/*------------------------------------------- Create Lista ----------------*/
-
 .createLista {
-    max-width: 270px;
-    min-height: 90px;
-    max-height: 150px;
+    background-color: #b9b99dbd; /* Cor de fundo com transparência */
+    backdrop-filter: blur(10px);
+    color: white;
+    max-width: 300px;
+    min-height: 100px;
+    max-height: 160px;
     border: 1px solid black;
     padding: 10px;
     border-radius: 15px;
@@ -126,7 +62,7 @@
 .createLista>.mercado {
     font-weight: bold;
     text-align: justify;
-    font-size: 14px;
+    font-size: 13px;
     grid-area: 1 / 1 / 2 / 3;
 }
 
@@ -134,7 +70,7 @@
     justify-self: flex-end;
     width: 1.5rem;
     height: 1.5rem;
-    fill: blue;
+    fill: rgb(54, 177, 101);
     grid-area: 1 / 3 / 2 / 5;
 }
 
@@ -146,9 +82,9 @@
 }
 
 .createLista>.item {
-    margin-top: 10px;
+    margin-top: 8px;
     text-align: start;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     grid-area: 3 / 1 / 4 / 3;
 }
@@ -185,7 +121,6 @@
     fill: yellow;
 }
 
-
 .createLista>.valor {
     font-size: 18px;
     font-weight: bold;
@@ -204,19 +139,111 @@
     grid-area: 1 / 5 / 6 / 6;
 }
 
-/*----------------------- Visulizar Lista ------------*/
+
+.barraBusca {
+    width: 100%;
+    position: absolute;
+    margin-top: 2rem;
+    left: 10%;
+}
+
+.listaExibe > input {
+    max-width: 20%;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    color: white;
+}
+
+.listaExibe > input::placeholder{
+    color: white;
+}
+
+.salvar{
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: rgb(22, 175, 116);
+    border: none;
+    color: white;
+}
+
+.listaExibe {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    flex-direction: column;
+    width: 900px;
+}
+
+.listaUsuario {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 900px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+
 .produtos {
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    max-width: 420px;
+    padding: 10px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    border: 1px solid #b9b99d;
+    background-color: white;
 }
 
-.produtos>.valor1,
-.valor2,
-.valor3 {
+.produtos > .item {
+    grid-area: 1 / 1 / 2 / 3;
     display: flex;
     align-items: center;
-    gap: 5px;
+    align-self: center;
+}
+
+.produtos > .desc {
+    grid-area: 1 / 3 / 2 / 3;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.produtos > .unMedida {
+    grid-area: 1 / 4 / 2 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.produtos > .quantidade {
+    grid-area: 1 / 5 / 2 / 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.produtos > .quantidade > svg {
+    align-items: center;
+}
+
+.produtos > .del {
+    grid-area: 1 / 6 / 2 / 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
 }

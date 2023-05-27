@@ -14,4 +14,22 @@
 *.vs
 *.log
 node_modules
+/tmp
+*.png
+*.webp
+*.jpeg
+*.gif
+*.tiff
+*.jpg
+*.jar
+*.lst
+*.properties
 
+
+
+
+MelhorPrecoApp/target/MelhorPrecoApp-1.0-SNAPSHOT.jar
+MelhorPrecoApp/target/maven-archiver/pom.properties
+MelhorPrecoApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+MelhorPrecoApp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+MelhorPrecoApp/target/classes/br.com.melhorpreco_app/script.js

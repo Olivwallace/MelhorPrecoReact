@@ -71,7 +71,7 @@ export const ListaLateralHome: React.FC<ListaPropsB> = (props) => {
     )
 }
 
-export const ListaCriancao: React.FC<ListaPropsA> = (props) => {
+export const ListaCriacao: React.FC<ListaPropsA> = (props) => {
     const [itens, setItens] = useState<React.ReactNode[]>([])
     
 
@@ -82,11 +82,13 @@ export const ListaCriancao: React.FC<ListaPropsA> = (props) => {
                 className="produtos"
                 key={element.codigo}
                 onClickButtonAdd={() => props.onUpdate(element, 1)}
-                onClickButtonRem={()=>{}}
+                onClickButtonRem={()=> props.onDelete(element)}
                 onClickButtonSub={() => props.onUpdate(element, -1)}
                 quantidade={(element.quantidade)?element.quantidade:element.quantidade = 1}
                 alteravel={true}
                 nomeItem={element.nome}
+                desc={element.marca}
+                unMedida={element.unMedida}
                 />
             );
         });

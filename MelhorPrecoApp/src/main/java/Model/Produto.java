@@ -11,6 +11,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.Date;
+
 public class Produto {
 
     private String codigo;
@@ -19,6 +21,9 @@ public class Produto {
     private String unidadeMedida;
     private String descricao;
     private int quantidade;
+    private boolean promocionado;
+    private Date validade_promocao;
+    private  double valor;
     private float avaliacaoMedia;
     private int numAvaliacoes;
 
@@ -46,6 +51,28 @@ public class Produto {
         setUnidadeMedida(un_medida);
         setDescricao(descricao);
         setQuantidade(qtd);
+    }
+
+    public Produto(String cod, String nome, String marca, String un_medida, String descricao, float avaliacaoMedia) {
+        setCodigo(cod);
+        setNome(nome);
+        setMarca(marca);
+        setUnidadeMedida(un_medida);
+        setDescricao(descricao);
+        setAvaliacaoMedia(avaliacaoMedia);
+    }
+
+    public Produto(String codigo, String nomeItem, String marca, String unidadeMedida,
+    String desc, int avaliacaoMedia, double valor, boolean promocionado, Date data){
+        setCodigo(codigo);
+        setNome(nomeItem);
+        setMarca(marca);
+        setUnidadeMedida(unidadeMedida);
+        setDescricao(desc);
+        setAvaliacaoMedia(avaliacaoMedia);
+        setValor(valor);
+        setPromocionado(promocionado);
+        setValidade_promocao(data);
     }
 
     // ------------------- Setters -------------------
@@ -82,6 +109,18 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    public void setPromocionado(boolean promocionado) {
+        this.promocionado = promocionado;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setValidade_promocao(Date validade_promocao) {
+        this.validade_promocao = validade_promocao;
+    }
+
     // ------------------- Getters -------------------
 
     public String getCodigo() {
@@ -114,5 +153,17 @@ public class Produto {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public boolean isPromocionado() {
+        return promocionado;
+    }
+
+    public Date getValidade_promocao() {
+        return validade_promocao;
+    }
+
+    public double getValor() {
+        return valor;
     }
 }

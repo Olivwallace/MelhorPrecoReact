@@ -24,8 +24,8 @@ export const Home: React.FC = (props) => {
 
     const [markers, setMarkets] = useState<ReponseSearch>()
     const [searchState, setSearch] = useState({
-        text: "",
-        select: 'Promotion',
+        text: '',
+        select: 'Market',
         radio: 'Distance'
     });
 
@@ -42,29 +42,25 @@ export const Home: React.FC = (props) => {
             tags: [searchState.select, searchState.radio]
         }
         
+        console.log(search)
         let resp = await api.perfomeSearch(search)
-        
+        console.log(resp)
         if(resp.status === 200){
             setMarkets(resp)
-            //setListSearch(resp.response)
         }
 
-    },[props])
+    },[props, searchState])
 
 
     useEffect(() => {
         handleShearch()
-    },[searchState.radio, searchState.select])
+    },[searchState.radio, searchState.select, searchState.text])
 
     useEffect(() => {
         handleShearch()
         context.validToken()
         if(context.user == null) context.session()
     }, [])
-
-   // useEffect(() => {
-    //    handleShearch()
-    //}, [markers?.data])
 
 
     if(!useLocation) { return <h1>Carregando Dados</h1>;} // Mostra Icone de Carregamento Temporario

@@ -35,7 +35,7 @@ export const NavBar: React.FC<NavBarProps> = (props) => {
        <Link className='linkHeader' to={props.hrefSobreNos}>Sobre nós</Link>
        </div>
       <div className='div'>
-              <label className='logado' onClick={handleMenu}>Olá, {props.namePerfil}</label>
+              <label className='logado' onClick={handleMenu}>{props.namePerfil}</label>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
