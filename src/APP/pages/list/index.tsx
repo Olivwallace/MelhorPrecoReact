@@ -77,7 +77,7 @@ export const Lista: React.FC = (props) => {
     //Construtor Pagina
     return (
         <>
-        <main>
+        <main className="exibe-lista">
             <NavBar auth={true}
                 namePerfil={context.user?.name}
                 hrefPerfil={""}
@@ -95,8 +95,10 @@ export const Lista: React.FC = (props) => {
                 className="filter-container2"
             />
 
+            <div className="list_map">
+            <div className="lista">
             <ListaExibe
-                className="listaAtual"
+                className="cabecalho"
                 itens={[
                     {
                         nomeItem: "Produto",
@@ -106,7 +108,11 @@ export const Lista: React.FC = (props) => {
                         mercado1: "Epa",
                         mercado2: "Super Nosso",
                         mercado3: "Carrefour"
-                    },
+                    }]}/>
+                    
+            <ListaExibe
+                className="listaAtual"
+                itens={[
                     {
                         nomeItem: "Feijao",
                         marca: "Camil",
@@ -184,9 +190,9 @@ export const Lista: React.FC = (props) => {
                     }
                 ]}
             />
-
-            <Map className="mapaList" locateUser={useLocation} markers={markers?.data.markets} positionCSS={'relative'} />
-
+            </div>
+            <Map className="mapaList" locateUser={useLocation} markers={markers?.data.markets} />
+            </div>
         </main>
     </>
 
