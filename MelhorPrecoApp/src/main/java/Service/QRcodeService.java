@@ -16,7 +16,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QRcode {
+public class QRcodeService {
 
     public String qrReader(String nomeArquivo) {
         Result result;
@@ -109,4 +109,30 @@ public class QRcode {
         Imgcodecs.imwrite(path, equalizedImage);
     }
 
+    public void quadriculaImg(String nomeArquivo){
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        //caminho do arquivo
+        String path = "tmpImages/"+nomeArquivo;
+
+        // Carregar a imagem em cores
+        Mat image = Imgcodecs.imread(path);
+        Mat imagemLimiarizada = new Mat();
+        Mat imagemCinza = new Mat();
+        Imgproc.cvtColor(image, imagemCinza, Imgproc.COLOR_BGR2GRAY);
+
+        Imgproc.adaptiveThreshold(imagemCinza, imagemLimiarizada, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY_INV, 11, 4);
+
+        // Encontrar os contornos dos objetos presentes na imagem
+        List<MatOfPoint> contornos = new ArrayList<>();
+        Mat hierarchy = new Mat();
+        Imgproc.findContours(imagemLimiarizada, contornos, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        // Desenhar os retângulos delimitadores dos contornos na imagem
+        for (MatOfPoint contorno : contornos) {
+            Rect retanguloDelimitador = Imgproc.boundingRect(contorno);
+            Imgproc.rectangle(image, retanguloDelimitador.tl(), retanguloDelimitador.br(), new Scalar(0, 0, 255), 2);
+        }
+
+        Imgcodecs.imwrite(path, image);
+    }
 }

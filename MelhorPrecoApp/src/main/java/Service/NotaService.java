@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import Connection.NotaURL;
-public class NotaService extends QRcode {
+public class NotaService extends QRcodeService {
 
 
     public String uploadNota(Request request, Response response) throws ServletException, IOException {
@@ -47,8 +47,10 @@ public class NotaService extends QRcode {
                     //convertGray(nomeArquivo);
                     //contrasteImg(nomeArquivo);
                     //equalizeImage(nomeArquivo);
+                    //
                      */
                     binaryImg(nomeArquivo);
+                    //quadriculaImg(nomeArquivo);
                     System.out.println(url.getHtml(qrReader(nomeArquivo)));
 
 
