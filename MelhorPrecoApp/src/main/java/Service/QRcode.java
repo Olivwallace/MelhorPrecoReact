@@ -1,5 +1,10 @@
 package Service;
-
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
@@ -7,15 +12,25 @@ import org.opencv.imgproc.Imgproc;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QRcode {
 
+    public String qrReader(String nomeArquivo) {
+        Result result;
+        String caminho = "tmpImages\\" + nomeArquivo ;
+        try {
+            BufferedImage bf = ImageIO.read(new FileInputStream(caminho));
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bf)));
+            result = new MultiFormatReader().decode(bitmap);
+        } catch (NotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        return result.getText();
+    }
     /**
      * Método de conversão da imagem para tons de cinza
      * @param nomeArquivo nome do arquivo para modificação
@@ -39,62 +54,59 @@ public class QRcode {
                 Imgcodecs.imwrite(path, finalImg);
             }
     }
-    public void recortaImg(String path){
-        String a = "tmpImages/"+path;
+    public void binaryImg(String nomeArquivo){
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        String path = "tmpImages/"+nomeArquivo;
+
         // Carregar a imagem em cores
-        Mat image = Imgcodecs.imread(a);
+        Mat image = Imgcodecs.imread(path);
         Mat grayImage = new Mat();
         Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
 
-// Aplique a detecção de contornos na imagem em escala de cinza
-        List<MatOfPoint> contours = new ArrayList<>();
-        Mat hierarchy = new Mat();
-        Imgproc.findContours(grayImage, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        // Aplicar o threshold
+        double thresholdValue = 127; // Valor limite
+        double maxBinaryValue = 255; // Valor máximo para pixels binários
+        int thresholdType = Imgproc.THRESH_BINARY; // Tipo de threshold (binário neste exemplo)
+        Imgproc.threshold(grayImage, grayImage, thresholdValue, maxBinaryValue, thresholdType);
 
-// Encontre o maior contorno com base em sua área
-        double maxArea = -1;
-        MatOfPoint largestContour = null;
-        for (MatOfPoint contour : contours) {
-            double area = Imgproc.contourArea(contour);
-            if (area > maxArea) {
-                maxArea = area;
-                largestContour = contour;
-            }
-        }
-
-// Obtenha o retângulo delimitador do maior contorno
-        Rect boundingRect = Imgproc.boundingRect(largestContour);
-
-// Recorte a imagem usando o retângulo delimitador
-        Mat croppedImage = new Mat(image, boundingRect);
-        Imgcodecs.imwrite(a, croppedImage);
+        // Salvar a imagem com o threshold aplicado
+        Imgcodecs.imwrite(path, grayImage);
 
     }
-    public void bufferedImage(String nomeArquivo,String formato){
+    public void contrasteImg(String nomeArquivo){
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Mat image = Imgcodecs.imread(("tmpImages/"+nomeArquivo));
+        String path = "tmpImages/"+nomeArquivo;
+
+        // Carregar a imagem em cores
+        Mat image = Imgcodecs.imread(path);
         Mat grayImage = new Mat();
         Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
-        // Convertendo para um array de bytes
-        MatOfByte matOfByte = new MatOfByte();
-         Imgcodecs.imencode(formato, grayImage, matOfByte);
-        byte[] byteArray = matOfByte.toArray();
 
-        try {
-            // Criando um objeto ByteArrayInputStream a partir do array de bytes
-            InputStream in = new ByteArrayInputStream(byteArray);
+        // Aplicar o threshold
+        double min = Core.minMaxLoc(grayImage).minVal;
+        double max = Core.minMaxLoc(grayImage).maxVal;
+        Mat contrastImage = new Mat();
+        Core.subtract(grayImage, new Scalar(min), contrastImage);
+        Core.multiply(contrastImage, new Scalar(255.0 / (max - min)), contrastImage);
 
-            // Lendo o BufferedImage a partir do InputStream
-            BufferedImage bufferedImage = ImageIO.read(in);
+        // Salvar a imagem com o threshold aplicado
+        Imgcodecs.imwrite(path, contrastImage);
 
-            // Salvando a imagem em tons de cinza
-            String outputFilePath = "tmpImages/"+nomeArquivo;
-            ImageIO.write(bufferedImage, formato, new File(outputFilePath));
-            System.out.println("Imagem em tons de cinza salva com sucesso em: " + outputFilePath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    }
+    public void equalizeImage(String nomeArquivo) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        String path = "tmpImages/"+nomeArquivo;
+
+        // Carregar a imagem em cores
+        Mat image = Imgcodecs.imread(path);
+        Mat grayImage = new Mat();
+        Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
+        // Equalizar o histograma
+        Mat equalizedImage = new Mat();
+        Imgproc.equalizeHist(grayImage, equalizedImage);
+        Imgcodecs.imwrite(path, equalizedImage);
     }
 
 }
