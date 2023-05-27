@@ -3,8 +3,8 @@ package Connection;
 import java.io.*;
 import java.net.*;
 
-class NotaURL {
-   public static String getHtml(String endereco){
+public class NotaURL {
+   public String getHtml(String endereco){
       URL url;
       InputStream is = null;
       BufferedReader br;
