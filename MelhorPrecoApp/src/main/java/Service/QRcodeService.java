@@ -20,7 +20,7 @@ public class QRcodeService {
 
     public String qrReader(String nomeArquivo) {
         Result result;
-        String caminho = "tmpImages\\" + nomeArquivo ;
+        String caminho = "tmpImages/" + nomeArquivo ;
         try {
             BufferedImage bf = ImageIO.read(new FileInputStream(caminho));
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bf)));

@@ -11,19 +11,24 @@ package App;
 
 import Connection.CorsFilter;
 import Service.*;
+import Utels.Contraction_Map;
 
 import static spark.Spark.*;
 
-public class ProviderApi {
+public class ProviderApi extends Contraction_Map {
 
     public static SingInService singInService = new SingInService();
     public static RegisterService registerService = new RegisterService();
     public static PerfilService perfilService = new PerfilService();
     public static ListService listService = new ListService();
     public static SearchService searchService = new SearchService();
-
     public static NotaService notaService = new NotaService();
+
     public static void main(String[] args){
+
+        initAbvMap();
+        System.out.println(getPalavra("Pot"));
+
         // Habilita o CORS para todas as origens e métodos
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
