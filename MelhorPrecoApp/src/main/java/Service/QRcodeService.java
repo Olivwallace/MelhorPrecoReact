@@ -42,17 +42,17 @@ public class QRcodeService {
 
         // Carregar a imagem em cores
         Mat image = Imgcodecs.imread(path);
-            if (!image.empty()){
-                Mat grayImage = new Mat();
-                Mat finalImg = new Mat();
-                // Converter para tons de cinza
-                Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
-                //aplicando o histograma para melhorar a imagem
-                CLAHE clahe = Imgproc.createCLAHE(1.0, new Size(8, 8));
-                clahe.apply(grayImage,finalImg);
-                // Salvar a imagem em tons de cinza
-                Imgcodecs.imwrite(path, finalImg);
-            }
+        if (!image.empty()){
+            Mat grayImage = new Mat();
+            Mat finalImg = new Mat();
+            // Converter para tons de cinza
+            Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
+            //aplicando o histograma para melhorar a imagem
+            CLAHE clahe = Imgproc.createCLAHE(1.0, new Size(8, 8));
+            clahe.apply(grayImage,finalImg);
+            // Salvar a imagem em tons de cinza
+            Imgcodecs.imwrite(path, finalImg);
+        }
     }
     public void binaryImg(String nomeArquivo){
 
