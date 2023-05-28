@@ -106,7 +106,6 @@ public class NotaService extends QRcodeService {
         int numero = Integer.parseInt(dadosEnd[1]);
         String cidade = dadosEnd[3].substring(dadosEnd[3].indexOf("-")+1);
         System.out.println(nomeMercado+"\t"+CNPJ+"\t"+rua+"\t"+numero+"\t"+cidade);
-
     }
 
 }
