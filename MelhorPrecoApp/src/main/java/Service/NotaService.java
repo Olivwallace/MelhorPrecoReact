@@ -61,6 +61,7 @@ public class NotaService extends QRcodeService {
                     produtos(html);
                 }
                 numero++;
+                existente.delete();
             }
 
         }
