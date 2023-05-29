@@ -1,4 +1,5 @@
 package Service;
+import Utels.Contraction_Map;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
@@ -16,7 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QRcodeService {
+public class QRcodeService extends Contraction_Map {
 
     public String qrReader(String nomeArquivo) {
         Result result;

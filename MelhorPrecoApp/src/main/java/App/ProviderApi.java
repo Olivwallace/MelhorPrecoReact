@@ -15,7 +15,7 @@ import Utels.Contraction_Map;
 
 import static spark.Spark.*;
 
-public class ProviderApi extends Contraction_Map {
+public class ProviderApi  {
 
     public static SingInService singInService = new SingInService();
     public static RegisterService registerService = new RegisterService();
@@ -25,9 +25,6 @@ public class ProviderApi extends Contraction_Map {
     public static NotaService notaService = new NotaService();
 
     public static void main(String[] args){
-
-        initAbvMap();
-        System.out.println(getPalavra("Pot"));
 
         // Habilita o CORS para todas as origens e métodos
         options("/*", (request, response) -> {

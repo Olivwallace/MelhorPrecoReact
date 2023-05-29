@@ -16,13 +16,16 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-
 import Connection.NotaURL;
 
 public class NotaService extends QRcodeService {
 
-
+    public NotaService(){
+        initAbvMap();
+    }
 
     public String uploadNota(Request request, Response response) throws ServletException, IOException {
         String location = "MelhorPrecoApp";
@@ -52,19 +55,10 @@ public class NotaService extends QRcodeService {
                 try (final InputStream in = part.getInputStream()) {
                     Files.copy(in, out);
                     part.delete();
-                    /*Conversão da imagem para tons de cinza
-                    //Conversão da imagem para tons de cinza
-                    //convertGray(nomeArquivo);
-                    //contrasteImg(nomeArquivo);
-                    //equalizeImage(nomeArquivo);
-                    //
-                     */
                     binaryImg(nomeArquivo);
-                    //quadriculaImg(nomeArquivo);
                    String html =  url.getHtml(qrReader(nomeArquivo));
                     mercado(html);
                     produtos(html);
-
                 }
                 numero++;
             }
@@ -81,20 +75,49 @@ public class NotaService extends QRcodeService {
         Document html = Jsoup.parse(result);
         Elements trElements = html.select("#myTable tr");
         Elements tdElements;
+
         for (Element trElement : trElements) {
             tdElements = trElement.select("td");
             Element td = tdElements.get(0);
             String tmp = td.toString().replaceAll("\n","");
-            String nome = tmp.substring((tmp.indexOf("<h7>")+4),(tmp.indexOf("</h7>")));
+            String nome = tmp.substring((tmp.indexOf("<h7>")+6),(tmp.indexOf("</h7>")));
+            nome = nome.replaceAll("\\.", " ");
+            String []vetPalavras = nome.split(" ");
+            int palavras = (ehUnidade(vetPalavras[vetPalavras.length-1]))? vetPalavras.length-1: vetPalavras.length;
+            Object [] nomeProduto = new Object[palavras];
+            for (int i = 0; i < palavras; i++) {
+                ArrayList<String> lista =  getPalavra(vetPalavras[i]);
+                if(lista != null){
+                    if(lista.size()==1){
+                        nomeProduto[i] = lista.get(0);
+                    } else if(lista.size()>1) {
+                        nomeProduto[i] = lista;
+                    }
+                }else {
+                    nomeProduto[i] = vetPalavras[i];
+                }
+            }
             String codigo = tmp.substring((tmp.indexOf(": ")+2),(tmp.indexOf(")")));
             td = tdElements.get(3);
             tmp = td.toString().replaceAll("\n","");
             String valor = tmp.substring(tmp.lastIndexOf("R$")+3,(tmp.indexOf("</td>")));
-            System.out.println(nome+"\t"+codigo+"\t"+valor);
+            System.out.println(Arrays.toString(nomeProduto) +"\t"+codigo+"\t"+valor);
         }
     }
+    public static boolean ehUnidade(String s){
+        boolean hasUn = false;
+        String []unMedida = {"kg","ml","1","2","3","4","5","6","7","8","9","0"};
+        int i = 0;
+        while(i<unMedida.length&&(!hasUn)){
+            if(s.contains(unMedida[i])){
+                hasUn = true;
+            }
+            i++;
+        }
+        return hasUn;
+    }
 
-    public static void mercado(String result){
+    public void mercado(String result){
         int inicio = result.indexOf("<table");
         int fim = result.indexOf("</table>");
         String tabela = result.substring(inicio,fim);
