@@ -401,7 +401,8 @@ achoco, achocolatado
 achoc, achocolatado
 acho, achocolatado
 ach, achocolatado
-po, pointegral, integral
+po, po
+integral, integral
 integra, integral
 integr, integral
 integ, integral
@@ -2566,3 +2567,11 @@ hein, heinz
 hei, heinz
 mars, mars
 mar, mars
+p, porto
+pt, pote
+sj, soja
+f, fino
+fi, fino
+fin, fino
+fino, fino
+pc, pacote

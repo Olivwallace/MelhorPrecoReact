@@ -73,11 +73,12 @@ export const EnvioNota: React.FC = () => {
     return (
 
         <> <NavBar auth={true}
+            tags={["Home", "Exibir Listas", "Nova Lista"]}
             namePerfil={""}
             hrefPerfil={""}
-            hrefListas={""}
-            hrefNota={""}
-            hrefSobreNos={""} />
+            hrefListas={"/"}
+            hrefNota={"/lists"}
+            hrefSobreNos={"/createList"} />
 
             <main className="main-container">
                 {!isConfirmOne ? <><div className="div1">

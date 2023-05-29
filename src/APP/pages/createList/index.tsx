@@ -94,10 +94,11 @@ export const CreateList: React.FC = (props) => {
         <main className="main">
             <NavBar auth={true}
                 namePerfil={context.user?.name}
+                tags={["Home", "Exibir Listas", "Enviar Notas"]}
                 hrefPerfil={""}
-                hrefListas={""}
-                hrefNota={""}
-                hrefSobreNos={""} />
+                hrefListas={"/"}
+                hrefNota={"/lists"}
+                hrefSobreNos={"/nota"} />
 
             <div className="barraBusca">
                 <SearchBar

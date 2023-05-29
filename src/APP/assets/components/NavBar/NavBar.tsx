@@ -30,9 +30,9 @@ export const NavBar: React.FC<NavBarProps> = (props) => {
     
       {props.auth?(   <>
        <div>
-      <Link className='linkHeader' to={props.hrefListas}>Lista</Link>
-       <Link className='linkHeader' to={props.hrefNota}>Nota</Link>
-       <Link className='linkHeader' to={props.hrefSobreNos}>Sobre nós</Link>
+      <Link className='linkHeader' to={props.hrefListas}>{(props.tags && props.tags[0])?props.tags[0]: "Exibir Listas"}</Link>
+       <Link className='linkHeader' to={props.hrefNota}>{(props.tags && props.tags[1])?props.tags[1]: "Criar Lista"}</Link>
+       <Link className='linkHeader' to={props.hrefSobreNos}>{(props.tags && props.tags[2])?props.tags[2]: "Enviar Notas"}</Link>
        </div>
       <div className='div'>
               <label className='logado' onClick={handleMenu}>{props.namePerfil}</label>

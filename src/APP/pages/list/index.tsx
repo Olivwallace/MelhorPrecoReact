@@ -80,10 +80,11 @@ export const Lista: React.FC = (props) => {
         <main className="exibe-lista">
             <NavBar auth={true}
                 namePerfil={context.user?.name}
+                tags={["Home", "Nova Lista", "Enviar Notas"]}
                 hrefPerfil={""}
-                hrefListas={""}
-                hrefNota={""}
-                hrefSobreNos={""} />
+                hrefListas={"/"}
+                hrefNota={"/createList"}
+                hrefSobreNos={"/nota"} />
 
             <FilterLists
                 options={list}
