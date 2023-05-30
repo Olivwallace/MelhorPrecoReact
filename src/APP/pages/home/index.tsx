@@ -71,11 +71,12 @@ export const Home: React.FC = (props) => {
              {
                     (context.user || context.session())? 
                     <NavBar auth = {true}
-                     namePerfil={context.user?.name} 
+                     namePerfil={context.user?.name}
+                     tags={["Exibir Listas", "Nova Lista", "Enviar Nota"]} 
                      hrefPerfil={""} 
-                     hrefListas={""} 
-                     hrefNota={""} 
-                     hrefSobreNos={""}/>
+                     hrefListas={"/lists"} 
+                     hrefNota={"/createList"} 
+                     hrefSobreNos={"/nota"}/>
                     :
                     <NavBar auth = {false}
                      namePerfil={""} 

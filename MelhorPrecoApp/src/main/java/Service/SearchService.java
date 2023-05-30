@@ -30,7 +30,7 @@ public class SearchService {
                 JsonObject mercado = new JsonObject();
                 mercado.addProperty("nome", x.getNome());
                 mercado.addProperty("cnpj", x.getCNPJ());
-                mercado.addProperty("endereco", x.getRua());
+                mercado.addProperty("endereco", x.getEndereco());
 
                 JsonArray coords = new JsonArray();
                 for (String coord : x.getCoordenada()) {
@@ -43,13 +43,9 @@ public class SearchService {
                     JsonObject jsonProduto = new JsonObject();
                     jsonProduto.addProperty("codigo", produto.getCodigo());
                     jsonProduto.addProperty("nome", produto.getNome());
-                    jsonProduto.addProperty("marca", produto.getMarca());
                     jsonProduto.addProperty("unMedida", produto.getUnidadeMedida());
-                    jsonProduto.addProperty("descricao", produto.getDescricao());
                     jsonProduto.addProperty("avaliacao", produto.getAvaliacaoMedia());
                     jsonProduto.addProperty("valor", produto.getValor());
-                    jsonProduto.addProperty("promocionado", produto.isPromocionado());
-                    jsonProduto.addProperty("condicaoPromocao", (produto.getValidade_promocao() != null) ? produto.getValidade_promocao().toString() : "");
 
                     produtos.add(jsonProduto);
                 }
@@ -84,13 +80,9 @@ public class SearchService {
                 JsonObject jsonProduto = new JsonObject();
                 jsonProduto.addProperty("codigo", produto.getCodigo());
                 jsonProduto.addProperty("nome", produto.getNome());
-                jsonProduto.addProperty("marca", produto.getMarca());
                 jsonProduto.addProperty("unMedida", produto.getUnidadeMedida());
-                jsonProduto.addProperty("descricao", produto.getDescricao());
                 jsonProduto.addProperty("avaliacao", produto.getAvaliacaoMedia());
                 jsonProduto.addProperty("valor", produto.getValor());
-                jsonProduto.addProperty("promocionado", produto.isPromocionado());
-                jsonProduto.addProperty("condicaoPromocao", (produto.getValidade_promocao() != null) ? produto.getValidade_promocao().toString() : "");
 
                 produtos.add(jsonProduto);
             }

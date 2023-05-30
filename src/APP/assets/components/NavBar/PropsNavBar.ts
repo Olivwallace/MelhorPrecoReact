@@ -4,6 +4,7 @@ export interface NavBarProps {
     hrefPerfil: string;
     hrefListas: string;
     hrefNota: string;
+    tags?: string[];
     hrefSobreNos: string;
     auth: boolean;
 }

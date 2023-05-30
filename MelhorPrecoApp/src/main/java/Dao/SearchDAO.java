@@ -25,12 +25,11 @@ public class SearchDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-
         try {
             statement = conexao.prepareStatement(
-                    "SELECT M.nome AS nomeMercado, M.cnpj, CONCAT(M.rua,', ',M.numero, ', ', M.cep, ' - ', M.cidade, ' - ', M.estado) AS endereco, M.coordenada, P.*, I.valor, I.promocionado, I.validade_promocao " +
-                            "FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo " +
-                            "WHERE M.nome LIKE ? " +
+                    "SELECT M.nome AS nomeMercado, M.cnpj, M.endereco, M.coordenada, P.*, I.valor" +
+                            "FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo" +
+                            "WHERE M.nome LIKE ?" +
                             "ORDER BY M.avaliacao DESC");
 
             statement.setString(1, "%" + json.get("text").toString().replaceAll("\"","") + "%");
@@ -47,15 +46,11 @@ public class SearchDAO {
                 while(resultSet.next() && resultSet.getString("cnpj").equals(cnpj)) {
                     String codigo = resultSet.getString("codigo");
                     String nomeItem = resultSet.getString("nome");
-                    String marca = resultSet.getString("marca");
                     String unMedida = resultSet.getString("un_medida");
                     int avaliacao = resultSet.getInt("avaliacao");
-                    String desc = resultSet.getString("descricao");
                     double valor = resultSet.getDouble("valor");
-                    boolean promocionado = resultSet.getBoolean("promocionado");
-                    Date data = resultSet.getDate("validade_promocao");
 
-                    itens.add(new Produto(codigo, nomeItem, marca, unMedida, desc, avaliacao, valor, promocionado, data));
+                    itens.add(new Produto(codigo, nomeItem, unMedida, avaliacao, valor));
                 }
 
                 mercados.add(new Mercado(cnpj, nome, endereco, coordenada, itens));
@@ -76,21 +71,18 @@ public class SearchDAO {
         ResultSet resultSet = null;
 
         try {
-            statement = conexao.prepareStatement("SELECT * FROM produto WHERE nome ILIKE ? or descricao ILIKE ?");
+            statement = conexao.prepareStatement("SELECT * FROM produto WHERE nome ILIKE ?");
             statement.setString(1, "%" + json.get("busca").getAsJsonObject().get("busca").toString().toString().replaceAll("\"","") + "%");
-            statement.setString(2, "%" + json.get("busca").getAsJsonObject().get("busca").toString().toString().replaceAll("\"","") + "%");
 
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                     String codigo = resultSet.getString("codigo");
                     String nomeItem = resultSet.getString("nome");
-                    String marca = resultSet.getString("marca");
                     String unMedida = resultSet.getString("un_medida");
                     int avaliacao = resultSet.getInt("avaliacao");
-                    String desc = resultSet.getString("descricao");
 
-                    produtos.add(new Produto(codigo, nomeItem, marca, unMedida, desc, (float)avaliacao));
+                    produtos.add(new Produto(codigo, nomeItem, unMedida, (float)avaliacao));
             }
 
         } catch (SQLException ex) {
