@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Tmp {
 
-    public Object[] produtos;
+    public Object[] palavras;
   public String valor;
 
   public Tmp(Object[] produtos,String valor){
-      this.produtos = produtos;
+      this.palavras = produtos;
       this.valor = valor;
   }
   public Tmp(){
       this.valor = null;
-      this.produtos = null;
+      this.palavras = null;
   }
 }

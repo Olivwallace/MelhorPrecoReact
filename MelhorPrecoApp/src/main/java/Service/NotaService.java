@@ -71,7 +71,7 @@ public class NotaService extends QRcodeService {
             for (Tmp tmp : produtos){
                 arrayList.add(gson.toJsonTree(tmp));
             }
-            data.add("mercado",gson.toJsonTree(mercado));
+            data.add("Mercado",gson.toJsonTree(mercado));
             data.add("Produtos", arrayList);
             response = new ResponseService(200, "SUCESS", data);
         } else {

@@ -111,10 +111,18 @@ export const EnvioNota: React.FC = () => {
                             </div>
                         </form>
                     </div>
-                </> : 
+                </> 
+                : 
+                <>
+                
+                            
                 
                 
-                <p></p>
+                
+                
+                </>
+                
+              
 
 
                 }
