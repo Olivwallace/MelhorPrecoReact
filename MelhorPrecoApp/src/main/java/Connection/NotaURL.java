@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import Model.Tmp;
 import static Utels.Contraction_Map.getPalavra;
 
 public class NotaURL {
@@ -41,11 +41,11 @@ public class NotaURL {
 
       return resp;
    }
-   public static void produtos(String result) {
+   public ArrayList<Tmp> produtos(String result) {
       Document html = Jsoup.parse(result);
       Elements trElements = html.select("#myTable tr");
       Elements tdElements;
-
+      ArrayList<Tmp> produtos = new ArrayList<>();
       for (Element trElement : trElements) {
          tdElements = trElement.select("td");
          Element td = tdElements.get(0);
@@ -72,9 +72,13 @@ public class NotaURL {
          tmp = td.toString().replaceAll("\n","");
          String valor = tmp.substring(tmp.lastIndexOf("R$")+3,(tmp.indexOf("</td>")));
          System.out.println(Arrays.toString(nomeProduto) +"\t"+codigo+"\t"+valor);
+         produtos.add(new Tmp(nomeProduto,valor));
+
+
       }
+      return produtos;
    }
-   public static boolean ehUnidade(String s){
+   public boolean ehUnidade(String s){
       boolean hasUn = false;
       String []unMedida = {"kg","ml","1","2","3","4","5","6","7","8","9","0"};
       int i = 0;
@@ -87,7 +91,7 @@ public class NotaURL {
       return hasUn;
    }
 
-   public void mercado(String result){
+   public String[] mercado(String result){
       int inicio = result.indexOf("<table");
       int fim = result.indexOf("</table>");
       String tabela = result.substring(inicio,fim);
@@ -95,10 +99,10 @@ public class NotaURL {
       String CNPJ = tabela.substring((tabela.indexOf("CNPJ")+5),(tabela.indexOf(" -, ")));
       String endereco = tabela.substring((tabela.indexOf("italic")+9),(tabela.lastIndexOf("</td>")));
       String []dadosEnd = endereco.split(", ");
-      String rua = dadosEnd[0];
-      int numero = Integer.parseInt(dadosEnd[1]);
       String cidade = dadosEnd[3].substring(dadosEnd[3].indexOf("-")+1);
-      System.out.println(nomeMercado+"\t"+CNPJ+"\t"+rua+"\t"+numero+"\t"+cidade);
+      String ende = dadosEnd[0]+" "+dadosEnd[1]+" "+cidade+" "+dadosEnd[4];
+      System.out.println(nomeMercado+"\t"+CNPJ+"\t"+ende);
+      return new String[]{nomeMercado,CNPJ,ende};
    }
 
 }

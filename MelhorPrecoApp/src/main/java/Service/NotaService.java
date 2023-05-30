@@ -1,12 +1,9 @@
 package Service;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
-
 import java.io.IOException;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
@@ -17,19 +14,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import Connection.NotaURL;
-
+import Model.Tmp;
 
 
 public class NotaService extends QRcodeService {
-
+    private ResponseService response;
     public NotaService(){
         initAbvMap();
     }
 
-    public String uploadNota(Request request, Response response) throws ServletException, IOException {
+    public String uploadNota(Request request, Response resp) throws ServletException, IOException {
         String location = "MelhorPrecoApp";
         long maxFileSize = 100000000;       // O tamanho máximo permitido para os arquivos enviados
         long maxRequestSize = 100000000;    // O tamanho máximo permitido para as solicitações multipart/form-data
@@ -42,7 +38,9 @@ public class NotaService extends QRcodeService {
         String path ="tmpImages/";
         File existente;
         int numero = 0;
-
+        String[] mercado = null;
+        ArrayList<Tmp> produtos = new ArrayList<>();
+        String html;
         //Carregando cada imagem do formData e salvando na pasta
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
@@ -51,28 +49,40 @@ public class NotaService extends QRcodeService {
             String nomeArquivo = numero+fName.substring(posicaoPonto);
             existente = new File(path + nomeArquivo);
             //verifica se essa imagem já existe
-
             if (!existente.exists()) {
                 Path out = Paths.get(path + nomeArquivo);
                 try (final InputStream in = part.getInputStream()) {
                     Files.copy(in, out);
                     part.delete();
                     binaryImg(nomeArquivo);
-                   String html =  url.getHtml(qrReader(nomeArquivo));
-                    url.mercado(html);
-                    url.produtos(html);
+                    html =  url.getHtml(qrReader(nomeArquivo));
+                    mercado  =  url.mercado(html);
+                    produtos =  url.produtos(html);
                 }
                 numero++;
                 existente.delete();
             }
 
         }
-
+        Gson gson = new Gson();
+        JsonObject data = new JsonObject();
+        JsonArray arrayList = new JsonArray();
+        if (produtos.size() > 0) {
+            for (Tmp tmp : produtos){
+                arrayList.add(gson.toJsonTree(tmp));
+            }
+            data.add("mercado",gson.toJsonTree(mercado));
+            data.add("Produtos", arrayList);
+            response = new ResponseService(200, "SUCESS", data);
+        } else {
+            data.add("Produtos", arrayList);
+            response = new ResponseService(409, "ERROR", data);
+        }
 
         existente = null;
         multipartConfigElement = null;
         parts = null;
-        return "OK";
+        return response.toJson();
     }
 
 }
