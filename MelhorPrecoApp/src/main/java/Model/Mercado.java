@@ -16,11 +16,7 @@ public class Mercado {
     private int id; // primary key
     private String CNPJ;
     private String nome;
-    private String rua;
-    private int numero;
-    private String CEP;
-    private String cidade;
-    private String estado;
+    private String endereco;
     private String coordenada;
     private float avaliacaoMedia;
     private int numAvaliacoes;
@@ -28,16 +24,11 @@ public class Mercado {
 
     // ------------------- Construtores -------------------
 
-    public Mercado(int id, String CNPJ, String nome, String rua, int numero, String CEP, String cidade, String estado,
-            String coordenada) {
+    public Mercado(int id, String CNPJ, String nome, String endereco, String coordenada) {
         setId(id);
         setCNPJ(CNPJ);
         setNome(nome);
-        setRua(rua);
-        setNumero(numero);
-        setCEP(CEP);
-        setCidade(cidade);
-        setEstado(estado);
+        setEndereco(endereco);
         setCoordenada(coordenada);
         setAvaliacaoMedia(3);
         setNumAvaliacoes(0);
@@ -46,7 +37,7 @@ public class Mercado {
     public Mercado(String CNPJ, String nome, String endereco, String coordenada, ArrayList<Produto> itens){
         setCNPJ(CNPJ);
         setNome(nome);
-        setRua(endereco);
+        setEndereco(endereco);
         setCoordenada(coordenada);
         setItens(itens);
     }
@@ -65,24 +56,8 @@ public class Mercado {
         this.nome = nome;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public void setCEP(String CEP) {
-        this.CEP = CEP;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public void setCoordenada(String coordenada) {
@@ -115,25 +90,7 @@ public class Mercado {
         return nome;
     }
 
-    public String getRua() {
-        return rua;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public String getCEP() {
-        return CEP;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
+    public String getEndereco() {return  endereco;}
 
     public String[] getCoordenada() {
         return  coordenada.split(",");

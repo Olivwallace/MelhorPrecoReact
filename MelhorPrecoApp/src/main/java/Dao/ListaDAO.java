@@ -171,7 +171,7 @@ public class ListaDAO {
                 String nomeLista = r1.getString("nome");
 
                 // Executa a consulta para recuperar as informações dos produtos associados a cada lista
-                s2 = connect.prepareStatement("SELECT codigo, nome, marca, un_medida, descricao, qtdproduto FROM produto JOIN itenslista ON codigo = produto WHERE lista = ?");
+                s2 = connect.prepareStatement("SELECT codigo, nome, un_medida, qtdproduto FROM produto JOIN itenslista ON codigo = produto WHERE lista = ?");
                 s2.setInt(1, codLista);
                 ResultSet r2 = s2.executeQuery();
 
@@ -180,12 +180,10 @@ public class ListaDAO {
                 while (r2.next()) {
                     String cod = r2.getString("codigo");
                     String nome = r2.getString("nome");
-                    String marca = r2.getString("marca");
                     String un_medida = r2.getString("un_medida");
-                    String descricao = r2.getString("descricao");
                     int qtd = r2.getInt("qtdproduto");
 
-                    produtos.add(new Produto(cod, nome, marca, un_medida, descricao, qtd));  // Cria objetos Produto e adiciona à lista de produtos
+                    produtos.add(new Produto(cod, nome, un_medida, qtd));  // Cria objetos Produto e adiciona à lista de produtos
                 }
 
                 // Cria um objeto Lista com as informações da lista atual e seus produtos associados, e adiciona à lista de listas
@@ -213,32 +211,28 @@ public class ListaDAO {
 
         int idLista = json.get("lista").getAsInt();
         int idUser = json.get("user").getAsInt();
-        String senha = json.get("password").toString().replaceAll("\"", "");
 
-        // Valida a senha do usuário antes de prosseguir com a exclusão
-        if(UserDAO.validarSenha(idUser, senha)) {
-            try {
-                // Desativa o commit automático para permitir o controle manual
-                connect.setAutoCommit(false);
+        try {
+            // Desativa o commit automático para permitir o controle manual
+            connect.setAutoCommit(false);
 
-                // Exclui os itens da lista do banco de dados
-                s1 = connect.prepareStatement("DELETE FROM itenslista WHERE lista = ?");
-                s1.setInt(1, idLista);
-                s1.executeUpdate();
+            // Exclui os itens da lista do banco de dados
+            s1 = connect.prepareStatement("DELETE FROM itenslista WHERE lista = ?");
+            s1.setInt(1, idLista);
+            s1.executeUpdate();
 
-                // Exclui a lista do banco de dados
-                s2 = connect.prepareStatement("DELETE FROM lista WHERE codigo = ? AND usuario = ?");
-                s2.setInt(1, idLista);
-                s2.setInt(2, idUser);
-                s2.executeUpdate();
+            // Exclui a lista do banco de dados
+            s2 = connect.prepareStatement("DELETE FROM lista WHERE codigo = ? AND usuario = ?");
+            s2.setInt(1, idLista);
+            s2.setInt(2, idUser);
+            s2.executeUpdate();
 
-                // Realiza o commit das alterações no banco de dados
-                connect.commit();
-                status = true;
+            // Realiza o commit das alterações no banco de dados
+            connect.commit();
+            status = true;
 
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return status;
