@@ -40,7 +40,7 @@ public class NotaService extends QRcodeService {
         int numero = 0;
         String[] mercado = null;
         ArrayList<Tmp> produtos = new ArrayList<>();
-        String html;
+        String html,chaveAcesso = "";
         //Carregando cada imagem do formData e salvando na pasta
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
@@ -55,15 +55,16 @@ public class NotaService extends QRcodeService {
                     Files.copy(in, out);
                     part.delete();
                     binaryImg(nomeArquivo);
-                    html =  url.getHtml(qrReader(nomeArquivo));
+                    chaveAcesso = qrReader(nomeArquivo);
+                    html =  url.getHtml(chaveAcesso);
+                    chaveAcesso = chaveAcesso.substring(chaveAcesso.indexOf("=")+1,chaveAcesso.indexOf("|"));
                     mercado  =  url.mercado(html);
                     produtos =  url.produtos(html);
                 }
-                numero++;
                 existente.delete();
             }
-
         }
+
         Gson gson = new Gson();
         JsonObject data = new JsonObject();
         JsonArray arrayList = new JsonArray();
@@ -71,6 +72,7 @@ public class NotaService extends QRcodeService {
             for (Tmp tmp : produtos){
                 arrayList.add(gson.toJsonTree(tmp));
             }
+            data.add("ChaveAcesso", gson.toJsonTree(chaveAcesso));
             data.add("Mercado",gson.toJsonTree(mercado));
             data.add("Produtos", arrayList);
             response = new ResponseService(200, "SUCESS", data);

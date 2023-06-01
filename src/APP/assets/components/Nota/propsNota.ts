@@ -1,6 +1,12 @@
 export interface propsInfonota{
     onChange:() =>{}
-
-    produtos: string[];
+    onChangeRating:() =>{}
+    produtos: Produto[];
 
 }
+interface Produto {
+    abreviacao: string;
+    palavras: (string | string[])[];
+    valor: string;
+  }
+ 

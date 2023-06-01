@@ -24,3 +24,6 @@ export * from "./Select/list/SelectFiltro";
 //Exporta Barra de navegação lateral
 export * from "./NavBar/NavBar";
 
+//Exporta montaLista
+export * from "./Nota/nota";
+ 

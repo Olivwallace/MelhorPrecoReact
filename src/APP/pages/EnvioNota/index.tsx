@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useAPI } from "../../service/api/useApi";
 import { ReactComponent as DelSVG } from "./img/delete.svg";
-import upload from "./img/upload.png"
-import imgUp from "./img/imgUp.svg"
+import upload from "./img/upload.png";
+import imgUp from "./img/imgUp.svg";
+import imgRating from "./img/imgRating.svg";
 import { NavBar } from "../../assets/components";
-import "./envioNota.css"
+import {InputNota} from "../../assets/components";
+import "./envioNota.css";
+import { Infonota } from "../../model/infoNota";
 
+type SelectEvent = React.ChangeEvent<HTMLSelectElement>
 type EventSubmit = React.FormEvent<HTMLFormElement>
 
 export const EnvioNota: React.FC = () => {
@@ -15,8 +19,10 @@ export const EnvioNota: React.FC = () => {
     const [image, setImage] = useState<File[]>([]); // inicializa o vetor de estados como um vetor vazio
     const [itens, setItens] = useState<React.ReactNode[]>([])
     const [isConfirmOne, setIsConfirmOne] = useState(false);
+    const [notaInicial, setNotaInicial] = useState<Infonota | null>(null);
     const api = useAPI.Nota
-
+    let nota;
+    
     const handleDeleteImagem = (index: number) => {
         console.log(image.length);
 
@@ -45,8 +51,24 @@ export const EnvioNota: React.FC = () => {
             formData.append('image', image[i]);
            }
 
-          await api.uploadImage({image: formData});
-        setIsConfirmOne(true);
+        nota = await api.uploadImage({image: formData});
+        console.log(nota);
+        if(nota.status = 200){
+           const notaInicial: Infonota = {
+                chaveAcesso: nota.data.ChaveAcesso,
+                mercado: nota.data.Mercado,
+                produtos: nota.data.Produtos.map((produto: any) => ({
+                    abreviacao: produto.abreviacao,
+                    palavras: produto.palavras,
+                    valor: produto.valor
+                }))
+
+            };
+            setNotaInicial(notaInicial);
+            setIsConfirmOne(true);
+        } else {
+
+        }
     }, [image]);
 
 
@@ -115,7 +137,26 @@ export const EnvioNota: React.FC = () => {
                 : 
                 <>
                 
-                            
+                        <><div className="div2">
+                    <img className="uploadSVG" src={imgRating} alt="" />
+                </div>
+                    <div className="form2">
+                        <form onSubmit={handlesubmit} name="confirmNota">
+                            <h3 className="titulo">{notaInicial?.mercado[0]}</h3>
+                                {notaInicial ? (
+                                    <InputNota
+                                    onChange={}
+                                    onChangeRating={}
+                                    produtos={notaInicial.produtos} />
+                                    ) : (
+                                    <div>Carregando...</div>
+                                    )}
+                            <div className="botoes">
+                                <button className="btn-submit" type="submit">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </>     
                 
                 
                 

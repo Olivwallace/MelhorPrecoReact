@@ -53,9 +53,11 @@ public class NotaURL {
          String nome = tmp.substring((tmp.indexOf("<h7>")+6),(tmp.indexOf("</h7>")));
          nome = nome.replaceAll("\\.", " ");
          String []vetPalavras = nome.split(" ");
+         String abreviacao = "";
          int palavras = (ehUnidade(vetPalavras[vetPalavras.length-1]))? vetPalavras.length-1: vetPalavras.length;
          Object [] nomeProduto = new Object[palavras];
          for (int i = 0; i < palavras; i++) {
+            abreviacao +=vetPalavras[i]+" ";
             ArrayList<String> lista =  getPalavra(vetPalavras[i]);
             if(lista != null){
                if(lista.size()==1){
@@ -71,8 +73,8 @@ public class NotaURL {
          td = tdElements.get(3);
          tmp = td.toString().replaceAll("\n","");
          String valor = tmp.substring(tmp.lastIndexOf("R$")+3,(tmp.indexOf("</td>")));
-         System.out.println(Arrays.toString(nomeProduto) +"\t"+codigo+"\t"+valor);
-         produtos.add(new Tmp(nomeProduto,valor));
+         System.out.println(abreviacao+"\t"+Arrays.toString(nomeProduto) +"\t"+codigo+"\t"+valor);
+         produtos.add(new Tmp(abreviacao,nomeProduto,valor));
 
 
       }

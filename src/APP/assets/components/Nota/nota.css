@@ -1,0 +1,52 @@
+.produtoPalavra {
+    display: flex;
+    text-align: center;
+    padding-left: 5px;
+    align-items: center;
+
+
+}
+.produtoPalavra label{
+    text-align: center;
+}
+
+.valorLine {
+    display: inline;
+}
+
+.divProduto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.produtoFrase {
+    display: flex;
+}
+
+.inputNota {
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0 5px;
+}
+
+.selectProduto {
+    height: 30px;
+    padding: 3px;
+    background: #4fa18d;
+
+    border-radius: 5px;
+}
+
+.selectProduto select {
+    font-size: 14px;
+    background-color: transparent;
+    height: 30px;
+    color: #fff;
+    border: none;
+}
+.selectProduto select option{
+    color: #000;
+}

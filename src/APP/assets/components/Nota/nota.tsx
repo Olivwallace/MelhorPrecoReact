@@ -1,32 +1,45 @@
-import React, { useEffect, useState } from "react";
+import * as React from 'react';
 import { propsInfonota } from "./propsNota";
 import { Rating } from "@mui/material";
-const [itens, setItens] = useState<React.ReactNode[]>([])
+import "./nota.css";
+type SelectEvent = React.ChangeEvent<HTMLSelectElement>
 
-export const inputNota: React.FC<propsInfonota> = (props) => {
+export const InputNota: React.FC<propsInfonota> = (props) =>  {
 
-    useEffect(() => {
-        const inputProdutos = props.produtos.map((element, index) => {
-        return(
+    return (<>
+        <div className='inputNota'>
+        {props.produtos.map((produto, index) => (
+          
+          <div className='divProduto' key={index}>
             
-            <div style={{display: "flex",justifyContent:"space-between"}}>
-                <label >{element}</label>
-                <Rating
+            <div className='produtoFrase'>
+              {produto.palavras.map((palavra, palavraIndex) => (
+                <div className='produtoPalavra' key={palavraIndex}>
+                  {typeof palavra === 'string' ? (
+                    <label>{palavra}</label>
+                  ) : (
+                   <div className='selectProduto'> 
+                    <select >
+                      {palavra.map((opcao, opcaoIndex) => (
+                        <option onChange={props.onChange}  key={opcaoIndex} value={opcao}>
+                          {opcao}
+                        </option>
+                      ))}
+                    </select>
+                 </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <Rating
                     name="simple-controlled"
                     value={3}
-                    onChange={props.onChange}
+                    onChange={props.onChangeRating}
                     />
-            </div>
-            
-        );
-
-
-        });
-        setItens(inputProdutos);
-
-    }, [props.produtos,props.onChange]);
-    return (
-        <>{itens}</>
+            <p className='valorLine'>R$ {produto.valor}</p>
+          </div>
+        ))}
+      </div></>
     );
 }
 
