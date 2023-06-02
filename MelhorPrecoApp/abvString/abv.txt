@@ -2169,3 +2169,8 @@ mars, mars
 mar, mars
 ma, mars
 m, mars
+bco, branco
+mac, macarrao
+bot, botanico
+l, lirio
+az, azul

@@ -24,12 +24,13 @@ public class SearchDAO {
         Connection conexao = Connect.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        System.out.println(json);
+        System.out.println(json.get("text").toString().replaceAll("\"",""));
 
         try {
-            statement = conexao.prepareStatement(
-                    "SELECT M.nome AS nomeMercado, M.cnpj, M.endereco, M.coordenada, P.*, I.valor FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo WHERE M.nome LIKE ? ORDER BY M.avaliacao DESC");
+            statement = conexao.prepareStatement("SELECT M.nome AS nomeMercado, M.cnpj, M.endereco, M.coordenada, P.*, I.valor FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo WHERE M.nome ILIKE ? ORDER BY M.cnpj DESC");
 
-            statement.setString(1, "%" + json.get("text").toString().replaceAll("\"","") + "%");
+            statement.setString(1, "%" +  json.get("text").toString().replaceAll("\"","") + "%");
 
             resultSet = statement.executeQuery();
 

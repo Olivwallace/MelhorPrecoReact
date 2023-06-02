@@ -44,8 +44,8 @@ export const Home: React.FC = (props) => {
         
         console.log(search)
         let resp = await api.perfomeSearch(search)
-        console.log(resp)
         if(resp.status === 200){
+            console.log("Entrou")
             setMarkets(resp)
         }
 

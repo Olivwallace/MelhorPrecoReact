@@ -30,7 +30,7 @@ export const Lista: React.FC = (props) => {
 
     // Filtros Aplicados
     const [filters, setFilters] = useState({
-        select: '',
+        select: ' ',
         radio: 'Distance'
     });
 
@@ -205,6 +205,7 @@ export const Lista: React.FC = (props) => {
     useEffect(() => {
         obterListasUsuario();
         obterMercados()
+        setAtual(0)
     }, [])
 
     if (!useLocation) { return <h1>Carregando Dados</h1>; } // Mostra Icone de Carregamento Temporario

@@ -15,20 +15,22 @@ export const InputEmailValid:React.FC<InputPropsArray> = (props) => {
     return (
         <div className={props.className}>
             <input className="inputEmailC1"
-                autoComplete="off" 
+                autoComplete={"off"} 
                 type="text"
                 name="email"
                 id={props.id?.[0]} 
                 value={props.value?.[0]}
-                onChange={props.onChange?.[0]} 
+                onChange={props.onChange?.[0]}
+                required 
                 placeholder={props.placeholder?.[0]} />
             <input className="inputEmailC2" 
-                autoComplete="off" 
+                autoComplete={"off"} 
                 type="text"
                 name="confirm_email"
                 id={props.id?.[1]} 
                 value={props.value?.[1]}
                 onChange={props.onChange?.[1]} 
+                required
                 placeholder={props.placeholder?.[1]} />
         </div>
     );

@@ -1,18 +1,21 @@
 package Service;
+
+import spark.Request;
+import spark.Response;
+import Connection.NotaURL;
 import Dao.NotaDAO;
 import Model.Nota;
+import Model.Tmp;
 import Utels.Arq;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import spark.Request;
-import spark.Response;
-import java.io.IOException;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
-import java.io.*;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,10 +23,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-
-import Connection.NotaURL;
-import Model.Tmp;
-
 
 public class NotaService extends QRcodeService {
     private NotaDAO notaDAO = new NotaDAO();
@@ -48,13 +47,16 @@ public class NotaService extends QRcodeService {
         String[] mercado = null;
         ArrayList<Tmp> produtos = new ArrayList<>();
         String html,chaveAcesso = "";
+
         //Carregando cada imagem do formData e salvando na pasta
         for (Part part : parts) {
             String fName = part.getSubmittedFileName();
             int posicaoPonto = fName.lastIndexOf(".");
+
             //modificação do nome do arquivo devido aos caracteres especiais
             String nomeArquivo = numero+fName.substring(posicaoPonto);
             existente = new File(path + nomeArquivo);
+
             //verifica se essa imagem já existe
             if (!existente.exists()) {
                 Path out = Paths.get(path + nomeArquivo);

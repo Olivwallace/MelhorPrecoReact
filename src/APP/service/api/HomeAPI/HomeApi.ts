@@ -12,22 +12,9 @@ export const HomeAPI = (api: AxiosInstance) => ({
             localizacao: search.location
         }
         
-        if(search.tags[0] == 'Market'){
-            response = await api.post("/getMercados", pesquisa)
-        }else{
-            response = await api.post("/getMercados", pesquisa)
-            /*switch (search.tags[1]) {
-                case 'rating':
-                    response = await api.post('/getProductRating', pesquisa);
-                    break;
-                case 'distance':
-                    response = await api.post('/getProductDistance', pesquisa);
-                    break;
-                case 'price':
-                    response = await api.post('/getProductPrice', pesquisa);
-                    break;
-            }*/
-        }
+        
+        response = await api.post("/getMercados", pesquisa)
+        
         
         return response?.data;
     }

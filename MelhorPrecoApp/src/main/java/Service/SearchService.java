@@ -57,7 +57,7 @@ public class SearchService {
             data.add("markets", markets);
 
 
-        response = new ResponseService(200, "Successfully", data);
+            response = new ResponseService(200, "Successfully", data);
         } else {
             data.addProperty("markets", "[]");
             response = new ResponseService(409, "Error", data);
