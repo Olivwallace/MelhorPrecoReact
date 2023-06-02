@@ -96,11 +96,11 @@ export const EnvioNota: React.FC = () => {
                 notaInicial.produtos[i].palavra = palavras[i];
               }
           }
-          console.log(notaInicial);
+
           const nota = notaInicial;
-          console.log(nota);
+
             if (nota!=null) {
-                console.log(notaInicial);
+
                 await api.uploadNota(nota);
             }
             navigate("/");

@@ -164,8 +164,6 @@ public class NotaService extends QRcodeService {
         então na hora de cadastrar dá pra usar ele, já que tem o nome do produto na varivel produto, tem o valor e a unMedida
         o mercado ta em nota mas é só usar nota.mercado[] na posicao 0 tem o nome do mercado, na posicao 1 tem o cnpj e o no 2 tem a rua com a cidade e estado
         e se der nota.chaveAcesso voce tem a chave de acesso da nota fiscal
-
-
         boolean create = notaDAO.envioNota(nota);
         JsonObject data = new JsonObject();
         if (create) {
