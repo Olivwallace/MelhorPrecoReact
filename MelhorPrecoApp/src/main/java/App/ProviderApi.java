@@ -13,6 +13,8 @@ import Connection.CorsFilter;
 import Service.*;
 import Utels.Contraction_Map;
 
+import java.io.IOException;
+
 import static spark.Spark.*;
 
 public class ProviderApi  {
@@ -22,7 +24,15 @@ public class ProviderApi  {
     public static PerfilService perfilService = new PerfilService();
     public static ListService listService = new ListService();
     public static SearchService searchService = new SearchService();
-    public static NotaService notaService = new NotaService();
+    public static NotaService notaService;
+
+    static {
+        try {
+            notaService = new NotaService();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void main(String[] args){
 
@@ -83,6 +93,7 @@ public class ProviderApi  {
         //post("/searchProdutos", (request, response) -> appService.searchProdutos(request, response));
         //-------- Notas -----------------------------------
         post( "/uploadNota",(request, response) -> notaService.uploadNota(request, response));
+        post( "/retornoNota",(request, response) -> notaService.retornoNota(request, response));
         init();
     }
 

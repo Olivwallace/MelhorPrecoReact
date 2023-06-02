@@ -54,7 +54,14 @@ public class NotaURL {
          nome = nome.replaceAll("\\.", " ");
          String []vetPalavras = nome.split(" ");
          String abreviacao = "";
-         int palavras = (ehUnidade(vetPalavras[vetPalavras.length-1]))? vetPalavras.length-1: vetPalavras.length;
+         int palavras;
+         String unMedida = "";
+         if(ehUnidade(vetPalavras[vetPalavras.length-1])){
+            palavras = vetPalavras.length-1;
+            unMedida = vetPalavras[vetPalavras.length-1];
+         } else {
+            palavras = vetPalavras.length;
+         }
          Object [] nomeProduto = new Object[palavras];
          for (int i = 0; i < palavras; i++) {
             abreviacao +=vetPalavras[i]+" ";
@@ -74,8 +81,7 @@ public class NotaURL {
          tmp = td.toString().replaceAll("\n","");
          String valor = tmp.substring(tmp.lastIndexOf("R$")+3,(tmp.indexOf("</td>")));
          System.out.println(abreviacao+"\t"+Arrays.toString(nomeProduto) +"\t"+codigo+"\t"+valor);
-         produtos.add(new Tmp(abreviacao,nomeProduto,valor));
-
+         produtos.add(new Tmp(abreviacao,nomeProduto,unMedida,valor));
 
       }
       return produtos;

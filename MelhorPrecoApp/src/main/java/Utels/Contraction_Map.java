@@ -1,6 +1,7 @@
 package Utels;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Contraction_Map {
         } else {
             ArrayList<String> listABV = new ArrayList<>();
             listABV.add(palavra);
-            CONTRACTIONS_MAP.put(abv, listABV);
+            CONTRACTIONS_MAP.put(abv,listABV);
         }
     }
 
@@ -39,8 +40,8 @@ public class Contraction_Map {
     /**
      * Inicializa estrutura hash map para abreviaturas padrões.
      */
-    public static void initAbvMap(){
-        Arq.openRead();
+    public static void initAbvMap() throws IOException {
+        Arq.openRead("abvString/abv.txt");
         while(Arq.hasNext()){
             String[] strings = Arq.readLine().split(",");
             adiconarContracao(strings[0].toLowerCase(), strings[1].toLowerCase());

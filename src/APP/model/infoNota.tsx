@@ -3,11 +3,13 @@ export type Infonota = {
     mercado:string[];
     produtos: Produto[];
 
+
 }
 type Produto = {
     abreviacao: string;
     palavras: (string | string[])[];
-    avaliacao: number;
+    unMedida:string;
+    palavra: string;
     valor: string;
   }
  
