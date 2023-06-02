@@ -80,7 +80,7 @@ export const CreateList: React.FC = (props) => {
         }
 
         let response = await api.criar(req)
-    }, [listaCliente]);
+    }, [listaCliente, listName]);
 
 
     //Efetua busca em tempo real
@@ -122,7 +122,8 @@ export const CreateList: React.FC = (props) => {
                 <input
                     type="text"
                     id="nomeLista"
-                    placeholder="Nova Lista" />
+                    placeholder="Nova Lista"
+                    onChange={(event) => {setListName(event.target.value)}} />
 
                 <button
                     disabled={listaCliente.length < 1}

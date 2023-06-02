@@ -8,10 +8,12 @@ import { useAPI } from "../../service/api/useApi";
 import { ListaDate } from "../../model/dadosLista";
 import './index.css';
 import { ListaExibe } from "../../assets/components/List/lista";
-import { ProductModel } from "../../model";
+import { MarketModel, ProductModel } from "../../model";
 import { ListaVisualizacaoItem } from "../../assets/components/List/itemLista/itemLista";
 import { ReponseSearch } from "../../service/api/HomeAPI/responseType";
 import { useGetLocation } from "../../hooks/useGetLocation";
+import { Marker } from "leaflet";
+import { ItensMercados } from "../../model/itemMercado";
 
 //---------------------------- Redefined Types
 type InputEvent = ChangeEvent<HTMLInputElement>
@@ -24,12 +26,19 @@ export const Lista: React.FC = (props) => {
     const context = useContext(AuthContext)
     const useLocation = useGetLocation()
     const api = useAPI.Lista
+    const api2 = useAPI.Home
 
     // Filtros Aplicados
     const [filters, setFilters] = useState({
         select: '',
         radio: 'Distance'
     });
+
+    //Lista Final
+    const [listaFinal, setListaFinal] = useState<ItensMercados[]>([])
+
+    // Lista atual
+    const [atual, setAtual] = useState<number>(-1)
 
     // Listas Usuario
     const [list, setList] = useState<ListaDate[]>()
@@ -46,10 +55,10 @@ export const Lista: React.FC = (props) => {
 
             lista.listas.map((element: any) => {
                 delete element.userId
-                delete element.itens
                 list.push({
                     nomeLista: element.nomeLista,
-                    idLista: element.listId
+                    idLista: element.listId,
+                    itens: element.itens
                 })
             })
 
@@ -58,18 +67,144 @@ export const Lista: React.FC = (props) => {
         }
     }, [])
 
-    // Lista atual
-    const [atual, setAtual] = useState<ProductModel[]>([])
+    // Lista de Todos os Mercados
+    const [mercadosProx, setMercadosProx] = useState<ReponseSearch>()
+    const obterMercados =  async() =>{
+        let usuario = context.user?.id || context.usuario()?.id;
+        let lista = []
+
+        if(usuario){
+            lista = await api2.perfomeSearch({
+                search: "", 
+                location: usuario.toLocaleString(),
+                tags: ["",""]
+            })
+        }
+
+        if(lista?.data){
+            setMercadosProx(lista)
+        }
+
+    }
 
     // Mercados Filtrados
-    const [markers, setMarkets] = useState<ReponseSearch>()
+    const [mercados, setMercados] = useState<MarketModel[]>()
+    
 
+    const calcularTotal = useCallback((market: number, list: ProductModel[]) => {
+        let total = 0
 
+        if(mercadosProx?.data.markets){
+            let mercado = mercadosProx.data.markets[market]
+            for(let i = 0; i < list.length; i++){
+                list.forEach(item =>{
+                    mercado.produtos.forEach(itemM =>{
+                        if(item === itemM){
+                            total += (itemM.valor && item.quantidade)? item.quantidade * itemM.valor:0;
+                        } 
+                    })
+                })
+            }
+        }
 
+        return total
+    },[atual])
 
 
     useEffect(() => {
+        if(list && mercadosProx?.data.markets){
+            let tdsMercados = mercadosProx?.data.markets
+            let mercadosBarato:{ total: number, mercado: MarketModel}[] = []
+            let i = 0
+            tdsMercados.forEach(market=>{
+                console.log(list)
+                let mercadoAtual = {
+                    total: calcularTotal(i, list[atual].itens),
+                    mercado: market
+                }
+                console.log(4)
+                
+                if(mercadosBarato.length < 3){
+                  
+                    mercadosBarato.push(mercadoAtual);
+                    if(mercadosBarato.length === 3) sort(mercadosBarato)
+                
+                }else{
+                    if(mercadoAtual.total < mercadosBarato[2].total){
+                        mercadosBarato[2] = mercadoAtual
+                        sort(mercadosBarato)
+                    }
+                }
+ 
+                i++;            
+            })
+
+            let mercados = []
+            for(let i = 0; i < mercadosBarato.length; i++){
+                mercados.push(mercadosBarato[i].mercado)
+            }
+
+            setMercados(mercados)
+            hadlelistafinal()
+        }
+    },[atual])
+
+    const hadlelistafinal = () =>{
+        let lista: ItensMercados[] = []
+        if(list && mercados){
+            for(let i = 0; i < list[atual].itens.length; i++){
+                let novo = {
+                    nomeItem: list[atual].itens[i].nome,
+                    mercado1: obterValor(mercados[0], list[atual].itens[i]),
+                    mercado2: obterValor(mercados[1], list[atual].itens[i]),
+                    mercado3: obterValor(mercados[2], list[atual].itens[i]),
+                    quantidade: list[atual].itens[i].quantidade ||  '1'
+                }
+
+                lista.push(novo);
+            }
+        }
+
+        setListaFinal(lista)
+    }
+
+    const obterValor = (mercado: MarketModel, produto: ProductModel) =>  {
+        let retorno = 0
+
+        if(mercado != undefined){
+            console.log(mercado.nome + " " + produto.nome)
+            mercado.produtos.forEach(item =>{
+                console.log(item.codigo + " " + produto.codigo + " " + item.valor )
+                if(produto.codigo == item.codigo) retorno = (item.valor)?item.valor:0
+            })
+        }
+
+        return retorno
+    }
+
+    const sort = (itens:{ total: number, mercado: MarketModel}[]) => {
+        for (var i = 0; i < itens.length; i++) {
+            for (var j = 0; j < itens.length-1; j++) {
+                if (itens[j].total > itens[j+1].total) {
+                    var temp = itens[j];
+                    itens[j] = itens[j+1];
+                    itens[j+1] = temp;
+                }
+            }
+        }
+    }
+
+    const handleAtual = (id: string) =>{
+        if(list){
+            for(let i = 0; i < list?.length; i++){
+                if(list[i].idLista.toString() === id) setAtual(i)
+            }
+        }
+    }
+
+    useEffect(() => {
         obterListasUsuario();
+        obterMercados()
     }, [])
 
     if (!useLocation) { return <h1>Carregando Dados</h1>; } // Mostra Icone de Carregamento Temporario
@@ -89,7 +224,7 @@ export const Lista: React.FC = (props) => {
             <FilterLists
                 options={list}
                 onChange={[
-                    (event: SelectEvent) => { setFilters({ ...filters, select: event.target.value }) },
+                    (event: SelectEvent) => { handleAtual(event.target.value) },
                     (event: InputEvent) => { setFilters({ ...filters, radio: event.target.value }) }
                 ]}
                 filters={filters}
@@ -103,96 +238,19 @@ export const Lista: React.FC = (props) => {
                 itens={[
                     {
                         nomeItem: "Produto",
-                        marca: "Desc",
                         unMedida: "UnMed",
                         quantidade: "Qtd",
-                        mercado1: "Epa",
-                        mercado2: "Super Nosso",
-                        mercado3: "Carrefour"
+                        mercado1: (mercados && mercados[0])?mercados[0].nome: "N.A",
+                        mercado2: (mercados && mercados[1])?mercados[1].nome: "N.A",
+                        mercado3: (mercados && mercados[2])?mercados[2].nome: "N.A"
                     }]}/>
                     
             <ListaExibe
                 className="listaAtual"
-                itens={[
-                    {
-                        nomeItem: "Feijao",
-                        marca: "Camil",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 5,
-                        mercado2: 20,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Feijoada",
-                        unMedida: "1kg",
-                        quantidade: 3,
-                        mercado1: 20,
-                        mercado2: 5,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Benedita",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 10,
-                        mercado2: 20,
-                        mercado3: 5
-                    },
-                    {
-                        nomeItem: "Feijao",
-                        marca: "Camil",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 5,
-                        mercado2: 20,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Feijoada",
-                        unMedida: "1kg",
-                        quantidade: 3,
-                        mercado1: 20,
-                        mercado2: 5,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Benedita",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 10,
-                        mercado2: 20,
-                        mercado3: 5
-                    },
-                    {
-                        nomeItem: "Feijao",
-                        marca: "Camil",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 5,
-                        mercado2: 20,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Feijoada",
-                        unMedida: "1kg",
-                        quantidade: 3,
-                        mercado1: 20,
-                        mercado2: 5,
-                        mercado3: 10
-                    }, {
-                        nomeItem: "Feijao",
-                        marca: "Benedita",
-                        unMedida: "1kg",
-                        quantidade: 10,
-                        mercado1: 10,
-                        mercado2: 20,
-                        mercado3: 5
-                    }
-                ]}
+                itens={listaFinal}
             />
             </div>
-            <Map className="mapaList" locateUser={useLocation} markers={markers?.data.markets} />
+            <Map className="mapaList" locateUser={useLocation} markers={mercados} />
             </div>
         </main>
     </>

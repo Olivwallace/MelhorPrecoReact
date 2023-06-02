@@ -1,10 +1,11 @@
 import { AxiosInstance } from "axios";
 import { SearchType } from "../../../model";
 import { ReponseSearch } from "./responseType";
+import { Marker } from "leaflet";
 
 export const HomeAPI = (api: AxiosInstance) => ({
 
-    perfomeSearch: async (search: SearchType):Promise<ReponseSearch> => {
+    perfomeSearch: async (search: SearchType) => {
         let response;
         let pesquisa = {
             text: search.search,
@@ -29,7 +30,7 @@ export const HomeAPI = (api: AxiosInstance) => ({
         }
         
         return response?.data;
-    },
+    }
 
 
 })

@@ -145,8 +145,6 @@ export const EnvioNota: React.FC = () => {
                             <h3 className="titulo">{notaInicial?.mercado[0]}</h3>
                                 {notaInicial ? (
                                     <InputNota
-                                    onChange={}
-                                    onChangeRating={}
                                     produtos={notaInicial.produtos} />
                                     ) : (
                                     <div>Carregando...</div>

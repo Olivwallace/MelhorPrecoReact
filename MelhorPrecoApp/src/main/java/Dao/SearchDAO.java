@@ -27,10 +27,7 @@ public class SearchDAO {
 
         try {
             statement = conexao.prepareStatement(
-                    "SELECT M.nome AS nomeMercado, M.cnpj, M.endereco, M.coordenada, P.*, I.valor" +
-                            "FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo" +
-                            "WHERE M.nome LIKE ?" +
-                            "ORDER BY M.avaliacao DESC");
+                    "SELECT M.nome AS nomeMercado, M.cnpj, M.endereco, M.coordenada, P.*, I.valor FROM mercado AS M JOIN itensMercado AS I ON I.mercado = M.id JOIN produto AS P ON I.produto = P.codigo WHERE M.nome LIKE ? ORDER BY M.avaliacao DESC");
 
             statement.setString(1, "%" + json.get("text").toString().replaceAll("\"","") + "%");
 

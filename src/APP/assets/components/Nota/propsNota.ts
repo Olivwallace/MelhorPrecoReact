@@ -1,6 +1,6 @@
 export interface propsInfonota{
-    onChange:() =>{}
-    onChangeRating:() =>{}
+    onChange?:() =>{}
+    onChangeRating?:() =>{}
     produtos: Produto[];
 
 }

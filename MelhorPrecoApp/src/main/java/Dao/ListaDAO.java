@@ -49,7 +49,7 @@ public class ListaDAO {
 
                 for (Produto p : lista.getItens()) {
                     s3.setInt(1, idLista);
-                    s3.setString(2, p.getCodigo());
+                    s3.setInt(2, Integer.parseInt(p.getCodigo()));
                     s3.setInt(3, p.getQuantidade());
                     s3.addBatch();
                 }
@@ -98,7 +98,7 @@ public class ListaDAO {
 
                 for (Produto p : lista.getItens()) {
                     s3.setInt(1, lista.getListId());
-                    s3.setString(2, p.getCodigo());
+                    s3.setInt(2, Integer.parseInt(p.getCodigo()));
                     s3.setInt(3, p.getQuantidade());
                     s3.addBatch();
                 }
