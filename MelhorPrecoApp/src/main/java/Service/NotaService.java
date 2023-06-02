@@ -128,9 +128,20 @@ public class NotaService extends QRcodeService {
         resp.type("application/json");
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(req.body(), JsonObject.class);
-        //transformação de json em classe
+
+
+
+        //transformação de json em classe É NESSA VARIAVEL QE TA TODOS OS DADOS DA NOTA
         Nota nota = new Nota(json);
+
+
+
+        //AQUI É SE CASO NÃO QUISER USAR OS PRODUTOS REPETIDOS
         List<Tmp> produtosNota = produtosDistintos(nota.getProdutos());
+
+
+
+
         String CNPJ = nota.getMercado()[1].replaceAll(" ","").replaceAll("\"","");
         String path = "abvString/"+CNPJ+".txt";
         File existe = new File(path);
@@ -159,11 +170,8 @@ public class NotaService extends QRcodeService {
             }
             Arq.close();
         }
+
         /*
-        Aqui, essa variavel produtosNota tem uma lista de tmp com todos os produtos distintos
-        então na hora de cadastrar dá pra usar ele, já que tem o nome do produto na varivel produto, tem o valor e a unMedida
-        o mercado ta em nota mas é só usar nota.mercado[] na posicao 0 tem o nome do mercado, na posicao 1 tem o cnpj e o no 2 tem a rua com a cidade e estado
-        e se der nota.chaveAcesso voce tem a chave de acesso da nota fiscal
         boolean create = notaDAO.envioNota(nota);
         JsonObject data = new JsonObject();
         if (create) {
