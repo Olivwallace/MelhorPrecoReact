@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { uploadNota } from "../../../model/infoNota";
+import { Infonota, uploadNota } from "../../../model/infoNota";
 
 export const NotaAPI = (api: AxiosInstance) => ({
 
@@ -11,6 +11,11 @@ export const NotaAPI = (api: AxiosInstance) => ({
             }
           });
         return response.data;
+    },
+    uploadNota: async (nota: Infonota) => {
+
+      const response = await api.post('/retornoNota',nota);
+      return response.data;
+
     }
-  
 })

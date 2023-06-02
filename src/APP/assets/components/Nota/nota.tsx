@@ -5,6 +5,7 @@ import "./nota.css";
 type SelectEvent = React.ChangeEvent<HTMLSelectElement>
 
 export const InputNota: React.FC<propsInfonota> = (props) =>  {
+ 
 
     return (<>
         <div className='inputNota'>
@@ -16,12 +17,12 @@ export const InputNota: React.FC<propsInfonota> = (props) =>  {
               {produto.palavras.map((palavra, palavraIndex) => (
                 <div className='produtoPalavra' key={palavraIndex}>
                   {typeof palavra === 'string' ? (
-                    <label>{palavra}</label>
+                    <label>{palavra}</label>             
                   ) : (
                    <div className='selectProduto'> 
                     <select >
                       {palavra.map((opcao, opcaoIndex) => (
-                        <option onChange={props.onChange}  key={opcaoIndex} value={opcao}>
+                        <option key={opcaoIndex} value={opcao}>
                           {opcao}
                         </option>
                       ))}
@@ -31,11 +32,7 @@ export const InputNota: React.FC<propsInfonota> = (props) =>  {
                 </div>
               ))}
             </div>
-            <Rating
-                    name="simple-controlled"
-                    value={3}
-                    onChange={props.onChangeRating}
-                    />
+          
             <p className='valorLine'>R$ {produto.valor}</p>
           </div>
         ))}

@@ -7,77 +7,61 @@
 
 package Model;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 public class Nota {
-    private int idNota; // primary key
+
     private String chaveAcesso;
-    private Mercado mercado; // foreign key
-    private int avaliaMercado;
-    private ArrayList<Integer> avaliaProduto;
-    private ArrayList<Produto> produtos;
+    private String[] mercado; // foreign key
+    private ArrayList<Tmp> produtos;
 
     // ------------------- Construtores -------------------
 
-    public Nota(int idNota, String chaveAcesso, Mercado mercado, int avaliaMercado, ArrayList<Integer> avaliaProduto,
-            ArrayList<Produto> produtos) {
-        setIdNota(idNota);
-        setChaveAcesso(chaveAcesso);
+    public Nota(JsonObject json) {
+
+        setChaveAcesso((json.get("chaveAcesso") != null)?json.get("chaveAcesso").toString():"");
+        JsonArray itens = json.getAsJsonArray("mercado");
+        String [] mercado = new String[itens.size()];
+        for (int i = 0; i <itens.size() ; i++) {
+            mercado[i] = itens.get(i).toString();
+        }
         setMercado(mercado);
-        setAvaliaMercado(avaliaMercado);
-        setAvaliaProduto(avaliaProduto);
+       itens = json.getAsJsonArray("produtos");
+       ArrayList<Tmp> produtos = new ArrayList<>();
+        for(int i = 0; i < itens.size(); i++){
+            produtos.add(new Tmp(itens.get(i)));
+        }
         setProdutos(produtos);
+
     }
 
     // ------------------- Setters -------------------
-
-    public void setIdNota(int idNota) {
-        this.idNota = idNota;
-    }
 
     public void setChaveAcesso(String chaveAcesso) {
         this.chaveAcesso = chaveAcesso;
     }
 
-    public void setMercado(Mercado mercado) {
+    public void setMercado(String[] mercado) {
         this.mercado = mercado;
     }
-
-    public void setAvaliaMercado(int avaliaMercado) {
-        this.avaliaMercado = avaliaMercado;
-    }
-
-    public void setAvaliaProduto(ArrayList<Integer> avaliaProduto) {
-        this.avaliaProduto = avaliaProduto;
-    }
-
-    public void setProdutos(ArrayList<Produto> produtos) {
+    public void setProdutos(ArrayList<Tmp> produtos) {
         this.produtos = produtos;
     }
 
     // ------------------- Getters -------------------
 
-    public int getIdNota() {
-        return idNota;
-    }
-
     public String getChaveAcesso() {
         return chaveAcesso;
     }
 
-    public Mercado getMercado() {
+    public String[] getMercado() {
         return mercado;
     }
 
-    public int getAvaliaMercado() {
-        return avaliaMercado;
-    }
-
-    public ArrayList<Integer> getAvaliaProduto() {
-        return avaliaProduto;
-    }
-
-    public ArrayList<Produto> getProdutos() {
+    public ArrayList<Tmp> getProdutos() {
         return produtos;
     }
 

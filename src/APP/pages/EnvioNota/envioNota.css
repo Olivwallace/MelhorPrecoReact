@@ -5,7 +5,12 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-
+.main-container2{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .main-container {
     height: 90vh;
     display: grid;

@@ -8,18 +8,22 @@ import { NavBar } from "../../assets/components";
 import {InputNota} from "../../assets/components";
 import "./envioNota.css";
 import { Infonota } from "../../model/infoNota";
+import { useNavigate } from "react-router-dom";
+import { Home } from "../home";
 
 type SelectEvent = React.ChangeEvent<HTMLSelectElement>
 type EventSubmit = React.FormEvent<HTMLFormElement>
 
 export const EnvioNota: React.FC = () => {
+    const navigate = useNavigate();
     const [isVazio, setIsVazio] = useState(false);
     const [isCheio, setIsCheio] = useState(false);
+    const [isErro, setIsErro] = useState(false);
     const [isImgDefault, setImgDefault] = useState(true);
     const [image, setImage] = useState<File[]>([]); // inicializa o vetor de estados como um vetor vazio
     const [itens, setItens] = useState<React.ReactNode[]>([])
     const [isConfirmOne, setIsConfirmOne] = useState(false);
-    const [notaInicial, setNotaInicial] = useState<Infonota | null>(null);
+    const [notaInicial, setNotaInicial] = useState<Infonota>();
     const api = useAPI.Nota
     let nota;
     
@@ -53,23 +57,54 @@ export const EnvioNota: React.FC = () => {
 
         nota = await api.uploadImage({image: formData});
         console.log(nota);
-        if(nota.status = 200){
+        if(nota.status == 200){
            const notaInicial: Infonota = {
                 chaveAcesso: nota.data.ChaveAcesso,
                 mercado: nota.data.Mercado,
                 produtos: nota.data.Produtos.map((produto: any) => ({
                     abreviacao: produto.abreviacao,
                     palavras: produto.palavras,
+                    unMedida:produto.unMedida,
                     valor: produto.valor
                 }))
-
             };
+            setIsErro(false);
             setNotaInicial(notaInicial);
+            console.log(notaInicial);
             setIsConfirmOne(true);
         } else {
-
+            setIsErro(true);
         }
     }, [image]);
+    const handlesubmit2 = useCallback(async (event: EventSubmit) => {
+        event.preventDefault();
+        const palavras = Array.from(document.querySelectorAll('.produtoFrase')).map((fraseElement: Element) => {
+            const palavras = Array.from(fraseElement.querySelectorAll('.produtoPalavra')).map((palavraElement: Element) => {
+              const selectElement = palavraElement.querySelector('select') as HTMLSelectElement;
+              if (selectElement) {
+                return selectElement.value;
+              } else if (palavraElement instanceof HTMLElement) {
+                return palavraElement.textContent;
+              }
+              return '';
+            });
+            return palavras.join(' '); 
+          });
+          let qtd =(notaInicial!=null&&notaInicial.produtos!=null)?notaInicial.produtos.length:0;
+          for (let i = 0; i < qtd ; i++) {
+            if (notaInicial && notaInicial.produtos[i]) {
+                notaInicial.produtos[i].palavra = palavras[i];
+              }
+          }
+          console.log(notaInicial);
+          const nota = notaInicial;
+          console.log(nota);
+            if (nota!=null) {
+                console.log(notaInicial);
+                await api.uploadNota(nota);
+            }
+            navigate("/");
+    },[notaInicial]);
 
 
     useEffect(() => {
@@ -102,8 +137,9 @@ export const EnvioNota: React.FC = () => {
             hrefNota={"/lists"}
             hrefSobreNos={"/createList"} />
 
-            <main className="main-container">
-                {!isConfirmOne ? <><div className="div1">
+            
+                {!isConfirmOne ? <><main className="main-container">
+                    <div className="div1">
                     <img className="uploadSVG" src={imgUp} alt="" />
                 </div>
                     <div className="form">
@@ -127,26 +163,25 @@ export const EnvioNota: React.FC = () => {
                             </div>
                             {isCheio && <label className="erro">Limite de 3 notas fiscais!!</label>}
                             {isVazio && <label className="erro">Selecione notas fiscais!!</label>}
+                            {isErro && <label className="erro">Erro no envio da nota!!</label>}
                             <div className="botoes">
                                 <label className="btnUpload" htmlFor="uploadPhoto"> Enviar foto</label>
                                 <button className="btn-submit" type="submit">Salvar</button>
                             </div>
                         </form>
                     </div>
+                    </main>
                 </> 
-                : 
-                <>
                 
-                        <><div className="div2">
-                    <img className="uploadSVG" src={imgRating} alt="" />
-                </div>
+                : 
+
+                <>
+                    <main className="main-container2">
                     <div className="form2">
-                        <form onSubmit={handlesubmit} name="confirmNota">
+                        <form onSubmit={handlesubmit2} name="confirmNota">
                             <h3 className="titulo">{notaInicial?.mercado[0]}</h3>
                                 {notaInicial ? (
-                                    <InputNota
-                                    onChange={}
-                                    onChangeRating={}
+                                    <InputNota  
                                     produtos={notaInicial.produtos} />
                                     ) : (
                                     <div>Carregando...</div>
@@ -156,18 +191,15 @@ export const EnvioNota: React.FC = () => {
                             </div>
                         </form>
                     </div>
+                    </main>
                 </>     
-                
-                
-                
-                
-                </>
+              
                 
               
 
 
                 }
-            </main>
+           
         </>
 
 
